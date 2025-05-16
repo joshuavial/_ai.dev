@@ -1,0 +1,69 @@
+# Repository Management Guidelines
+
+## Structure
+- Keep all scripts in their own dedicated folders
+- Group related scripts together in the same folder
+- Use descriptive folder names (e.g., `toggl/`, `data-processing/`)
+
+## Adding New Scripts
+1. Create a new folder if it's a new category of scripts
+2. Include a README.md in each folder explaining its purpose
+3. Add usage examples in the folder's README.md
+4. Update requirements.txt if new dependencies are needed
+
+## Environment
+- Use .env files for configuration (see env.sample examples)
+- Keep .env files in .gitignore
+- Include env.sample files to document required variables
+
+## Development
+- Setup: `[YOUR_SETUP_COMMAND_HERE]`
+- Follow existing code style patterns
+- Document script usage and parameters
+
+## Ticket Workflow System
+
+The repository uses a structured workflow system for development tasks. Each task follows one of these workflows depending on size and complexity.
+
+### Issue Structure
+
+All GitHub issues follow a standardized format defined in [path/to/github-issue-structure.md].
+
+### Workflow Phases
+
+Development follows these phases in sequence:
+
+1. **Planning**: Define requirements, analyze technical approach, and create a detailed plan
+   - See [path/to/planning-workflow.md]
+   
+2. **Execution**: Implement the solution using TDD and continuous state tracking
+   - See [path/to/execution-workflow.md]
+   
+3. **Quality Assurance**: Verify the implementation meets quality standards and requirements
+   - See [path/to/qa-workflow.md]
+   
+4. **Reflection**: Analyze the process, capture learnings, and identify improvements
+   - See [path/to/reflection-workflow.md]
+
+### Fast Track for Small Changes
+
+For small bug fixes and minor enhancements, use the streamlined Fast Track workflow:
+- See [path/to/fast-track-workflow.md]
+
+### Important Workflow Guidelines
+
+1. **One Workflow at a Time**: Always work within a single workflow phase. Never proceed to the next phase without explicit instruction.
+
+2. **Workflow Identification**: If unclear which workflow phase applies, ask for clarification before proceeding.
+
+3. **Workflow Transitions**: Only transition between workflow phases when explicitly instructed.
+
+4. **Documentation**: Maintain appropriate documentation as specified in each workflow.
+
+5. **Workflow Adherence**: Continuously reference the current workflow document during work. If ever in doubt about process or next steps, re-read the relevant workflow document.
+
+6. **Context Loading**: When beginning a new workflow phase, thoroughly read the workflow document and all linked references to fully understand the context and requirements.
+
+7. **Continuous Alignment**: Regularly verify that work being done aligns with the current workflow phase's requirements and processes.
+
+When using AI assistance, always specify which workflow phase you're currently in to ensure proper adherence to the process. AI assistants should actively confirm their understanding of the current workflow and request clarification if uncertain.
