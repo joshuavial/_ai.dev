@@ -45,14 +45,17 @@ This phase focuses on identifying opportunities for process improvement and capt
    - Analyze completed project reflections for process improvement suggestions
    - Look for patterns across multiple reflections
    - Identify recurring pain points or inefficiencies
+   - Pay particular attention to TDD compliance issues and test execution gaps
 
 2. **Gather Team Feedback**
    - Conduct periodic process review sessions
    - Collect feedback through surveys or interviews
    - Create channels for ongoing process improvement suggestions
+   - Specifically ask about test-first development challenges
 
 3. **Analyze Metrics**
    - Review process metrics (e.g., cycle time, defect rates, estimation accuracy)
+   - Track test coverage trends and TDD compliance rates
    - Identify outliers or trends that suggest process issues
    - Compare against industry benchmarks when available
 
@@ -60,11 +63,13 @@ This phase focuses on identifying opportunities for process improvement and capt
    - Document each potential improvement with a clear problem statement
    - Link to relevant reflections or feedback sources
    - Assign an initial priority based on impact and frequency
+   - Ensure tickets address both procedural and technical aspects
 
 5. **Initial Prioritization**
    - Assess the potential impact of each improvement opportunity
    - Consider implementation effort and complexity
    - Create a prioritized backlog of process improvements
+   - Prioritize improvements that enhance verification points
 
 #### Outputs:
 - Process Improvement Tickets with clear problem statements
@@ -165,28 +170,33 @@ This phase focuses on implementing the approved changes.
    - Develop communication strategy
 
 2. **Documentation Updates**
-   - Update affected workflow documents
-   - Create or update templates
-   - Update related examples
+   - Update affected workflow documents directly - NEVER create separate "update" documents
+   - Always modify the original workflow files to maintain a single source of truth
+   - Create or update templates within existing structures
+   - Update related examples to reflect new requirements
    - Version control all documentation changes
+   - Ensure all changes are consistent across related documents
 
 3. **Team Communication**
    - Announce the upcoming change
    - Explain rationale and benefits
    - Provide timeline for implementation
    - Address questions and concerns
+   - Create clear examples of before/after workflow changes
 
 4. **Training Development**
    - Identify training needs
-   - Create training materials
+   - Create training materials with concrete examples
    - Schedule training sessions
    - Prepare support resources
+   - Develop verification checklists for new processes
 
 5. **Rollout Execution**
    - Implement the change according to the selected approach
    - Provide ongoing support during transition
    - Monitor for immediate issues
    - Collect initial feedback
+   - Confirm documents are correctly updated
 
 #### Outputs:
 - Updated workflow documents
@@ -515,6 +525,8 @@ Considerations:
 
 **IMPORTANT:** The Management Workflow should only ever change workflow documents and shared files. Never create or modify PRDs (Product Requirement Documents) as part of the management workflow, as PRDs are part of the product planning process, not process management.
 
+**CRITICAL:** Never create separate "update" versions of workflow documents. Always modify the original workflow files directly to maintain a single source of truth. All changes must be made within the existing workflow structure.
+
 Process improvement tickets should follow this structure:
 
 1. **Main Issue Description:**
@@ -525,25 +537,28 @@ Process improvement tickets should follow this structure:
 
 2. **First Comment - Problem Statement:**
    - Current process description
-   - Problem statement
-   - Impact of the current process
-   - Affected workflows
+   - Problem statement with clear examples of the issues
+   - Impact of the current process with measurable consequences
+   - Affected workflows with specific file paths
    - Initial evidence (metrics, feedback, observations)
+   - Root cause analysis of process failures
 
 3. **Second Comment - Process Change Proposal:**
-   - Detailed change description
-   - Expected benefits
-   - Examples
-   - Impact analysis
-   - Implementation approach
-   - Success criteria
+   - Detailed change description with specific file modifications
+   - Expected benefits with measurable outcomes
+   - Before/after examples showing the exact changes
+   - Impact analysis on all related workflows
+   - Implementation approach with timeline
+   - Success criteria with verification methods
+   - Document update strategy - always modifying original files
 
 4. **Third Comment - Current State:**
    - Implementation status
-   - Checklist of implementation tasks
+   - Checklist of implementation tasks including document updates
    - Current blockers or challenges
    - Next steps
    - Validation results (when available)
+   - Confirmation that original workflow documents were updated
 
 ## Example Process Change
 

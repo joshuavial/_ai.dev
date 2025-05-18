@@ -122,7 +122,94 @@ Example of a parent-child ticket relationship:
 
 The parent ticket maintains the comprehensive technical plan, while sub-tickets contain only the details relevant to their specific scope.
 
-### 6. Final Technical Plan
+### 6. Testing Strategy Planning
+
+Every technical plan must include a comprehensive testing strategy that explicitly prepares for Test-Driven Development:
+
+- **Test Categories & Coverage Goals:**
+  - Unit Tests: Identify specific units requiring testing and coverage targets
+  - Integration Tests: Define integration points requiring testing
+  - UI Tests: Identify UI components requiring test coverage
+  - Edge Cases: List specific edge cases to be tested
+  - Regression Tests: Identify related functionality that needs regression testing
+
+- **Test-First Implementation Plan:**
+  For each component to be modified or created, define the following test-first approach:
+
+  ```
+  #### Component: [ComponentName]
+  
+  **Red Phase (Failing Tests):**
+  - Test 1: [Description of specific test case]
+  - Test 2: [Description of specific test case]
+  
+  **Green Phase (Implementation):**
+  - Implement minimal solution to make tests pass
+  - Run and document test results
+  
+  **Refactor Phase:**
+  - [Specific refactoring goals]
+  - Run tests after refactoring to ensure they pass
+  ```
+
+- **Test Verification Requirements:**
+  - Required evidence of test execution at each phase
+  - Expected test coverage percentages
+  - Mock requirements for external dependencies
+  - Performance test criteria (if applicable)
+
+Example testing strategy section:
+
+```
+### Test-Driven Implementation Strategy
+
+#### Test Categories
+- Unit Tests: Export service formatting functions (target: 90% coverage)
+- Integration Tests: API endpoint functionality with mock data
+- UI Tests: Export button behavior and loading states
+- Edge Cases: Empty data, large files, various export formats
+
+#### Component: ExportService.js
+
+**Red Phase (Failing Tests):**
+- Test PDF data formatting with mock user data
+- Test CSV data formatting with mock user data
+- Test error handling for invalid data formats
+
+**Green Phase (Implementation):**
+- Implement formatUserData function with PDF/CSV formatters
+- Verify tests pass and document results
+
+**Refactor Phase:**
+- Extract format-specific logic to separate modules
+- Optimize large data handling
+- Verify refactored code passes all tests
+
+#### Component: UserProfileController.js
+
+**Red Phase (Failing Tests):**
+- Test API endpoint returns correctly formatted data
+- Test authorization requirements
+- Test error handling for various cases
+
+**Green Phase (Implementation):**
+- Implement endpoint with basic authorization
+- Connect to export service
+- Verify tests pass
+
+**Refactor Phase:**
+- Improve error responses
+- Add caching for repeated requests
+- Verify refactored code passes all tests
+
+#### Test Verification Requirements
+- Screenshot or log of RED phase (failing tests) before implementation
+- Screenshot or log of GREEN phase (passing tests) after implementation 
+- Screenshot or log of tests passing after REFACTOR phase
+- Test coverage report showing minimum 85% coverage
+```
+
+### 7. Final Technical Plan
 
 Complete the second comment with a comprehensive technical plan, including:
 
@@ -130,13 +217,13 @@ Complete the second comment with a comprehensive technical plan, including:
 - Package/library decisions with justification
 - Components to modify
 - New components to create
-- Testing strategy
-- Detailed implementation checklist
+- **Test-Driven Implementation Strategy (REQUIRED)**
+- Detailed implementation checklist that explicitly includes test execution steps
 - Potential risks and mitigation strategies
 
-### 7. Initialize Current State Tracking
+### 8. Initialize Current State Tracking
 
-Create the third comment with an initial state tracking template:
+Create the third comment with an initial state tracking template that explicitly tracks test status:
 
 ```
 ## Current State
@@ -146,15 +233,18 @@ Create the third comment with an initial state tracking template:
 **Progress:**
 - [x] Initial planning complete
 - [x] Technical approach defined
+- [x] Test strategy defined
 - [ ] Branch created
-- [ ] Implementation started
+
+**Test Status:**
+- No tests implemented yet
 
 **Blockers:**
 - None at this time
 
 **Next Steps:**
 1. Create branch and begin implementation
-2. Set up initial file structure
+2. Write failing tests for first component
 
 **Notes:**
 - Implementation will begin on [DATE]
@@ -226,18 +316,47 @@ Use jsPDF because:
 - Large profiles may timeout during export - implement chunking
 - PDF generation may have rendering issues - need thorough testing
 
-### Implementation Checklist
+### TDD Implementation Checklist
 - [ ] Create branch with ticket ID
+- [ ] **ExportService PDF formatter:**
+  - [ ] Write failing tests (RED)
+  - [ ] Document test failure with logs/screenshots
+  - [ ] Implement minimal solution to pass tests (GREEN)
+  - [ ] Document passing tests with logs/screenshots
+  - [ ] Refactor code (REFACTOR)
+  - [ ] Verify tests still pass after refactoring
+  - [ ] Generate test coverage report
+
+- [ ] **ExportService CSV formatter:**
+  - [ ] Write failing tests (RED)
+  - [ ] Document test failure with logs/screenshots
+  - [ ] Implement minimal solution to pass tests (GREEN)
+  - [ ] Document passing tests with logs/screenshots
+  - [ ] Refactor code (REFACTOR)
+  - [ ] Verify tests still pass after refactoring
+  - [ ] Generate test coverage report
+
+- [ ] **UserProfileController - export endpoint:**
+  - [ ] Write failing tests (RED)
+  - [ ] Document test failure with logs/screenshots
+  - [ ] Implement minimal solution to pass tests (GREEN)
+  - [ ] Document passing tests with logs/screenshots
+  - [ ] Refactor code (REFACTOR)
+  - [ ] Verify tests still pass after refactoring
+  - [ ] Generate test coverage report
+
+- [ ] **ExportButton.jsx component:**
+  - [ ] Write failing tests (RED)
+  - [ ] Document test failure with logs/screenshots
+  - [ ] Implement minimal solution to pass tests (GREEN)
+  - [ ] Document passing tests with logs/screenshots
+  - [ ] Refactor code (REFACTOR)
+  - [ ] Verify tests still pass after refactoring
+  - [ ] Generate test coverage report
+
 - [ ] Add jsPDF package with lazy loading
-- [ ] Implement ExportService.js with PDF and CSV formatters
-- [ ] Add export endpoint to UserProfileController.js
-- [ ] Update UserService.js with export functions
-- [ ] Add ExportButton.jsx component
-- [ ] Update ProfilePage.jsx with export option
-- [ ] Update AuthMiddleware.js with permission checks
-- [ ] Write unit tests for export functions
-- [ ] Write integration tests for API endpoint
-- [ ] Test with large profiles
+- [ ] Update remaining components as needed
+- [ ] Perform final integration testing
 ```
 
 ### Example 2: Integration Implementation
@@ -343,17 +462,25 @@ Use xero-node because:
 - [x] Initial planning complete
 - [x] Technical approach defined
 - [x] Branch created: feature/PROJ-123-user-profile-export
-- [x] jsPDF package added with lazy loading
-- [x] ExportService.js implemented with PDF formatter
-- [x] CSV formatter implemented
-- [ ] API endpoint added to UserProfileController.js (50% complete)
-- [ ] UserService.js updated with export functions
-- [ ] ExportButton.jsx component created
-- [ ] ProfilePage.jsx updated with export option
-- [ ] AuthMiddleware.js updated with permission checks
-- [ ] Unit tests written for export functions
-- [ ] Integration tests written for API endpoint
-- [ ] Large profile testing completed
+
+**Test Status:**
+- **ExportService PDF formatter:**
+  - [x] Tests written (RED ✓) - [Link to screenshot/log]
+  - [x] Implementation complete (GREEN ✓) - [Link to screenshot/log]
+  - [x] Code refactored (REFACTOR ✓) - [Link to screenshot/log]
+  - Current coverage: 92%
+
+- **ExportService CSV formatter:**
+  - [x] Tests written (RED ✓) - [Link to screenshot/log]
+  - [ ] Implementation complete (GREEN ⬤)
+  - [ ] Code refactored (REFACTOR ⬤)
+  - Current coverage: N/A
+
+- **UserProfileController export endpoint:**
+  - [ ] Tests written (RED ⬤)
+  - [ ] Implementation complete (GREEN ⬤)
+  - [ ] Code refactored (REFACTOR ⬤)
+  - Current coverage: N/A
 
 **Blockers:**
 - Need design review for ExportButton.jsx component

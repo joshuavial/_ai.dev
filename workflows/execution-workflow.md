@@ -13,56 +13,96 @@ For the standardized GitHub issue structure, see [../shared/github-issue-structu
 
 ### 2. Test-Driven Development (TDD)
 
-Follow the TDD cycle for implementation:
+You MUST follow the TDD cycle for implementation. This is a strict requirement, not a suggestion. Each cycle must be documented with evidence of test execution.
 
-1. **Write a Failing Test:**
-   - Start by writing a test that defines the expected behavior
+1. **RED Phase (Write Failing Tests):**
+   - Start by writing a test that defines the expected behavior before any implementation
    - Make it specific and focused on a single functionality
    - Run the test to confirm it fails (red phase)
+   - REQUIRED: Take a screenshot or save logs showing the failing test
+   - Document the failing test in the Current State comment
    - Consider both the happy path and edge cases
 
-2. **Implement the Minimal Solution:**
-   - Write just enough code to make the test pass
+2. **GREEN Phase (Implement Minimal Solution):**
+   - Write just enough code to make the test pass - no more, no less
    - Focus on functionality, not optimization
    - Run the test to confirm it passes (green phase)
+   - REQUIRED: Take a screenshot or save logs showing the passing test
+   - Document the passing test in the Current State comment
+   - Do not proceed to refactoring until tests pass
 
-3. **Refactor:**
+3. **REFACTOR Phase:**
    - Improve the implementation without changing behavior
    - Remove duplication and improve code clarity
-   - Ensure tests still pass after refactoring
+   - Run tests after each significant refactoring step
+   - REQUIRED: Take a screenshot or save logs showing tests still pass after refactoring
+   - Document the refactoring in the Current State comment
    - Consider performance optimizations if needed
 
-4. **Repeat:**
-   - Move to the next piece of functionality
-   - Continue the red-green-refactor cycle
+4. **Verification Requirements:**
+   - You MUST have evidence of all three phases for each component
+   - Each phase must be documented in the Current State comment
+   - You CANNOT skip any phase of the cycle
+   - You CANNOT implement code without first writing failing tests
+   - You MUST run tests after each phase and document the results
 
-Example TDD workflow for a new feature:
+5. **Repeat:**
+   - Move to the next piece of functionality
+   - Continue the red-green-refactor cycle with full documentation
+
+Example TDD workflow with required documentation for a new feature:
 
 ```
 # For a user export feature:
 
-## Step 1: Write failing test for export service
+## Component: ExportService PDF Formatter
+
+### Step 1: RED - Write failing test for export service
 - Write test that expects the service to format user data as PDF
-- Run test to verify it fails appropriately
+- Run test suite with `npm test`
+- VERIFY: Test fails with expected error message
+- DOCUMENT: Screenshot showing failing test in terminal
+- UPDATE CURRENT STATE: Mark "Tests written (RED ✓)" with link to evidence
 
-## Step 2: Implement minimum viable export service
+### Step 2: GREEN - Implement minimum viable export service
 - Create basic service with PDF formatter functionality
-- Run test to verify it now passes
+- Run test suite with `npm test`
+- VERIFY: Test now passes
+- DOCUMENT: Screenshot showing passing test in terminal
+- UPDATE CURRENT STATE: Mark "Implementation complete (GREEN ✓)" with link to evidence
 
-## Step 3: Refactor export service
+### Step 3: REFACTOR - Improve export service
 - Improve code organization
 - Extract reusable components
-- Ensure tests still pass
+- Run test suite with `npm test` after each significant change
+- VERIFY: Tests still pass after refactoring
+- DOCUMENT: Screenshot of passing tests and code coverage
+- UPDATE CURRENT STATE: Mark "Code refactored (REFACTOR ✓)" with link to evidence
 
-## Step 4: Write failing test for API endpoint
+## Component: API Endpoint
+
+### Step 4: RED - Write failing test for API endpoint
 - Write test that expects the API to return exported user data
-- Run test to verify it fails
+- Run test suite with `npm test`
+- VERIFY: Test fails with expected error message
+- DOCUMENT: Screenshot showing failing test in terminal
+- UPDATE CURRENT STATE: Mark "Tests written (RED ✓)" with link to evidence
 
-## Step 5: Implement the API endpoint
+### Step 5: GREEN - Implement the API endpoint
 - Create minimal implementation to make the test pass
-- Ensure previous tests still pass
+- Run test suite with `npm test`
+- VERIFY: Test now passes
+- DOCUMENT: Screenshot showing passing test in terminal
+- UPDATE CURRENT STATE: Mark "Implementation complete (GREEN ✓)" with link to evidence
 
-(Continue cycle for each component)
+### Step 6: REFACTOR - Improve API endpoint
+- Refactor for error handling and edge cases
+- Run test suite with `npm test` after changes
+- VERIFY: Tests still pass after refactoring
+- DOCUMENT: Screenshot of passing tests and code coverage
+- UPDATE CURRENT STATE: Mark "Code refactored (REFACTOR ✓)" with link to evidence
+
+(Continue cycle for each component with documentation of all three phases)
 ```
 
 ### 3. Implementation Flow
@@ -89,7 +129,7 @@ Follow this sequence for most efficient implementation:
    - Apply security measures
    - Address performance considerations
 
-### 4. Continuous State Tracking
+### 4. TDD Verification and State Tracking
 
 #### Retrieving GitHub Issues
 
@@ -97,18 +137,40 @@ For detailed instructions on accessing GitHub issues and their comments, refer t
 
 **IMPORTANT:** Always use GitHub CLI commands (like `gh issue view`) to access GitHub issues. Never attempt to locate GitHub issues by searching local directories.
 
+#### Required TDD Evidence
+
+You MUST collect and document the following evidence for each component:
+
+1. **RED Phase Evidence:**
+   - Screenshot or log output showing test failure
+   - Commit with failing test code
+   - Documentation of specific test cases written
+
+2. **GREEN Phase Evidence:**
+   - Screenshot or log output showing test passing
+   - Commit with implementation code
+   - Documentation of implementation approach
+
+3. **REFACTOR Phase Evidence:**
+   - Screenshot or log output showing tests passing after refactoring
+   - Commit with refactored code
+   - Documentation of improvements made
+
 #### Updating the Current State
 
-Throughout implementation, continuously update the third comment in the GitHub issue:
+Throughout implementation, continuously update the third comment in the GitHub issue with explicit TDD verification:
 
-- Keep the Current State comment up to date with implementation progress
+- Maintain a "Test Status" section tracking RED/GREEN/REFACTOR for each component
+- Include links to evidence (screenshots/logs) for each TDD phase
+- Document current test coverage for completed components
+- Update the status after completing each phase of the TDD cycle
 - Check off completed tasks as they are finished
 - Add newly discovered tasks if they emerge during implementation
 - Document blockers and challenges as they appear
 - Update the next steps section regularly
 - Add relevant notes about discoveries or changes to the approach
 
-Example state tracking updates:
+Example state tracking updates with explicit TDD documentation:
 
 ```
 ## Current State
@@ -119,24 +181,39 @@ Example state tracking updates:
 - [x] Initial planning complete
 - [x] Technical approach defined
 - [x] Branch created: feature/PROJ-123-user-profile-export
-- [x] Created failing tests for PDF export functionality
-- [x] Implemented ExportService.js to pass tests
-- [x] Refactored ExportService.js for better performance
-- [ ] Writing tests for API endpoint (50% complete)
-- [ ] Remaining tasks...
+
+**Test Status:**
+- **ExportService PDF formatter:**
+  - [x] Tests written (RED ✓) - [Link to screenshot/log showing failing tests]
+  - [x] Implementation complete (GREEN ✓) - [Link to screenshot/log showing passing tests]
+  - [x] Code refactored (REFACTOR ✓) - [Link to screenshot/log showing tests passing after refactoring]
+  - Current coverage: 92%
+
+- **ExportService CSV formatter:**
+  - [x] Tests written (RED ✓) - [Link to screenshot/log showing failing tests]
+  - [ ] Implementation complete (GREEN ⬤)
+  - [ ] Code refactored (REFACTOR ⬤)
+  - Current coverage: N/A
+
+- **UserProfileController export endpoint:**
+  - [ ] Tests written (RED ⬤)
+  - [ ] Implementation complete (GREEN ⬤)
+  - [ ] Code refactored (REFACTOR ⬤)
+  - Current coverage: N/A
 
 **Blockers:**
 - Need design review for UI components
 - Awaiting API permissions from DevOps team
 
 **Next Steps:**
-1. Complete API endpoint tests
-2. Implement API endpoint to pass tests
-3. Begin UI component test development
+1. Complete implementation of CSV formatter to pass tests
+2. Document test results with screenshots
+3. Begin test writing for API endpoint
 
 **Notes:**
 - Discovered performance issue with large data sets - implementing chunking approach
-- Need to adjust rate limiting for production deployment
+- Added additional test cases for exotic character handling in CSV export
+- Current test suite run time: 3.45s
 ```
 
 ### 5. Continuous Improvement
@@ -152,8 +229,12 @@ During implementation:
 
 - Create PR with reference to ticket ID
 - Ensure PR description references the Technical Plan
+- Include evidence of TDD compliance in the PR description
+- Verify and document that all tests are passing with screenshots/logs
+- Include test coverage reports in the PR
 - Address review comments promptly
 - Update the Current State comment to reflect PR review status
+- If any tests fail during review, follow the TDD cycle to fix them
 
 ### 7. Completion
 
