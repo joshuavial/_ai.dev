@@ -38,6 +38,7 @@ You MUST follow the TDD cycle for implementation. This is a strict requirement, 
    - REQUIRED: Take a screenshot or save logs showing tests still pass after refactoring
    - Document the refactoring in the Current State comment
    - Consider performance optimizations if needed
+   - CRITICAL: You MUST run the complete test suite after completing all refactoring to ensure no regressions were introduced
 
 4. **Verification Requirements:**
    - You MUST have evidence of all three phases for each component
@@ -45,6 +46,8 @@ You MUST follow the TDD cycle for implementation. This is a strict requirement, 
    - You CANNOT skip any phase of the cycle
    - You CANNOT implement code without first writing failing tests
    - You MUST run tests after each phase and document the results
+   - You MUST run the complete test suite after finishing ALL implementation tasks
+   - CRITICAL: Never consider a task complete until all tests pass successfully
 
 5. **Repeat:**
    - Move to the next piece of functionality
@@ -227,19 +230,22 @@ During implementation:
 
 ### 6. PR Creation and Review
 
+- MANDATORY: Run the complete test suite before creating the PR
 - Create PR with reference to ticket ID
 - Ensure PR description references the Technical Plan
 - Include evidence of TDD compliance in the PR description
 - Verify and document that all tests are passing with screenshots/logs
 - Include test coverage reports in the PR
 - Address review comments promptly
+- Run tests after addressing review comments to verify no regressions
 - Update the Current State comment to reflect PR review status
 - If any tests fail during review, follow the TDD cycle to fix them
 
 ### 7. Completion
 
 - Verify all checklist items are complete
-- Ensure all tests pass
+- MANDATORY: Run the complete test suite to ensure ALL tests pass before considering the task complete
+- Document evidence of passing tests with screenshots or logs
 - Update documentation if needed
 - Do a final update to the Current State comment with completion status
 - Close ticket with reference to the PR
