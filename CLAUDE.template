@@ -34,21 +34,21 @@ All GitHub issues follow a standardized format defined in [path/to/github-issue-
 Development follows these phases in sequence:
 
 1. **Planning**: Define requirements, analyze technical approach, and create a detailed plan
-   - See [path/to/planning-workflow.md]
+   - See [_ai.bws/workflows/planning.md]
    
 2. **Execution**: Implement the solution using TDD and continuous state tracking
-   - See [path/to/execution-workflow.md]
+   - See [_ai.bws/workflows/execution.md]
    
 3. **Quality Assurance**: Verify the implementation meets quality standards and requirements
-   - See [path/to/qa-workflow.md]
+   - See [_ai.bws/workflows/qa.md]
    
 4. **Reflection**: Analyze the process, capture learnings, and identify improvements
-   - See [path/to/reflection-workflow.md]
+   - See [_ai.bws/workflows/reflection.md]
 
 ### Fast Track for Small Changes
 
 For small bug fixes and minor enhancements, use the streamlined Fast Track workflow:
-- See [path/to/fast-track-workflow.md]
+- See [_ai.bws/workflows/fast-track.md]
 
 ### Important Workflow Guidelines
 
@@ -63,7 +63,7 @@ For small bug fixes and minor enhancements, use the streamlined Fast Track workf
 5. **Workflow Adherence**: Continuously reference the current workflow document during work. If ever in doubt about process or next steps, re-read the relevant workflow document.
 
 6. **Context Loading and Orientation**: When beginning a new workflow phase:
-   - Follow the [Orientation Protocol](../shared/orientate.md) to locate yourself in the project hierarchy
+   - Follow the [Boot Protocol](../protocols/boot.md) to locate yourself in the project hierarchy
    - Thoroughly read the workflow document in its entirety
    - Read ALL linked documents referenced in the workflow
    - Ask the user any clarifying questions before beginning planning or execution

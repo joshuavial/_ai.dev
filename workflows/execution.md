@@ -1,12 +1,12 @@
 # Execution Workflow
 
-Before beginning any implementation work, follow the complete [Orientation Protocol](../shared/orientate.md) to understand your context.
+Before beginning any implementation work, follow the complete Boot Protocol (File: `_ai.bws/protocols/boot.md`) to understand your context.
 
-This workflow should be used in conjunction with the [Task Management Guidelines](../shared/task-management.md) for implementing and tracking tasks.
+This workflow should be used in conjunction with the Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) for implementing and tracking tasks.
 
 This document outlines the recommended workflow for executing tickets, with a focus on structured implementation and continuous improvement.
 
-For the standardized GitHub issue structure, see [../shared/github-issue-structure.md](../shared/github-issue-structure.md).
+For the standardized GitHub issue structure, see Issue Protocol (File: `_ai.bws/protocols/issue.md`).
 
 ## Implementation Process
 
@@ -129,7 +129,7 @@ Follow this sequence for most efficient implementation:
    - Build UI components
    - Integrate with back-end services
    - Implement user interactions
-   - **IMPORTANT**: When using Playwright for browser automation, strictly follow the [Playwright Management Guidelines](../shared/playwright-management.md)
+   - **IMPORTANT**: When using Playwright for browser automation, strictly follow the Playwright Protocol (File: `_ai.bws/protocols/playwright.md`)
 
 4. **Cross-Cutting Concerns:**
    - Add error handling
@@ -137,13 +137,13 @@ Follow this sequence for most efficient implementation:
    - Apply security measures
    - Address performance considerations
 
-**CRITICAL REQUIREMENT**: When using Playwright, you MUST immediately stop execution if any Playwright operation fails. Never attempt to install browsers as they are already installed. See [Playwright Management Guidelines](../shared/playwright-management.md) for complete details.
+**CRITICAL REQUIREMENT**: When using Playwright, you MUST immediately stop execution if any Playwright operation fails. Never attempt to install browsers as they are already installed. See Playwright Protocol (File: `_ai.bws/protocols/playwright.md`) for complete details.
 
 ### 4. TDD Verification and State Tracking
 
 #### Retrieving GitHub Issues
 
-For detailed instructions on accessing GitHub issues and their comments, refer to the [GitHub Issue Structure document](../shared/github-issue-structure.md#accessing-github-issues).
+For detailed instructions on accessing GitHub issues and their comments, refer to the Issue Protocol (File: `_ai.bws/protocols/issue.md`), section "Accessing GitHub Issues".
 
 **IMPORTANT:** Always use GitHub CLI commands (like `gh issue view`) to access GitHub issues. Never attempt to locate GitHub issues by searching local directories.
 
@@ -357,7 +357,7 @@ When implementing a feature that has been broken down into sub-tickets:
 When working with AI tools to implement features:
 
 1. **Clear Context:** Provide full PRD links and ticket details
-2. **GitHub Issue Access:** When referencing GitHub issues, always use the GitHub CLI commands described in the [GitHub Issue Structure document](../shared/github-issue-structure.md#accessing-github-issues)
+2. **GitHub Issue Access:** When referencing GitHub issues, always use the GitHub CLI commands described in the Issue Protocol (File: `_ai.bws/protocols/issue.md`), section "Accessing GitHub Issues"
 3. **Chunked Tasks:** Break down implementation into small, manageable steps
 4. **Sequential Progression:** Complete one logical component before moving to the next
 5. **Test-First Approach:** Define expected behavior before implementation
@@ -370,4 +370,4 @@ When working with AI tools to implement features:
 
 Following this structured approach ensures thorough implementation and reduces back-and-forth cycles.
 
-For information on quality verification, see [qa-workflow.md](qa-workflow.md).
+For information on quality verification, see QA Workflow (File: `_ai.bws/workflows/qa.md`).

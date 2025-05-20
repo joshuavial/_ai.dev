@@ -118,9 +118,6 @@ null
 - Update task field when switching between tasks
 - Document progress in Notes section
 
-### Fast Track Workflow
-- May only use Issue field without PRD or Task
-- Update current work to reflect quick fixes
 
 ## Benefits
 

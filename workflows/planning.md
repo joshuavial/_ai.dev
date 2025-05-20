@@ -1,12 +1,12 @@
 # Planning Workflow
 
-Before beginning any planning work, follow the complete [Orientation Protocol](../shared/orientate.md) to understand your context.
+Before beginning any planning work, follow the complete Boot Protocol (File: `_ai.bws/protocols/boot.md`) to understand your context.
 
-This workflow should be used in conjunction with the [Task Management Guidelines](../shared/task-management.md) for breaking down work items and tracking progress.
+This workflow should be used in conjunction with the Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) for breaking down work items and tracking progress.
 
 This document outlines the recommended workflow for planning tickets, with a focus on thorough planning and structured preparation.
 
-For the standardized GitHub issue structure, see [../shared/github-issue-structure.md](../shared/github-issue-structure.md).
+For the standardized GitHub issue structure, see Issue Protocol (File: `_ai.bws/protocols/issue.md`).
 
 ## Multi-Level Planning Capabilities
 
@@ -550,4 +550,4 @@ Use xero-node because:
 - May need to adjust API rate limits for production deployment
 ```
 
-For information on executing tickets, see [execution-workflow.md](execution-workflow.md)
+For information on executing tickets, see Execution Workflow (File: `_ai.bws/workflows/execution.md`)

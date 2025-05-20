@@ -2,6 +2,8 @@
 
 This document outlines the structured approach for managing, improving, and evolving the development process itself. The Management Workflow defines how process changes are identified, evaluated, implemented, and validated.
 
+> **IMPORTANT USAGE NOTE**: When using the Management workflow, you should ONLY modify workflow and process documentation in `_ai.bws` directories. Never modify project-specific files in the `_ai` directory or other project directories during management workflow activities. All improvement planning and documentation should be placed in the `_ai.bws/_improvements` directory to keep meta-documentation separate from the actual workflow files.
+
 ## Purpose and Scope
 
 ### Purpose of the Management Workflow
@@ -534,9 +536,90 @@ Considerations:
 
 ### Modification Guidelines
 
-**IMPORTANT:** The Management Workflow should only ever change workflow documents and shared files. Never create or modify PRDs (Product Requirement Documents) as part of the management workflow, as PRDs are part of the product planning process, not process management.
+**IMPORTANT:** The Management Workflow should only ever change workflow documents and shared files in the `_ai.bws` directory. Never create or modify PRDs (Product Requirement Documents) or any project-specific files in the `_ai` directory as part of the management workflow.
 
-**CRITICAL:** Never create separate "update" versions of workflow documents. Always modify the original workflow files directly to maintain a single source of truth. All changes must be made within the existing workflow structure.
+**CRITICAL:** Never create separate "update" versions of workflow documents with suffixes like `.updated` or `.new`. Always modify the original workflow files directly to maintain a single source of truth. All changes must be made within the existing workflow structure.
+
+**ORGANIZATION:** Use the `_ai.bws/_improvements` directory for all documentation about planning and implementing process improvements. This keeps meta-documentation separate from the actual workflow files and makes it easier to track improvement initiatives. Do not include timeline estimates with specific weeks or dates in these documents - they are for ongoing collaboration between user and AI, not for formal project planning.
+
+### _improvements Directory Guidelines
+
+The `_ai.bws/_improvements` directory is a specialized location for process improvement documentation that follows these guidelines:
+
+#### 1. Purpose and Content
+
+- **Purpose**: A dedicated space for documenting process improvement initiatives, separate from the workflow documents themselves
+- **Content Types**:
+  - Process improvement proposals
+  - Implementation planning documents
+  - Analysis of current processes
+  - Documentation streamlining initiatives
+  - Workflow enhancement research
+  - Before/after comparisons of process changes
+
+#### 2. File Organization
+
+- **File Naming**:
+  - Use descriptive kebab-case filenames: `process-name-improvement.md`
+  - Avoid using version numbers or dates in filenames
+  - Use consistent naming patterns for related documents
+  
+- **Document Types**:
+  - **Overview Documents**: End with `-overview.md` (e.g., `documentation-streamlining-overview.md`)
+  - **Implementation Plans**: End with `-implementation.md` or `-checklist.md`
+  - **Scratchpads**: End with `-scratchpad.md` or `-notes.md`
+  - **Analysis Documents**: End with `-analysis.md`
+  
+- **Subdirectories**:
+  - Create subdirectories for complex improvement initiatives with multiple documents
+  - Name subdirectories after the improvement area (e.g., `_improvements/github-integration/`)
+
+#### 3. Document Structure
+
+- **Standard Sections**:
+  - Every document should begin with a clear title and purpose statement
+  - Include a "NOTE" section indicating the document's role in the improvement process
+  - Use consistent heading levels (H1 for title, H2 for major sections, etc.)
+  - Include cross-references to related documents when applicable
+  
+- **Implementation Checklists**:
+  - Use GitHub-style task lists with checkboxes `- [ ]` and `- [x]`
+  - Group tasks into logical sections with headings
+  - Include "Completed Tasks" and "Upcoming Tasks" sections
+  - Each task should be specific, measurable, and actionable
+  
+- **Notes/Scratchpad Documents**:
+  - Date entries when adding new notes
+  - Use clear section titles for different idea categories
+  - Maintain a "Decisions Made" section to track resolved questions
+
+#### 4. Maintenance Guidelines
+
+- **Regular Cleanup**:
+  - Archive completed initiatives to `_improvements/archive/` directory
+  - Update checklists as tasks are completed
+  - Consolidate redundant or fragmented notes periodically
+  
+- **Cross-Referencing**:
+  - Maintain references between related documents
+  - Add links to implemented changes in workflow documents
+  - Document which workflow files were modified based on improvement plans
+  
+- **Versioning**:
+  - Never create multiple versions of the same document with suffixes
+  - Instead, use clear "Current Status" sections at the top of documents
+  - Use "PART I: COMPLETED WORK" and "PART II: FUTURE WORK" structure for long-running initiatives
+
+#### 5. Multi-Document Strategy
+
+For complex improvements, split documentation into multiple specialized files:
+
+- **Overview Document**: Contains objectives, rationale, and strategic vision
+- **Implementation Checklist**: Tracks concrete tasks with checkbox status
+- **Analysis Document**: Details findings from research and investigation
+- **Scratchpad/Notes**: Captures brainstorming, random ideas, and meeting notes
+
+This multi-document approach improves clarity and makes progress tracking easier while keeping each document focused on a specific purpose.
 
 Process improvement tickets should follow this structure:
 

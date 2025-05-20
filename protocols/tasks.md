@@ -247,14 +247,11 @@ This task management approach should be integrated into all existing workflows:
    - Break tasks into todos using TodoWrite
    - Update task files alongside Current State comments
 
-3. **Fast Track Workflow**
-   - For small changes, may skip task level and use todos directly
-   - For slightly larger fast track items, create lightweight task files
 
-4. **QA Workflow**
+3. **QA Workflow**
    - Verify all tasks meet acceptance criteria
    - Ensure task files are properly updated to reflect completion
 
-5. **Reflection Workflow**
+4. **Reflection Workflow**
    - Review effectiveness of task breakdown
    - Identify improvements for future task management
