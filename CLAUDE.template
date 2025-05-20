@@ -65,7 +65,7 @@ This document contains core definitions, instruction types, activation syntax, a
 
 4. **Documentation**: Maintain appropriate documentation as specified in each workflow.
 
-5. **Protocol Activation**: Use `!protocol [name]` for protocols and `!workflow [name]` for workflows.
+5. **Protocol Activation**: Use `protocol [name]` for protocols and `workflow [name]` for workflows.
 
 6. **Workflow Adherence**: Continuously reference the current workflow document during work. If ever in doubt about process or next steps, re-read the relevant workflow document.
 

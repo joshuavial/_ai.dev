@@ -34,19 +34,19 @@ To activate a specific document, use these standard patterns:
 
 ```
 # Workflow activation
-!workflow planning
-!workflow execution
-!workflow qa
-!workflow reflection
-!workflow management
+workflow planning
+workflow execution
+workflow qa
+workflow reflection
+workflow management
 
 # Protocol usage
-!protocol boot
-!protocol tdd
-!protocol issue
-!protocol tasks
-!protocol current
-!protocol playwright
+protocol boot
+protocol tdd
+protocol issue
+protocol tasks
+protocol current
+protocol playwright
 ```
 
 ---
@@ -161,14 +161,14 @@ To activate a specific document, use these standard patterns:
 1. To load a protocol or workflow, use these directives:
    ```
    # For workflows:
-   !workflow planning
-   !workflow execution
-   !workflow qa
+   workflow planning
+   workflow execution
+   workflow qa
    
    # For protocols:
-   !protocol tdd
-   !protocol boot
-   !protocol issue
+   protocol tdd
+   protocol boot
+   protocol issue
    ```
 
 2. This will trigger loading of the appropriate document

@@ -7,7 +7,7 @@ This directory contains specialized protocols that can be lazy-loaded when neede
 Protocols are designed to be loaded only when needed, using the explicit directive:
 
 ```
-!protocol [name]
+protocol [name]
 ```
 
 This approach offers several advantages:

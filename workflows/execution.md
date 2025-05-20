@@ -6,7 +6,7 @@
 - Tasks Protocol (File: `_ai.bws/protocols/tasks.md`)
 - Issue Protocol (File: `_ai.bws/protocols/issue.md`)
 - TDD Protocol (File: `_ai.bws/protocols/tdd.md`)
-**Activation**: `!workflow execution`
+**Activation**: `workflow execution`
 
 This document outlines the recommended workflow for executing tickets, with a focus on structured implementation using Test-Driven Development (TDD) and continuous improvement.
 
@@ -381,7 +381,7 @@ After completing the execution phase, the next step is typically to move into qu
 1. Making sure all implementation is complete
 2. Running the full test suite to ensure everything passes
 3. Ensuring all items in the technical plan have been addressed
-4. Activating the QA Workflow with: `!workflow qa`
+4. Activating the QA Workflow with: `workflow qa`
 
 For details on quality verification, refer to QA Workflow (File: `_ai.bws/workflows/qa.md`).
 

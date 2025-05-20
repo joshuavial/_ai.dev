@@ -5,7 +5,7 @@
 - Boot Protocol (File: `_ai.bws/protocols/boot.md`)
 - Tasks Protocol (File: `_ai.bws/protocols/tasks.md`)
 - Issue Protocol (File: `_ai.bws/protocols/issue.md`)
-**Activation**: `!workflow planning`
+**Activation**: `workflow planning`
 
 This document outlines the recommended workflow for planning tickets, with a focus on thorough planning and structured preparation. The planning phase is where requirements are analyzed, technical approaches are defined, and implementation is prepared.
 
@@ -559,7 +559,7 @@ After completing the planning phase, the next step is typically to move into exe
 
 1. Making sure all planning deliverables are complete
 2. Confirming the technical plan with stakeholders
-3. Activating the Execution Workflow with: `!workflow execution`
+3. Activating the Execution Workflow with: `workflow execution`
 
 For details on implementation, refer to Execution Workflow (File: `_ai.bws/workflows/execution.md`).
 
