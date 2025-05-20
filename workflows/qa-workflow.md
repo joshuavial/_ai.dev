@@ -37,7 +37,9 @@ Depending on the complexity and scope of the changes, QA should involve:
    - End-users or their representatives
    - Business stakeholders for high-impact features
 
-## QA Workflow Process
+## QA Workflow
+
+This workflow should be used in conjunction with the [Task Management Guidelines](../shared/task-management.md) for verifying task completion and quality.
 
 ### 1. QA Preparation
 

@@ -62,8 +62,18 @@ For small bug fixes and minor enhancements, use the streamlined Fast Track workf
 
 5. **Workflow Adherence**: Continuously reference the current workflow document during work. If ever in doubt about process or next steps, re-read the relevant workflow document.
 
-6. **Context Loading**: When beginning a new workflow phase, thoroughly read the workflow document and all linked references to fully understand the context and requirements.
+6. **Context Loading and Orientation**: When beginning a new workflow phase:
+   - Follow the [Orientation Protocol](../shared/orientate.md) to locate yourself in the project hierarchy
+   - Thoroughly read the workflow document in its entirety
+   - Read ALL linked documents referenced in the workflow
+   - Ask the user any clarifying questions before beginning planning or execution
+   - Do not proceed until you have a complete understanding of all requirements and processes
 
-7. **Continuous Alignment**: Regularly verify that work being done aligns with the current workflow phase's requirements and processes.
+7. **Workflow Adoption**: When the user asks you to adopt a specific workflow (e.g., "use the Fast Track workflow" or "use Planning workflow"):
+   - IMMEDIATELY trigger the Orientation Protocol
+   - Confirm your understanding of the request and current state
+   - Only proceed after user confirmation
+
+8. **Continuous Alignment**: Regularly verify that work being done aligns with the current workflow phase's requirements and processes.
 
 When using AI assistance, always specify which workflow phase you're currently in to ensure proper adherence to the process. AI assistants should actively confirm their understanding of the current workflow and request clarification if uncertain.

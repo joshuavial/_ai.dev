@@ -521,7 +521,18 @@ Considerations:
 - Determine clear decision criteria for the final approach
 - Manage the additional overhead of maintaining two processes
 
-## Process Change GitHub Issue Structure
+## Critical Guidelines for Workflow Modifications
+
+### User Consent Requirements
+
+**MANDATORY:** Obtain explicit user approval before making ANY modifications to workflows:
+
+1. **NEVER create new workflow files or documents** without explicit user consent
+2. **NEVER modify existing workflow files** without first presenting proposed changes and receiving explicit approval
+3. **ALWAYS present changes as proposals first** - describe what you want to change and wait for confirmation
+4. **ALWAYS explain the rationale** for proposed changes to help users make informed decisions
+
+### Modification Guidelines
 
 **IMPORTANT:** The Management Workflow should only ever change workflow documents and shared files. Never create or modify PRDs (Product Requirement Documents) as part of the management workflow, as PRDs are part of the product planning process, not process management.
 

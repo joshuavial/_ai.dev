@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2025-05-20
+
+### Added
+- New shared documents:
+  - Playwright Management Guidelines - explicit requirements for handling browser automation
+  - Task Management Guidelines - hierarchy and tracking for PRDs, Issues, Tasks, and Todos
+  - Orientation Protocol - required process for understanding context before beginning work
+
+### Enhanced
+- Updated all workflows to reference shared documents
+- Added multi-level planning capabilities to Planning workflow
+- Improved error handling for browser automation
+- Enhanced CLAUDE template and instructions to:
+  - Require reading all linked documents before starting work
+  - Trigger orientation protocol when adopting workflows
+  - Confirm understanding before beginning work
+
 ## [0.3.0] - 2025-05-19
 
 ### Enhanced

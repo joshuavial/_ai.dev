@@ -1,5 +1,9 @@
 # Fast Track Workflow
 
+Before beginning any fast track work, follow the complete [Orientation Protocol](../shared/orientate.md) to understand your context.
+
+This workflow should be used in conjunction with the [Task Management Guidelines](../shared/task-management.md) for managing smaller tasks and quick implementations.
+
 This document outlines a streamlined workflow for handling small changes, individual bug fixes, and minor enhancements that don't warrant the full workflow process. The Fast Track workflow maintains quality while reducing overhead for straightforward tasks.
 
 ## When to Use Fast Track
@@ -59,6 +63,8 @@ For bug fixes, follow this simple test-driven approach:
 - Write a test that reproduces the bug (fails)
 - Implement the fix to make the test pass
 - Run all related tests to ensure no regression
+
+**IMPORTANT:** When using Playwright for browser automation, strictly follow the [Playwright Management Guidelines](../shared/playwright-management.md). Never attempt to install browsers and always stop execution immediately if any Playwright operation fails.
 
 ### 3. Review and Merge
 

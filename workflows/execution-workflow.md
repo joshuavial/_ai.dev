@@ -1,5 +1,9 @@
 # Execution Workflow
 
+Before beginning any implementation work, follow the complete [Orientation Protocol](../shared/orientate.md) to understand your context.
+
+This workflow should be used in conjunction with the [Task Management Guidelines](../shared/task-management.md) for implementing and tracking tasks.
+
 This document outlines the recommended workflow for executing tickets, with a focus on structured implementation and continuous improvement.
 
 For the standardized GitHub issue structure, see [../shared/github-issue-structure.md](../shared/github-issue-structure.md).
@@ -125,12 +129,15 @@ Follow this sequence for most efficient implementation:
    - Build UI components
    - Integrate with back-end services
    - Implement user interactions
+   - **IMPORTANT**: When using Playwright for browser automation, strictly follow the [Playwright Management Guidelines](../shared/playwright-management.md)
 
 4. **Cross-Cutting Concerns:**
    - Add error handling
    - Implement logging
    - Apply security measures
    - Address performance considerations
+
+**CRITICAL REQUIREMENT**: When using Playwright, you MUST immediately stop execution if any Playwright operation fails. Never attempt to install browsers as they are already installed. See [Playwright Management Guidelines](../shared/playwright-management.md) for complete details.
 
 ### 4. TDD Verification and State Tracking
 

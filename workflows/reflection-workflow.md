@@ -1,5 +1,7 @@
 # Reflection Workflow
 
+This workflow should be used in conjunction with the [Task Management Guidelines](../shared/task-management.md) for reviewing completed tasks and capturing learnings.
+
 This document outlines the recommended process for conducting a thorough reflection upon task completion. Reflection is a critical practice for continuous improvement, capturing learnings, and refining workflows.
 
 ## Purpose of Reflection

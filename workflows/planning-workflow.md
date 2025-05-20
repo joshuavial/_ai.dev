@@ -1,8 +1,22 @@
 # Planning Workflow
 
+Before beginning any planning work, follow the complete [Orientation Protocol](../shared/orientate.md) to understand your context.
+
+This workflow should be used in conjunction with the [Task Management Guidelines](../shared/task-management.md) for breaking down work items and tracking progress.
+
 This document outlines the recommended workflow for planning tickets, with a focus on thorough planning and structured preparation.
 
 For the standardized GitHub issue structure, see [../shared/github-issue-structure.md](../shared/github-issue-structure.md).
+
+## Multi-Level Planning Capabilities
+
+The Planning workflow is designed to operate at multiple levels of the work hierarchy:
+
+1. **PRD Level Planning**: Breaking down a product area into issues
+2. **Issue Level Planning**: Creating technical plans for specific issues
+3. **Task Level Planning**: Breaking issues into discrete implementation tasks
+
+When operating at a specific level, explicitly state which level you are planning for and follow the appropriate sections of this workflow.
 
 ## Planning Phase Process
 
