@@ -158,32 +158,32 @@ For detailed instructions on accessing GitHub issues and their comments, refer t
 
 **IMPORTANT:** Always use GitHub CLI commands (like `gh issue view`) to access GitHub issues. Never attempt to locate GitHub issues by searching local directories.
 
-#### Required TDD Evidence
+#### TDD Tracking Requirements
 
-You MUST collect and document the following evidence for each component:
+You MUST track the following for each component:
 
-1. **RED Phase Evidence:**
-   - Screenshot or log output showing test failure
-   - Commit with failing test code
-   - Documentation of specific test cases written
+1. **RED Phase Tracking:**
+   - List specific test cases written
+   - Note which functionality each test covers
+   - Document behavior coverage rather than collecting evidence
 
-2. **GREEN Phase Evidence:**
-   - Screenshot or log output showing test passing
-   - Commit with implementation code
-   - Documentation of implementation approach
+2. **GREEN Phase Tracking:**
+   - Document the implementation approach taken
+   - Verify all tests pass with minimal implementation
+   - Ensure implementation focuses only on making tests pass
 
-3. **REFACTOR Phase Evidence:**
-   - Screenshot or log output showing tests passing after refactoring
-   - Commit with refactored code
-   - Documentation of improvements made
+3. **REFACTOR Phase Tracking:**
+   - Record code improvements made
+   - Measure and document test coverage percentage
+   - Identify any gaps in test coverage
 
 #### Updating the Current State
 
 Throughout implementation, continuously update the third comment in the GitHub issue with explicit TDD verification:
 
 - Maintain a "Test Status" section tracking RED/GREEN/REFACTOR for each component
-- Include links to evidence (screenshots/logs) for each TDD phase
-- Document current test coverage for completed components
+- Document which tests were written and what they verify
+- Record test coverage percentages after refactoring
 - Update the status after completing each phase of the TDD cycle
 - Check off completed tasks as they are finished
 - Add newly discovered tasks if they emerge during implementation
@@ -205,13 +205,12 @@ Example state tracking updates with explicit TDD documentation:
 
 **Test Status:**
 - **ExportService PDF formatter:**
-  - [x] Tests written (RED ✓) - [Link to screenshot/log showing failing tests]
-  - [x] Implementation complete (GREEN ✓) - [Link to screenshot/log showing passing tests]
-  - [x] Code refactored (REFACTOR ✓) - [Link to screenshot/log showing tests passing after refactoring]
-  - Current coverage: 92%
+  - [x] Tests written (RED ✓) - Tests cover basic PDF generation, headers, and error cases
+  - [x] Implementation complete (GREEN ✓) - Minimal implementation passes all tests
+  - [x] Code refactored (REFACTOR ✓) - Coverage: 92%
 
 - **ExportService CSV formatter:**
-  - [x] Tests written (RED ✓) - [Link to screenshot/log showing failing tests]
+  - [x] Tests written (RED ✓) - Tests cover data formatting, special characters, and large datasets
   - [ ] Implementation complete (GREEN ⬤)
   - [ ] Code refactored (REFACTOR ⬤)
   - Current coverage: N/A
@@ -228,7 +227,7 @@ Example state tracking updates with explicit TDD documentation:
 
 **Next Steps:**
 1. Complete implementation of CSV formatter to pass tests
-2. Document test results with screenshots
+2. Implement CSV formatter and ensure test coverage
 3. Begin test writing for API endpoint
 
 **Notes:**

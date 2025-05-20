@@ -30,16 +30,15 @@ The RED phase establishes test criteria before any implementation:
    - Verify error messages are meaningful
    - Tests should fail because functionality is missing, not because tests are incorrect
 
-3. **Document RED Phase Evidence**
-   - Capture test execution results with screenshots or logs
-   - Store in `_ai/tdd/[issue-number]-tdd-evidence/[component]-red.[ext]`
-   - Include date and test execution details
+3. **Track RED Phase**
+   - Run tests and confirm they fail for the expected reasons
+   - Note which tests were written and what functionality they verify
+   - Focus on behavior coverage rather than collecting evidence
 
 4. **RED Phase Checklist**
    - [ ] Tests define expected behavior clearly
    - [ ] Tests include edge cases and error conditions
    - [ ] Tests fail for expected reasons
-   - [ ] Test failure is documented with evidence
    - [ ] No implementation code has been written yet
 
 ## GREEN Phase Requirements
@@ -57,16 +56,15 @@ The GREEN phase implements minimal code to make tests pass:
    - If any tests still fail, continue implementation
    - Do not proceed to refactoring until all tests pass
 
-3. **Document GREEN Phase Evidence**
-   - Capture successful test execution with screenshots or logs
-   - Store in `_ai/tdd/[issue-number]-tdd-evidence/[component]-green.[ext]`
-   - Include date and test execution details
+3. **Track GREEN Phase**
+   - Verify tests now pass with minimal implementation
+   - Note the implementation approach taken
+   - Ensure implementation focuses only on making tests pass
 
 4. **GREEN Phase Checklist**
    - [ ] Implementation is minimal and focused on test requirements
    - [ ] All tests pass consistently
    - [ ] No premature optimization or extra features added
-   - [ ] Test success is documented with evidence
 
 ## REFACTOR Phase Requirements
 
@@ -88,44 +86,44 @@ The REFACTOR phase improves implementation while maintaining passing tests:
    - Ensure no regressions have been introduced
    - Verify the feature works with the rest of the system
 
-4. **Document REFACTOR Phase Evidence**
-   - Capture final test execution after refactoring
-   - Store in `_ai/tdd/[issue-number]-tdd-evidence/[component]-refactor.[ext]`
-   - Include date and test execution details
+4. **Measure Test Coverage**
+   - Run code coverage tools to assess coverage percentage
+   - Identify any gaps in test coverage
+   - Document the final coverage metrics for the component
 
 5. **REFACTOR Phase Checklist**
    - [ ] Code quality improved without changing behavior
    - [ ] All tests still pass consistently
    - [ ] No regressions introduced
    - [ ] Project coding standards applied
-   - [ ] Final test execution documented with evidence
+   - [ ] Test coverage metrics documented
 
 ## TDD Documentation Requirements
 
-All TDD activities must be documented in the KB state file:
+Track TDD progress in the GitHub issue's Current State comment:
 
 1. **Progress Tracking Format**
    ```markdown
    ## TDD Progress
    
    ### [Component Name]
-   - [x] RED phase - [Evidence](_ai/tdd/123-tdd-evidence/component-red.png)
-   - [x] GREEN phase - [Evidence](_ai/tdd/123-tdd-evidence/component-green.png)
-   - [x] REFACTOR phase - [Evidence](_ai/tdd/123-tdd-evidence/component-refactor.png)
+   - [x] RED phase - Tests written for feature X, Y, Z
+   - [x] GREEN phase - Implementation complete
+   - [x] REFACTOR phase - Coverage: 85%
    ```
 
 2. **Required Documentation Elements**
    - Track RED/GREEN/REFACTOR status for each component
-   - Include evidence links for each TDD phase
-   - Document current test coverage for completed components
+   - List what functionality each test covers
+   - Document current test coverage percentage for completed components
    - Flag any components that don't have complete TDD cycle
    - Update GitHub issue Current State with TDD progress
 
-3. **TDD Evidence Requirements**
-   - Every major component should have its own evidence files
-   - Evidence should clearly show test results (passed/failed)
-   - File naming must follow the `[component]-[phase].[ext]` pattern
-   - Store all evidence in dedicated issue folder: `_ai/tdd/[issue-number]-tdd-evidence/`
+3. **Coverage Reporting**
+   - Document test coverage percentages in the Current State
+   - Focus on meaningful coverage (not just line coverage)
+   - Identify any critical areas that need additional testing
+   - Note any technical limitations in coverage reporting
 
 ## Implementation Process
 
@@ -138,8 +136,8 @@ Follow this process when implementing a feature with TDD:
 
 2. **For Each Component**
    - Complete full RED-GREEN-REFACTOR cycle
-   - Document each phase with evidence
-   - Update KB state file after completing each phase
+   - Track progress in the current state comment
+   - Record coverage metrics after refactoring
    - Do not move to next component until cycle is complete
 
 3. **Integration Testing**
@@ -150,7 +148,7 @@ Follow this process when implementing a feature with TDD:
 4. **Final Verification**
    - Run complete test suite one final time
    - Update overall test coverage metrics
-   - Ensure all TDD evidence is properly documented
+   - Ensure coverage meets project standards
    - Update GitHub issue Current State with completion status
 
 ## Example TDD Implementation
@@ -162,17 +160,18 @@ Follow this process when implementing a feature with TDD:
 1. Created test: should display user name and email
 2. Created test: should show edit button for owner
 3. Created test: should hide edit button for non-owner
-4. Ran tests: All failing as expected [screenshot link]
+4. Ran tests: All failing as expected
 
 ## GREEN Phase
 1. Implemented UserProfileComponent with conditional edit button
-2. Ran tests: All passing [screenshot link]
+2. Ran tests: All passing
 
 ## REFACTOR Phase
 1. Extracted permission check to utility function
 2. Improved responsive layout
 3. Added accessibility attributes
-4. Ran tests: All still passing [screenshot link]
+4. Ran tests: All still passing
+5. Current coverage: Component - 92%, Utils - 87%
 ```
 
 ## Common TDD Pitfalls to Avoid
@@ -197,4 +196,4 @@ Follow this process when implementing a feature with TDD:
    - Trying to optimize during GREEN phase
    - Focus first on correctness, then on performance
 
-By following this TDD protocol, you will ensure high-quality, well-tested code with clear documentation of the development process.
+By following this TDD protocol, you will ensure high-quality, well-tested code with measurable test coverage.
