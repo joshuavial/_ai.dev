@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2025-05-20
+
+### Enhanced
+- Added critical user confirmation requirement to Planning workflow:
+  - Requires presenting the complete plan to the user before saving
+  - Mandates explicit feedback and approval process
+  - Enforces documenting user feedback and confirming final understanding
+  - Provides example confirmation request format
+
 ## [0.4.0] - 2025-05-20
 
 ### Added
