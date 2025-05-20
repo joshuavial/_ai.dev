@@ -1,12 +1,16 @@
 # Execution Workflow
 
-Before beginning any implementation work, follow the complete Boot Protocol (File: `_ai.bws/protocols/boot.md`) to understand your context.
+**Primary Protocol**: File: `_ai.bws/workflows/execution.md`
+**Required Protocols**: 
+- Boot Protocol (File: `_ai.bws/protocols/boot.md`)
+- Tasks Protocol (File: `_ai.bws/protocols/tasks.md`)
+- Issue Protocol (File: `_ai.bws/protocols/issue.md`)
+- TDD Protocol (File: `_ai.bws/protocols/tdd.md`)
+**Activation**: `!workflow execution`
 
-This workflow should be used in conjunction with the Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) for implementing and tracking tasks.
+This document outlines the recommended workflow for executing tickets, with a focus on structured implementation using Test-Driven Development (TDD) and continuous improvement.
 
-This document outlines the recommended workflow for executing tickets, with a focus on structured implementation and continuous improvement.
-
-For the standardized GitHub issue structure, see Issue Protocol (File: `_ai.bws/protocols/issue.md`).
+> Note: Always begin by activating the Boot Protocol to establish context before starting implementation work.
 
 ## Implementation Process
 
@@ -370,4 +374,20 @@ When working with AI tools to implement features:
 
 Following this structured approach ensures thorough implementation and reduces back-and-forth cycles.
 
-For information on quality verification, see QA Workflow (File: `_ai.bws/workflows/qa.md`).
+## Next Steps
+
+After completing the execution phase, the next step is typically to move into quality assurance. This is done by:
+
+1. Making sure all implementation is complete
+2. Running the full test suite to ensure everything passes
+3. Ensuring all items in the technical plan have been addressed
+4. Activating the QA Workflow with: `!workflow qa`
+
+For details on quality verification, refer to QA Workflow (File: `_ai.bws/workflows/qa.md`).
+
+## Related Protocols
+
+- TDD Protocol (File: `_ai.bws/protocols/tdd.md`) - For test-driven development process
+- Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) - For work tracking
+- Issue Protocol (File: `_ai.bws/protocols/issue.md`) - For GitHub issue structure
+- Playwright Protocol (File: `_ai.bws/protocols/playwright.md`) - For browser automation

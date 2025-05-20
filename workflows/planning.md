@@ -1,12 +1,15 @@
 # Planning Workflow
 
-Before beginning any planning work, follow the complete Boot Protocol (File: `_ai.bws/protocols/boot.md`) to understand your context.
+**Primary Protocol**: File: `_ai.bws/workflows/planning.md`
+**Required Protocols**: 
+- Boot Protocol (File: `_ai.bws/protocols/boot.md`)
+- Tasks Protocol (File: `_ai.bws/protocols/tasks.md`)
+- Issue Protocol (File: `_ai.bws/protocols/issue.md`)
+**Activation**: `!workflow planning`
 
-This workflow should be used in conjunction with the Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) for breaking down work items and tracking progress.
+This document outlines the recommended workflow for planning tickets, with a focus on thorough planning and structured preparation. The planning phase is where requirements are analyzed, technical approaches are defined, and implementation is prepared.
 
-This document outlines the recommended workflow for planning tickets, with a focus on thorough planning and structured preparation.
-
-For the standardized GitHub issue structure, see Issue Protocol (File: `_ai.bws/protocols/issue.md`).
+> Note: Always begin by activating the Boot Protocol to establish context before starting planning work.
 
 ## Multi-Level Planning Capabilities
 
@@ -550,4 +553,18 @@ Use xero-node because:
 - May need to adjust API rate limits for production deployment
 ```
 
-For information on executing tickets, see Execution Workflow (File: `_ai.bws/workflows/execution.md`)
+## Next Steps
+
+After completing the planning phase, the next step is typically to move into execution. This is done by:
+
+1. Making sure all planning deliverables are complete
+2. Confirming the technical plan with stakeholders
+3. Activating the Execution Workflow with: `!workflow execution`
+
+For details on implementation, refer to Execution Workflow (File: `_ai.bws/workflows/execution.md`).
+
+## Related Protocols
+
+- Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) - For work breakdown
+- Issue Protocol (File: `_ai.bws/protocols/issue.md`) - For GitHub issue structure
+- TDD Protocol (File: `_ai.bws/protocols/tdd.md`) - For test planning
