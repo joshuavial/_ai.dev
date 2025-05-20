@@ -13,9 +13,25 @@ The Orientation Protocol ensures that:
 
 ## Required Orientation Steps
 
-### 1. Branch Identification
+### 1. Current Work Identification
 
-**ALWAYS start by identifying which branch you're working in:**
+**ALWAYS start by checking the current work state:**
+
+```
+Read the file: _ai/current.md
+```
+
+This file follows the structure defined in [Current Work Tracking](./current-work-tracking.md) and contains:
+- Active PRD (or null)
+- Active Issue (or null)
+- Active Task (or null)
+- Contextual notes about the current work
+
+Understanding the current work context is critical before proceeding with other orientation steps.
+
+### 2. Branch Identification
+
+**Next, identify which branch you're working in:**
 
 ```bash
 git branch --show-current
@@ -23,7 +39,7 @@ git branch --show-current
 
 The branch name typically follows the pattern `[issue-number]-[description]` or `feature/[description]`. Extract the issue number from the branch name.
 
-### 2. GitHub Issue Review
+### 3. GitHub Issue Review
 
 **Use the issue number to locate and read the GitHub issue:**
 
@@ -37,7 +53,7 @@ From the issue:
 - Determine which workflow phase is currently active (Planning, Execution, QA, or Fast Track)
 - Review the Current State comment to understand progress
 
-### 3. PRD Orientation
+### 4. PRD Orientation
 
 **Locate and read the relevant PRD:**
 
@@ -50,7 +66,7 @@ Review the PRD to:
 - Identify related issues or dependencies
 - Recognize user/business goals for this work
 
-### 4. Task Orientation
+### 5. Task Orientation
 
 **Identify your current task within the overall execution plan:**
 
@@ -63,7 +79,7 @@ For each task:
 - Check its current progress and notes
 - Understand its relationship to other tasks
 
-### 5. Todo Orientation
+### 6. Todo Orientation
 
 **Review current todos for your immediate next actions:**
 
@@ -190,6 +206,8 @@ TodoRead
 
 Before beginning work, verify you can answer all of these questions:
 
+- [ ] What is the current work state (PRD/Issue/Task)?
+- [ ] Does the current work align with the branch I'm in?
 - [ ] What branch am I working in?
 - [ ] What issue number am I addressing?
 - [ ] What is the overall goal of this issue?
@@ -200,6 +218,7 @@ Before beginning work, verify you can answer all of these questions:
 - [ ] What has been completed so far?
 - [ ] What is the next immediate action?
 - [ ] Are there any blockers or dependencies?
+- [ ] Are there any specific notes in the current work file?
 
 ## Confirmation of Understanding
 

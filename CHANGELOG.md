@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2025-05-20
+
+### Added
+- New Current Work Tracking document:
+  - Defines structure for tracking active PRD, Issue, and Task
+  - Provides mechanism for contextual continuity across sessions
+  - Uses `_ai/current.md` as the central work state reference
+
+### Enhanced
+- Updated Orientation Protocol to check current work state as first step
+- Added current work verification to orientation checklist
+- Improved orientation flow to prioritize current work context
+
 ## [0.4.1] - 2025-05-20
 
 ### Enhanced
