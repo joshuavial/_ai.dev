@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2025-05-21
+
+### Fixed
+- Added critical boot protocol instructions to all workflow files:
+  - Ensures proper initialization when workflows are accessed directly
+  - Prevents workflows from being used as entry points without proper context
+  - Requires reading core instructions before starting any workflow
+  - Enforces boot protocol for consistent workflow adoption
+
 ## [0.5.0] - 2025-05-21
 
 ### Enhanced

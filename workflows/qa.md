@@ -1,5 +1,12 @@
 # Quality Assurance Workflow
 
+# IMPORTANT: Read Boot Protocol First
+> **CRITICAL**: When adopting this workflow, you MUST first read the core instructions and follow the boot protocol to ensure proper initialization. Do NOT skip this step as it's essential for correct workflow operation.
+>
+> 1. Read core instructions: `_ai.bws/core-instructions.md`
+> 2. Follow boot protocol: `_ai.bws/protocols/boot.md`
+> 3. Only then proceed with this workflow
+
 This document outlines the quality assurance (QA) process that should be followed after implementation is complete and before the reflection phase begins. A thorough QA process ensures that all work meets quality standards and requirements before being considered complete.
 
 For the standardized GitHub issue structure, see [../shared/github-issue-structure.md](../shared/github-issue-structure.md).

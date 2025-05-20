@@ -1,5 +1,12 @@
 # Execution Workflow
 
+# IMPORTANT: Read Boot Protocol First
+> **CRITICAL**: When adopting this workflow, you MUST first read the core instructions and follow the boot protocol to ensure proper initialization. Do NOT skip this step as it's essential for correct workflow operation.
+>
+> 1. Read core instructions: `_ai.bws/core-instructions.md`
+> 2. Follow boot protocol: `_ai.bws/protocols/boot.md`
+> 3. Only then proceed with this workflow
+
 **Primary Protocol**: File: `_ai.bws/workflows/execution.md`
 **Required Protocols**: 
 - Boot Protocol (File: `_ai.bws/protocols/boot.md`)
