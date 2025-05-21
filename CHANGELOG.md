@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.3] - 2025-05-21
+
+### Changed
+- Reinforced file naming standards to prevent .refactored and .enhanced files:
+  - Enhanced [CRITICAL:DOC-00] directive in core-instructions.md with stronger wording
+  - Added explicit file management requirements to TDD protocol's REFACTOR phase
+  - Added file management verification steps to execution workflow
+  - Added mandatory checks for proper file modification during PR creation and completion
+  - Eliminated duplicate files with version suffixes created during refactoring
+
 ## [0.5.2] - 2025-05-21
 
 ### Changed

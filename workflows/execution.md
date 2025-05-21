@@ -191,6 +191,31 @@ Throughout implementation, continuously update the third comment in the GitHub i
 - Update the next steps section regularly
 - Add relevant notes about discoveries or changes to the approach
 
+#### File Management Verification
+
+Throughout implementation, you MUST follow these file management requirements:
+
+1. **Direct File Modification**
+   - Always modify original files in place when making changes
+   - NEVER create new versions of files with suffixes like .updated, .new, .enhanced, .refactored, etc.
+   - Use version control (git) to track changes, not separate files
+
+2. **Verification Steps Before Committing**
+   - Before committing changes, verify no duplicate files have been created
+   - Check that all modifications have been made to the original files
+   - Remove any temporary files that may have been created during development
+
+3. **Refactoring Guidelines**
+   - When refactoring code, always modify the original file directly
+   - Do not create new "refactored" or "enhanced" versions
+   - Use proper testing to ensure changes maintain expected behavior
+   - Document refactoring in the Current State comment, not in separate files
+
+4. **Required File Management Checks**
+   - After completing each TDD cycle, verify no duplicate files exist
+   - Before creating PRs, run a check for any files with suffixes indicating they are alternate versions
+   - If duplicate files are discovered, consolidate changes into the original file and remove the duplicates
+
 Example state tracking updates with explicit TDD documentation:
 
 ```
@@ -253,6 +278,7 @@ During implementation:
 - Include evidence of TDD compliance in the PR description
 - Verify and document that all tests are passing with screenshots/logs
 - Include test coverage reports in the PR
+- MANDATORY: Verify that all code modifications have been made directly to original files, with no alternate versions created with suffixes like .updated, .new, .enhanced, .refactored, etc.
 - Address review comments promptly
 - Run tests after addressing review comments to verify no regressions
 - Update the Current State comment to reflect PR review status
@@ -264,6 +290,7 @@ During implementation:
 - MANDATORY: Run the complete test suite to ensure ALL tests pass before considering the task complete
 - Document evidence of passing tests with screenshots or logs
 - Update documentation if needed
+- Perform a final check to ensure all changes were made to original files directly, with no alternate versions created with suffixes like .updated, .new, .enhanced, .refactored, etc.
 - Do a final update to the Current State comment with completion status
 - Close ticket with reference to the PR
 - Proceed to the QA workflow for final quality verification

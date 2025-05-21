@@ -75,6 +75,7 @@ The REFACTOR phase improves implementation while maintaining passing tests:
    - Apply design patterns where appropriate
    - Remove code duplication and improve names
    - Adhere to project code style and standards
+   - **CRITICAL**: Always modify files in place - NEVER create new versions with suffixes like .refactored or .enhanced
 
 2. **Run Tests After Each Change**
    - Tests must continue to pass after each refactoring step
@@ -91,12 +92,19 @@ The REFACTOR phase improves implementation while maintaining passing tests:
    - Identify any gaps in test coverage
    - Document the final coverage metrics for the component
 
-5. **REFACTOR Phase Checklist**
+5. **File Management Requirements**
+   - Always refactor the original file directly in place
+   - Never create alternate versions with different filenames
+   - Use version control (git) to track changes, not separate files
+   - Maintain a single source of truth for each component
+
+6. **REFACTOR Phase Checklist**
    - [ ] Code quality improved without changing behavior
    - [ ] All tests still pass consistently
    - [ ] No regressions introduced
    - [ ] Project coding standards applied
    - [ ] Test coverage metrics documented
+   - [ ] Original files modified directly (no .refactored/.enhanced versions)
 
 ## TDD Documentation Requirements
 

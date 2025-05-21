@@ -1,6 +1,6 @@
 # Core Instructions for LLM Workflows
 
-[CRITICAL:DOC-00] NEVER create new versions of files with suffixes like .updated, .new, .enhanced etc. ALWAYS edit the original file directly.
+[CRITICAL:DOC-00] NEVER create new versions of files with suffixes like .updated, .new, .enhanced, .refactored etc. ALWAYS edit the original file directly. This is especially important during refactoring tasks - when improving code, you must modify the original file in place, not create alternate versions. Violation of this directive leads to confusion, duplicate files, and maintenance issues.
 
 This document serves as the single source of truth for workflow instructions across all processes. Each instruction has a unique identifier and is categorized by type and applicable workflows.
 
