@@ -7,361 +7,313 @@
 > 2. Follow boot protocol: `_ai.bws/protocols/boot.md`
 > 3. Only then proceed with this workflow
 
-This document outlines the quality assurance (QA) process that should be followed after implementation is complete and before the reflection phase begins. A thorough QA process ensures that all work meets quality standards and requirements before being considered complete.
+This document outlines the quality assurance (QA) process for verifying completed implementation work. QA operates at the task level, producing actionable feedback documents that integrate with the execution workflow.
 
-For the standardized GitHub issue structure, see [../shared/github-issue-structure.md](../shared/github-issue-structure.md).
+## QA Purpose and Scope
 
-## QA Process Overview
+### When to Begin QA
 
-The QA workflow serves as a bridge between execution and reflection, providing a structured approach to verify that all work meets required standards. This process should be applied to all significant features, bug fixes, and changes before they are considered ready for production.
+QA is triggered when:
+- A task's implementation is marked complete in its technical plan
+- All TDD cycles are documented with evidence
+- The execution workflow indicates readiness for quality verification
 
-## When to Begin QA
+### QA Operates at Task Level
 
-QA begins when:
-- All implementation tasks in the execution workflow are marked complete
-- The PR has been created and reviewed by at least one developer
-- All automated tests are passing in the CI/CD pipeline
-- The implementation is deployed to a testing or staging environment
+- **Scope**: Single task folder in `_ai/tasks/[issue-id]-[task-letter]-[task-name]/`
+- **Input**: `technical-plan.md` with completed implementation
+- **Output**: `qa-report.md` with verification results and action items
 
-## QA Team Composition
+## 3-Question Quality Framework
 
-Depending on the complexity and scope of the changes, QA should involve:
+QA evaluation centers on three core questions:
 
-1. **Developer QA:**
-   - The original developer performs initial verification
-   - A peer developer conducts a code review and functionality check
+1. **Objective Verification**: Does it meet the objectives?
+2. **Functional Verification**: Does it function?
+3. **Quality Assessment**: Is it well factored, easy to maintain, consistent, and well tested?
 
-2. **Dedicated QA:**
-   - QA specialists who focus on testing and quality
-   - May include manual testers and/or QA automation engineers
-
-3. **Domain Experts:**
-   - Product managers to verify business requirements
-   - Designers to verify UI/UX implementation
-   - Subject matter experts for specialized domain logic
-
-4. **Stakeholders:**
-   - End-users or their representatives
-   - Business stakeholders for high-impact features
-
-## QA Workflow
-
-This workflow should be used in conjunction with the [Task Management Guidelines](../shared/task-management.md) for verifying task completion and quality.
+## QA Process
 
 ### 1. QA Preparation
 
-Before beginning QA testing:
+**Locate Task Folder**:
+- Navigate to: `_ai/tasks/[issue-id]-[task-letter]-[task-name]/`
+- Review: `technical-plan.md` for objectives and commitments
+- Check: TDD evidence in `tdd-evidence/` folder (if present)
+- Review: Any artifacts in `artifacts/` folder
 
-- **Create QA Plan:**
-  - Define what needs to be tested
-  - Identify who will perform each test
-  - Determine test environments needed
-  - Establish acceptance criteria
+**Understand Planning Commitments**:
+- Read planning objectives from technical plan
+- Review user-approved scope and approach
+- Note specific package/library decisions made
+- Identify test coverage targets and TDD requirements
 
-- **Update GitHub Issue:**
-  - Update the Current State comment to "In QA"
-  - Add a QA checklist to the ticket
-  - Tag appropriate team members for testing
+### 2. Quality Verification
 
-- **Prepare Test Environment:**
-  - Deploy changes to the appropriate environment
-  - Ensure test data is available
-  - Verify that the environment is properly configured
+#### 2.1 Objective Verification
+**Questions to Answer**:
+- Were all planning objectives achieved?
+- Was user-approved scope delivered completely?
+- Were all acceptance criteria met?
+- Were technical plan commitments honored?
+- Were package/library decisions followed as planned?
 
-Example QA section in Current State comment:
+**Verification Methods**:
+- Compare deliverables against technical plan objectives
+- Check that implementation matches planned approach
+- Verify all checklist items from technical plan are complete
+- Confirm user sign-off requirements were met
 
+#### 2.2 Functional Verification
+**Questions to Answer**:
+- Does core functionality work as specified?
+- Do error handling mechanisms function properly?
+- Do integration points work correctly?
+- Does performance meet requirements?
+- Do user workflows function end-to-end?
+
+**Verification Methods**:
+- Test core functionality manually
+- Verify error cases are handled gracefully
+- Check integration with existing components
+- Run automated tests if available
+- Test edge cases and boundary conditions
+
+#### 2.3 Quality Assessment
+**Questions to Answer**:
+- Is code readable and well-structured?
+- Are appropriate abstractions and patterns used?
+- Does it follow existing code patterns and conventions?
+- Does it use established architectural approaches?
+- Are naming and structure consistent?
+- Does test coverage meet planned targets?
+- Are tests meaningful and cover edge cases?
+- Is TDD evidence complete (RED-GREEN-REFACTOR cycles)?
+- Was any obvious technical debt introduced?
+- Were maintainability considerations addressed?
+
+**Verification Methods**:
+- Review code quality and structure
+- Check consistency with existing codebase patterns
+- Verify test coverage against planned targets
+- Review TDD evidence for completeness
+- Assess technical debt impact
+- Evaluate maintainability and readability
+
+### 3. QA Documentation
+
+**Create QA Report**: `qa-report.md` in the task folder
+
+#### QA Report Template
+
+```markdown
+# QA Report: [Task Name]
+
+**Date**: [Current Date]
+**Technical Plan**: technical-plan.md
+**QA Status**: ✅ PASS / ⚠️ NEEDS WORK / ❌ FAIL
+
+## Executive Summary
+
+- **Objective Verification**: ✅ PASS / ❌ FAIL
+- **Functional Verification**: ✅ PASS / ❌ FAIL  
+- **Quality Assessment**: ✅ PASS / ❌ FAIL
+
+## 1. Objective Verification
+
+### ✅ Requirements Met
+- [List objectives that were successfully achieved]
+- [Note planning commitments that were honored]
+
+### ❌ Requirements Not Met  
+- [List objectives that failed verification]
+- [Note planning commitments that were not honored]
+- **Action Required**: [Specific steps needed for each issue]
+
+## 2. Functional Verification
+
+### ✅ Functions Correctly
+- [List functional areas that work properly]
+- [Note successful integrations and workflows]
+
+### ❌ Functional Issues
+- [List functional problems found with specific examples]
+- [Note integration or workflow failures]
+- **Action Required**: [Specific fixes needed for each issue]
+
+## 3. Quality Assessment
+
+### ✅ Quality Standards Met
+- [List quality aspects that pass review]
+- [Note successful code patterns and test coverage]
+
+### ❌ Quality Issues
+- [List code quality problems: structure, consistency, testing]
+- [Note technical debt or maintainability concerns]
+- **Action Required**: [Specific improvements needed for each issue]
+
+## Action Items for Execution
+
+### Critical (Must Fix Before Production)
+- [ ] [Specific actionable item with clear success criteria]
+- [ ] [Specific actionable item with clear success criteria]
+
+### Recommended (Should Fix)  
+- [ ] [Specific actionable item with clear success criteria]
+- [ ] [Specific actionable item with clear success criteria]
+
+### Optional (Nice to Have)
+- [ ] [Specific actionable item with clear success criteria]
+
+## QA Sign-off
+
+**Overall Result**: Ready for Production / Needs Rework / Critical Issues Found
+
+**Next Steps**: 
+- If PASS: Ready for production deployment
+- If NEEDS WORK: Return to execution workflow to address action items
+- If FAIL: Requires significant rework before re-evaluation
+
+**Re-QA Required**: Yes/No (if action items are addressed)
 ```
-## Current State
 
-**Status:** In QA
+### 4. QA Status Classification
 
-**QA Checklist:**
-- [ ] Developer verification (AssignedTo: @original-dev)
-- [ ] Peer developer review (AssignedTo: @peer-dev)
-- [ ] Functional testing (AssignedTo: @qa-specialist)
-- [ ] Accessibility testing (AssignedTo: @accessibility-specialist)
-- [ ] Performance testing (AssignedTo: @performance-engineer)
-- [ ] Product manager verification (AssignedTo: @product-manager)
-- [ ] User acceptance testing (AssignedTo: @stakeholder)
+#### ✅ PASS
+- All three verification areas pass
+- No critical issues found
+- Ready for production
 
-**QA Notes:**
-- Test environment available at: [URL]
-- Test credentials: [if applicable]
-- Special testing instructions: [if applicable]
-```
+#### ⚠️ NEEDS WORK  
+- Minor issues in one or more areas
+- Critical items must be fixed
+- Recommended items should be addressed
+- Return to execution workflow with action items
 
-### 2. Testing Layers
+#### ❌ FAIL
+- Major issues in multiple areas
+- Significant rework required
+- Does not meet basic quality standards
+- Requires substantial execution cycle before re-QA
 
-QA should proceed through multiple testing layers:
+## Integration with Execution Workflow
 
-#### 2.1. Developer Verification
+### QA Feedback Loop
 
-The original developer verifies:
-- All acceptance criteria are met
-- Implementation follows the technical plan
-- All test cases pass
-- Code has appropriate documentation
-- No obvious edge cases are missed
+When QA identifies issues:
 
-#### 2.2. Code Quality Review
+1. **Execution Reviews QA Report**: Read `qa-report.md` in task folder
+2. **Address Action Items**: Use TDD cycle for fixes
+3. **Update QA Report**: Check off completed items
+4. **Request Re-QA**: When all critical items resolved
 
-A peer developer checks:
-- Code follows project standards and best practices
-- No security vulnerabilities are present
-- Error handling is appropriate
-- Edge cases are handled properly
-- No unnecessary complexity or performance issues
+### QA Action Item Resolution
 
-#### 2.3. Functional Testing
+For each QA issue being addressed in execution:
 
-QA specialists verify:
-- All features work as specified
-- Integration with other components works correctly
-- Error cases are handled gracefully
-- UI components display and function correctly
-- Data persistence works as expected
+```markdown
+## Addressing QA Issue: [Issue Description]
 
-#### 2.4. Cross-Functional Testing
+### TDD Approach
+- [ ] RED: Write test for the fix
+- [ ] GREEN: Implement minimal fix  
+- [ ] REFACTOR: Improve implementation
+- [ ] Verify: Complete test suite passes
 
-Specialized QA verifies:
-- **Accessibility:** WCAG compliance, screen reader compatibility
-- **Performance:** Load times, resource usage, handling of large data sets
-- **Security:** Authorization checks, data validation, injection protection
-- **Usability:** Intuitive workflows, clear error messages, responsive design
-- **Compatibility:** Browser/device compatibility, API versions
-
-#### 2.5. Business Requirements Verification
-
-Product managers verify:
-- Implementation aligns with business goals
-- User experience meets expectations
-- Edge cases are handled appropriately from a business perspective
-- Feature works in expected user scenarios
-
-#### 2.6. User Acceptance Testing (UAT)
-
-When applicable, stakeholders verify:
-- Feature solves the intended problem
-- Workflow makes sense from an end-user perspective
-- No critical issues from a user perspective
-
-### 3. Issue Tracking and Resolution
-
-During QA:
-
-- **Document Issues:**
-  - Create sub-tickets for issues found
-  - Categorize by severity (Critical, Major, Minor, Cosmetic)
-  - Include clear reproduction steps and expected behavior
-
-- **Prioritize Fixes:**
-  - Critical and major issues block completion
-  - Minor issues may be addressed in the current release or backlogged
-  - Cosmetic issues can be logged for future improvements
-
-- **Verification Process:**
-  - Fixes are reviewed by the person who reported the issue
-  - Issues are only closed when verified as fixed
-
-Example issue template:
-
-```
-## QA Issue: [Brief Description]
-
-**Severity:** [Critical/Major/Minor/Cosmetic]
-
-**Environment:** 
-- Browser/Device: [e.g., Chrome 95.0, iPhone 12]
-- OS: [e.g., Windows 11, iOS 15]
-- URL: [where the issue was found]
-
-**Steps to Reproduce:**
-1. [Clear step-by-step instructions]
-2. [Include any specific test data]
-3. [Include screenshots if helpful]
-
-**Expected Behavior:**
-[What should happen]
-
-**Actual Behavior:**
-[What actually happens]
-
-**Additional Context:**
-[Any other relevant information]
-```
-
-### 4. Regression Testing
-
-After fixes are implemented:
-
-- Run automated regression tests
-- Perform manual verification of related functionality
-- Check that fixes don't introduce new issues
-- Verify that previously working features still function correctly
-
-### 5. QA Sign-off
-
-When all testing is complete:
-
-- **Final QA Review:**
-  - All test cases have been executed
-  - Critical and major issues have been resolved
-  - Any deferred issues are documented and approved for deferral
-
-- **Documentation Update:**
-  - Update user documentation if needed
-  - Ensure API documentation is current
-  - Check that release notes are accurate
-
-- **Update Status:**
-  - Update the Current State comment to reflect QA completion
-  - Document any known issues that were accepted
-  - Prepare for release if applicable
-
-Example QA completion update:
-
-```
-## Current State
-
-**Status:** QA Complete
-
-**QA Results:**
-- [x] Developer verification - Passed
-- [x] Peer developer review - Passed with minor comments
-- [x] Functional testing - Passed
-- [x] Accessibility testing - Passed WCAG AA
-- [x] Performance testing - Passed (response time < 200ms)
-- [x] Product manager verification - Approved
-- [x] User acceptance testing - Approved
-
-**Known Issues:**
-- Minor: Button alignment on mobile devices (PROJ-789)
-- Cosmetic: Icon size inconsistency in dark mode (PROJ-790)
-
-**Release Approval:**
-Approved for production by @product-manager on [DATE]
+### Resolution Notes
+- [Description of what was changed]
+- [Impact on other components]
+- [Link to updated QA report item]
 ```
 
 ## QA Best Practices
 
-### Test Case Development
+### Systematic Approach
+- Always follow the 3-question framework systematically
+- Document specific examples for each finding
+- Provide actionable guidance, not just "fix this"
+- Reference specific files and line numbers when applicable
 
-- **Cover Core Functionality:**
-  - Happy path scenarios
-  - Edge cases and boundary conditions
-  - Error handling and recovery
+### Integration Focus
+- Pay special attention to how changes integrate with existing code
+- Verify that new patterns align with established conventions
+- Check that dependencies are properly managed
+- Ensure consistent error handling approaches
 
-- **Use Checklists:**
-  - Standard functionality checklist
-  - Feature-specific test cases
-  - Non-functional requirements (performance, security)
+### Test Quality Assessment
+- Verify tests actually test the intended behavior
+- Check that edge cases are covered appropriately
+- Ensure tests will catch regressions
+- Validate that TDD cycles were genuinely followed
 
-- **Automate When Possible:**
-  - Unit tests for core logic
-  - Integration tests for component interaction
-  - End-to-end tests for critical user flows
+### Documentation Standards
+- Keep QA reports concise but thorough
+- Use clear, specific language in action items
+- Provide examples of good vs. problematic code when helpful
+- Link to relevant documentation or standards
 
-### QA Environment Management
+## Example QA Report
 
-- **Environment Parity:**
-  - Test environments should mirror production
-  - Database schemas should match production
-  - Feature flags should be configured properly
+```markdown
+# QA Report: Xero OAuth Integration
 
-- **Test Data Management:**
-  - Use consistent test data sets
-  - Reset data between tests when needed
-  - Ensure sensitive data is not used in tests
+**Date**: 2024-12-06
+**Technical Plan**: technical-plan.md  
+**QA Status**: ⚠️ NEEDS WORK
 
-### QA Documentation
+## Executive Summary
 
-- **Test Plans:**
-  - Document test strategy
-  - List test cases and expected results
-  - Define test data requirements
+- **Objective Verification**: ✅ PASS
+- **Functional Verification**: ✅ PASS
+- **Quality Assessment**: ❌ FAIL
 
-- **QA Reports:**
-  - Summarize test coverage
-  - Document issues found and resolved
-  - Provide recommendations for improvements
+## 1. Objective Verification
 
-## QA for Different Types of Changes
+### ✅ Requirements Met
+- OAuth flow implemented as planned
+- Token refresh mechanism working
+- Integration with existing auth system complete
 
-### Feature QA
+## 2. Functional Verification
 
-For new features:
-- Verify against acceptance criteria
-- Test integration with existing features
-- Check for conflicts with other functionality
-- Verify documentation is complete
+### ✅ Functions Correctly
+- OAuth authorization completes successfully
+- Token refresh triggers automatically
+- Error cases return appropriate responses
 
-### Bug Fix QA
+## 3. Quality Assessment
 
-For bug fixes:
-- Verify the bug is actually fixed
-- Check for regression in related functionality
-- Ensure fix addresses root cause, not just symptoms
-- Add regression tests to prevent future occurrences
+### ❌ Quality Issues
+- Test coverage at 67%, target was 85%
+- Hardcoded API endpoints should be configurable
+- Error handling inconsistent with project patterns
 
-### Performance Improvement QA
+## Action Items for Execution
 
-For performance changes:
-- Measure before and after metrics
-- Test with production-like data volumes
-- Check impact on related functionality
-- Verify there are no new bottlenecks
+### Critical (Must Fix Before Production)
+- [ ] Increase test coverage to minimum 85% for XeroAuthService
+- [ ] Move API endpoints to configuration file
 
-### UI/UX Change QA
+### Recommended (Should Fix)
+- [ ] Standardize error handling to match existing auth patterns
+- [ ] Add logging for OAuth flow steps
 
-For UI changes:
-- Verify design implementation accuracy
-- Test on various screen sizes and devices
-- Check accessibility compliance
-- Verify consistent user experience
+## QA Sign-off
 
-## QA for AI-Assisted Implementation
+**Overall Result**: Needs Rework
+**Next Steps**: Address critical items and update test coverage
+**Re-QA Required**: Yes
+```
 
-When work has been implemented with AI assistance:
-
-1. **Algorithm Verification:**
-   - Verify the logic and algorithms are correct
-   - Check for edge cases the AI might have missed
-   - Ensure code is idiomatic and follows project conventions
-
-2. **Integration Review:**
-   - Pay extra attention to how AI-generated code integrates with existing code
-   - Verify dependencies are correctly managed
-   - Check that naming conventions are consistent
-
-3. **Documentation Check:**
-   - Ensure AI-generated documentation is accurate
-   - Verify that code comments are helpful and accurate
-   - Check that any generated tests are meaningful
-
-## QA Completion and Transition to Reflection
+## QA Completion and Next Steps
 
 Once QA is complete:
 
-1. **Final Status Update:**
-   - Mark all QA tasks as complete in the ticket
-   - Update the Current State to reflect QA completion
-   - Document any known issues or limitations
+1. **Save QA Report**: Ensure `qa-report.md` is saved in task folder
+2. **Update Current State**: If returning to execution, update technical plan
+3. **Archive on Completion**: Move entire task folder to `_ai/archive/` when done
+4. **Transition**: 
+   - If PASS: Ready for reflection or production
+   - If NEEDS WORK/FAIL: Return to execution workflow
 
-2. **Prepare for Reflection:**
-   - Gather QA metrics and insights
-   - Document lessons learned from testing
-   - Prepare recommendations for future improvements
-
-3. **Release Coordination:**
-   - Communicate completion to release managers
-   - Ensure deployment plans are in place
-   - Update stakeholders on status
-
-4. **Transition to Reflection:**
-   - Schedule reflection meeting
-   - Share QA results with the team
-   - Begin reflection process
-
-The QA process bridges implementation and reflection, ensuring that only quality-verified work is considered complete. Completing this workflow signals that the feature is ready for the reflection phase, where the team can evaluate the entire development process and identify improvement opportunities.
-
-See [reflection-workflow.md](reflection-workflow.md) for the next phase.
+The QA workflow ensures systematic quality verification while providing clear, actionable feedback for the execution workflow to address any identified issues.

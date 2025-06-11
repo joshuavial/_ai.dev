@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2025-12-06
+
+### Added
+- Task folder-based organization system for `_ai/` directory:
+  - Standardized task folder naming: `[issue-id]-[task-letter]-[task-name]`
+  - Required files: `technical-plan.md`, `qa-report.md`
+  - Optional folders: `tdd-evidence/`, `artifacts/`, `implementation.md`
+- Comprehensive QA workflow redesign:
+  - 3-question quality framework (Objective, Functional, Quality Assessment)
+  - Task-level QA with actionable output documents
+  - Integration with execution workflow for feedback loop
+- QA-Execution integration:
+  - QA produces actionable `qa-report.md` with categorized issues
+  - Execution workflow handles QA feedback systematically
+  - TDD-based approach to resolving QA issues
+
+### Changed
+- Planning workflow updated to create task folders instead of individual files
+- Execution workflow updated to work from task folder structure
+- Issue Protocol updated to reference task folders instead of individual documents
+- All workflows now operate at task level with folder-based organization
+
+### Enhanced
+- Clear separation between PRDs (high-level) and task implementation (detailed)
+- Improved traceability between planning, execution, and QA phases
+- Streamlined documentation structure for easier reference and archival
+
 ## [0.5.4] - 2025-11-06
 
 ### Added

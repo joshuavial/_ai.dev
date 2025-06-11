@@ -15,9 +15,23 @@
 - TDD Protocol (File: `_ai.bws/protocols/tdd.md`)
 **Activation**: `workflow execution`
 
-This document outlines the recommended workflow for executing tickets, with a focus on structured implementation using Test-Driven Development (TDD) and continuous improvement.
+This document outlines the recommended workflow for executing tickets, with a focus on structured implementation using Test-Driven Development (TDD) and continuous improvement. Execution works from task folders created by the planning workflow.
 
 > Note: Always begin by activating the Boot Protocol to establish context before starting implementation work.
+
+## Task Folder Structure
+
+Execution operates from task folders with this structure:
+```
+_ai/tasks/[issue-id]-[task-letter]-[task-name]/
+├── technical-plan.md    # Input: planning objectives and approach
+├── qa-report.md         # Output: QA feedback (created by QA workflow)
+├── implementation.md    # Optional: detailed execution notes
+├── tdd-evidence/        # Optional: test artifacts and screenshots
+└── artifacts/           # Optional: other task-related files
+```
+
+**Primary Document**: `technical-plan.md` contains objectives, approach, and Current State tracking
 
 ## Implementation Process
 
@@ -179,17 +193,23 @@ You MUST track the following for each component:
 
 #### Updating the Current State
 
-Throughout implementation, continuously update the third comment in the GitHub issue with explicit TDD verification:
+Throughout implementation, continuously update the Current State section in `technical-plan.md`:
 
-- Maintain a "Test Status" section tracking RED/GREEN/REFACTOR for each component
-- Document which tests were written and what they verify
+**Update Current State Section**:
+- Maintain "Test Status" tracking RED/GREEN/REFACTOR for each component
+- Document which tests were written and what they verify  
 - Record test coverage percentages after refactoring
-- Update the status after completing each phase of the TDD cycle
+- Update status after completing each phase of the TDD cycle
 - Check off completed tasks as they are finished
 - Add newly discovered tasks if they emerge during implementation
 - Document blockers and challenges as they appear
-- Update the next steps section regularly
+- Update next steps section regularly
 - Add relevant notes about discoveries or changes to the approach
+
+**Optional Implementation Notes**:
+- Create `implementation.md` for detailed execution notes and discoveries
+- Store TDD artifacts in `tdd-evidence/` subfolder
+- Store other task files in `artifacts/` subfolder
 
 #### File Management Verification
 
@@ -286,14 +306,62 @@ During implementation:
 
 ### 7. Completion
 
-- Verify all checklist items are complete
+- Verify all checklist items in `technical-plan.md` are complete
 - MANDATORY: Run the complete test suite to ensure ALL tests pass before considering the task complete
-- Document evidence of passing tests with screenshots or logs
+- Document evidence of passing tests in `tdd-evidence/` folder
 - Update documentation if needed
 - Perform a final check to ensure all changes were made to original files directly, with no alternate versions created with suffixes like .updated, .new, .enhanced, .refactored, etc.
-- Do a final update to the Current State comment with completion status
+- Update Current State section in `technical-plan.md` to "Ready for QA"
 - Close ticket with reference to the PR
 - Proceed to the QA workflow for final quality verification
+
+### 8. QA Response Process
+
+When QA returns work with issues (creates `qa-report.md` in task folder):
+
+#### QA Document Review
+- Read the `qa-report.md` in the task folder
+- Review all Critical and Recommended action items
+- Update Current State in `technical-plan.md` to "Addressing QA Feedback"
+
+#### Issue Resolution Approach
+1. **Critical Issues (Must Fix)**
+   - Address these using full TDD cycle (RED-GREEN-REFACTOR)
+   - Update `qa-report.md` by checking off resolved items
+   - Re-run complete test suite after each fix
+
+2. **Recommended Issues (Should Fix)**
+   - Evaluate impact and priority
+   - Address using TDD cycle if implementing
+   - Document decision in `implementation.md` if deferring to future work
+
+3. **Optional Issues (Nice to Have)**
+   - Review for quick wins
+   - Document decisions about implementation in `implementation.md`
+
+#### QA Feedback Loop
+- Update Current State in `technical-plan.md` with progress on QA action items
+- Check off completed items directly in the `qa-report.md`
+- When all Critical items resolved, update Current State to "Ready for Re-QA"
+- Continue until QA report shows ✅ PASS status
+
+#### QA Action Item Template
+For each QA issue being addressed, add to `implementation.md`:
+
+```markdown
+## Addressing QA Issue: [Issue Description]
+
+### TDD Approach
+- [ ] RED: Write test for the fix
+- [ ] GREEN: Implement minimal fix
+- [ ] REFACTOR: Improve implementation
+- [ ] Verify: Complete test suite passes
+
+### Resolution Notes
+- [Description of what was changed]
+- [Impact on other components]
+- [Updated item in qa-report.md: ✅]
+```
 
 ## TDD Implementation Examples
 

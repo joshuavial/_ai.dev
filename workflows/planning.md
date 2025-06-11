@@ -54,13 +54,18 @@ When operating at a specific level, explicitly state which level you are plannin
 
 ## Planning Phase Process
 
-### 1. Ticket Creation
+### 1. Task Folder and Technical Plan Creation
 
-- Ensure the ticket has a clear, unique ID (e.g., PROJ-123)
-- Create the main issue description
-- Add the Product/Problem Statement as the first comment
-- Add the Technical Plan as the second comment
-- Initialize the Current State as the third comment
+**Create Task Folder Structure**:
+- Create folder: `_ai/tasks/[issue-id]-[task-letter]-[task-name]/`
+- Task naming pattern: `[issue-id]-[task-letter]-[descriptive-task-name]`
+- Examples: `478-a-xero-oauth-integration`, `123-b-profile-setup-forms`
+
+**Create Technical Plan**:
+- Create file: `technical-plan.md` in the task folder
+- Use the technical plan template (see section 7)
+- Reference parent PRD from `_ai/prds/` folder
+- Include task-specific scope and objectives
 
 ### 2. Initial Technical Analysis
 
@@ -257,17 +262,52 @@ Example testing strategy section:
 - Test coverage report showing minimum 85% coverage
 ```
 
-### 7. Final Technical Plan
+### 7. Technical Plan Template
 
-Complete the second comment with a comprehensive technical plan, including:
+The `technical-plan.md` file should follow this structure:
 
-- Detailed implementation approach
-- Package/library decisions with justification
-- Components to modify
-- New components to create
-- **Test-Driven Implementation Strategy (REQUIRED)**
-- Detailed implementation checklist that explicitly includes test execution steps
-- Potential risks and mitigation strategies
+```markdown
+# Technical Plan: [Task Name]
+
+**Issue**: #{issue-id}
+**Task**: {task-letter} 
+**PRD Reference**: {prd-name}.md
+**Status**: Planning
+
+## Objectives
+[What this task aims to achieve - specific goals and outcomes]
+
+## Technical Approach
+[Implementation strategy and high-level approach]
+
+## Package/Library Analysis
+[If new packages needed - include analysis from section 4]
+
+## Components to Modify
+[List existing components that will be changed]
+
+## New Components to Create
+[List new components to be built]
+
+## Test-Driven Implementation Strategy
+[Detailed TDD approach - see section 6 for requirements]
+
+## Implementation Checklist
+[Detailed checklist with TDD steps - see examples in section 8]
+
+## Risks and Mitigation
+[Potential risks and how to address them]
+
+## Current State
+**Status**: Planning
+**Progress**: 
+- [x] Technical approach defined
+- [ ] Implementation started
+
+**Next Steps**:
+1. Create task folder and begin implementation
+2. Start with TDD cycle for first component
+```
 
 ### 8. User Confirmation and Sign-Off
 
@@ -309,34 +349,19 @@ Are you comfortable with this approach? Would you like me to make any adjustment
 
 Only proceed with saving/updating the plan after receiving explicit user confirmation.
 
-### 9. Initialize Current State Tracking
+### 9. Task Folder Completion
 
-Create the third comment with an initial state tracking template that explicitly tracks test status:
+After user confirmation:
 
-```
-## Current State
+**Finalize Task Folder**:
+- Save `technical-plan.md` in the task folder
+- Create placeholder `qa-report.md` (empty file for later use)
+- Create `tdd-evidence/` subfolder if TDD artifacts will be needed
+- Create `artifacts/` subfolder if other task files will be needed
 
-**Status:** Planning _(Planning/In Progress/Ready for Review/Blocked)_
-
-**Progress:**
-- [x] Initial planning complete
-- [x] Technical approach defined
-- [x] Test strategy defined
-- [ ] Branch created
-
-**Test Status:**
-- No tests implemented yet
-
-**Blockers:**
-- None at this time
-
-**Next Steps:**
-1. Create branch and begin implementation
-2. Write failing tests for first component
-
-**Notes:**
-- Ready for implementation phase
-```
+**Update Project State**:
+- Update `_ai/current.md` to reference the new task folder
+- Link GitHub issue to task folder path in issue description
 
 ## Example Technical Plans
 
@@ -588,9 +613,12 @@ Use xero-node because:
 
 After completing the planning phase, the next step is typically to move into execution. This is done by:
 
-1. Making sure all planning deliverables are complete
-2. Confirming the technical plan with stakeholders
-3. Activating the Execution Workflow with: `workflow execution`
+1. Ensuring task folder is created with `technical-plan.md`
+2. Confirming the technical plan with stakeholders  
+3. Updating `_ai/current.md` to reference the task folder
+4. Activating the Execution Workflow with: `workflow execution`
+
+The execution workflow will work from the `technical-plan.md` file in the task folder and update the Current State section as implementation progresses.
 
 For details on implementation, refer to Execution Workflow (File: `_ai.bws/workflows/execution.md`).
 

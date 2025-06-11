@@ -32,7 +32,9 @@ When creating a new GitHub issue:
 ```markdown
 Create an interactive onboarding wizard to guide new users through profile setup.
 
-📝 **Documentation**: _ai/issues/123-user-onboarding-wizard.md
+📁 **Tasks**: 
+- _ai/tasks/123-a-wizard-navigation/ 
+- _ai/tasks/123-b-profile-setup/
 🔄 **Dependencies**: #120, #121
 👥 **Stakeholders**: @product-manager, @design-lead
 🔍 **Priority**: High
@@ -40,7 +42,7 @@ Create an interactive onboarding wizard to guide new users through profile setup
 
 The issue description MUST include:
 - One-line summary of the issue purpose
-- Link to KB documentation with format: `📝 **Documentation**: _ai/issues/{number}-{name}.md`
+- Task folders with format: `📁 **Tasks**: _ai/tasks/{issue-id}-{task-letter}-{task-name}/`
 - Dependencies with format: `🔄 **Dependencies**: #{numbers}` (or "None" if none exist)
 - Stakeholders with format: `👥 **Stakeholders**: @mentions`
 - Priority with format: `🔍 **Priority**: High/Medium/Low`
@@ -51,14 +53,14 @@ The issue description MUST include:
 ## Current State
 
 **Status**: In Progress
-**KB State**: _ai/states/123-current-state.md
+**Active Task**: _ai/tasks/123-a-wizard-navigation/
 **Updated**: 2023-08-15 14:30
 **Blockers**: Waiting for design assets from @design-lead
 ```
 
 The Current State comment MUST include:
 - Status indicator (Planning/In Progress/Review/Complete)
-- Link to KB state document
+- Link to active task folder
 - Last update timestamp
 - Current blockers (if any, otherwise "None")
 
@@ -104,7 +106,7 @@ For issues that are sub-tickets of larger issues:
 
 ### What NOT to Include in GitHub Issues
 
-Store in KB documents, not GitHub issues:
+Store in task folders, not GitHub issues:
 1. Detailed planning, technical plans, and task breakdowns
 2. TDD evidence (images and artifacts)
 3. Status history and detailed progress tracking
@@ -114,7 +116,7 @@ Store in KB documents, not GitHub issues:
 ### What SHOULD Be in GitHub Issues
 
 1. Clear, concise issue statement
-2. Links to KB documentation where details are stored
+2. Links to task folders where details are stored
 3. Essential metadata (dependencies, stakeholders, priority)
 4. Current status and blockers
 5. Brief progress updates in Current State comment
@@ -129,7 +131,7 @@ Title: #124 Implement Password Reset Flow
 Description:
 Create secure password reset functionality with email verification.
 
-📝 **Documentation**: _ai/issues/124-password-reset.md
+📁 **Tasks**: _ai/tasks/124-a-password-reset/
 🔄 **Dependencies**: #118
 👥 **Stakeholders**: @security-team, @product-manager
 🔍 **Priority**: High
@@ -143,7 +145,7 @@ Title: #125 Fix Login Error on Safari
 Description:
 Address authentication failure affecting Safari browsers.
 
-📝 **Documentation**: _ai/issues/125-safari-login-bug.md
+📁 **Tasks**: _ai/tasks/125-a-safari-login-fix/
 🔄 **Dependencies**: None
 👥 **Stakeholders**: @front-end-lead
 🔍 **Priority**: Critical
@@ -157,7 +159,7 @@ Title: #123.2 Create Step Content Components for Onboarding
 Description:
 Implement individual step content components for the onboarding wizard.
 
-📝 **Documentation**: _ai/issues/123-2-step-content.md
+📁 **Tasks**: _ai/tasks/123-b-step-content/
 🔗 **Parent Issue**: #123
 🔄 **Dependencies**: #123.1
 👥 **Stakeholders**: @ux-designer
