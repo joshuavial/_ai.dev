@@ -28,6 +28,30 @@ The Planning workflow is designed to operate at multiple levels of the work hier
 
 When operating at a specific level, explicitly state which level you are planning for and follow the appropriate sections of this workflow.
 
+## Critical Guidelines for Planning
+
+### Prohibition of Time Estimates
+
+**IMPORTANT**: Do NOT include any time estimates, deadlines, or specific dates in planning documents. This includes:
+
+- Sprint estimates or story points
+- Week/day estimates for implementation
+- Specific calendar dates or deadlines
+- Timeline predictions of any kind
+- Effort estimates in hours, days, or weeks
+
+**Why no time estimates?**
+- Time estimates are inherently uncertain during planning
+- They create false expectations and pressure
+- Actual implementation time varies based on many factors
+- Focus should be on quality technical planning, not timeline predictions
+
+**What to use instead:**
+- Relative complexity indicators (simple, moderate, complex)
+- Dependency identification without timeline implications
+- Prioritization without time commitments
+- Focus on technical approach and thoroughness
+
 ## Planning Phase Process
 
 ### 1. Ticket Creation
@@ -43,7 +67,7 @@ When operating at a specific level, explicitly state which level you are plannin
 - Read and understand the associated PRD (if applicable)
 - Identify which technical components will be affected
 - Review related tickets or dependencies
-- Estimate effort required
+- Assess complexity (simple/moderate/complex) without time estimates
 
 ### 3. Code Review and Improvement Opportunities
 
@@ -311,7 +335,7 @@ Create the third comment with an initial state tracking template that explicitly
 2. Write failing tests for first component
 
 **Notes:**
-- Implementation will begin on [DATE]
+- Ready for implementation phase
 ```
 
 ## Example Technical Plans

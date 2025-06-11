@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.4] - 2025-11-06
+
+### Added
+- Explicit prohibition of time estimates in planning workflow:
+  - Added "Critical Guidelines for Planning" section with time estimate prohibition
+  - Listed specific prohibited items (sprint estimates, deadlines, calendar dates, etc.)
+  - Provided rationale for the prohibition
+  - Suggested alternatives (complexity indicators, dependency identification, prioritization)
+
+### Changed
+- Modified "Initial Technical Analysis" to use complexity assessment instead of effort estimation
+- Updated example state tracking to remove date references
+
 ## [0.5.3] - 2025-05-21
 
 ### Changed
