@@ -23,8 +23,9 @@ The `_ai/current.md` file should follow this structure:
 ## Active Issue
 [GitHub issue number/name or null if not working on a specific issue]
 
-## Active Task
-[Task name or null if not working on a specific task]
+## Active Tasks
+[List of tasks currently being worked on with status, or "None" if no active tasks]
+- **task-name** - Status: [planning/in-progress/blocked/review/complete]
 
 ## Notes
 [Any contextual notes about the current work]
@@ -72,8 +73,9 @@ User Onboarding System
 ## Active Issue
 #123 - Implement Onboarding Wizard UI
 
-## Active Task
-Create responsive step navigation component
+## Active Tasks
+- **wizard-navigation** - Status: in-progress
+- **step-content** - Status: planning
 
 ## Notes
 - The navigation component should work on mobile and desktop views
@@ -95,8 +97,8 @@ null
 ## Active Issue
 #456 - Fix login button alignment on mobile
 
-## Active Task
-null
+## Active Tasks
+None
 
 ## Notes
 - This is a small fix not associated with a specific PRD
@@ -115,7 +117,7 @@ null
 
 ### Execution Workflow
 - Check current work state to understand context
-- Update task field when switching between tasks
+- Update task status when switching between tasks or completing work
 - Document progress in Notes section
 
 

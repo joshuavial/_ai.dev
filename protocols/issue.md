@@ -33,8 +33,8 @@ When creating a new GitHub issue:
 Create an interactive onboarding wizard to guide new users through profile setup.
 
 📁 **Tasks**: 
-- _ai/tasks/123-a-wizard-navigation/ 
-- _ai/tasks/123-b-profile-setup/
+- _ai/tasks/123-wizard-navigation/ 
+- _ai/tasks/123-profile-setup/
 🔄 **Dependencies**: #120, #121
 👥 **Stakeholders**: @product-manager, @design-lead
 🔍 **Priority**: High
@@ -42,7 +42,7 @@ Create an interactive onboarding wizard to guide new users through profile setup
 
 The issue description MUST include:
 - One-line summary of the issue purpose
-- Task folders with format: `📁 **Tasks**: _ai/tasks/{issue-id}-{task-letter}-{task-name}/`
+- Task folders with format: `📁 **Tasks**: _ai/tasks/{issue-id}-{task-name}/`
 - Dependencies with format: `🔄 **Dependencies**: #{numbers}` (or "None" if none exist)
 - Stakeholders with format: `👥 **Stakeholders**: @mentions`
 - Priority with format: `🔍 **Priority**: High/Medium/Low`
@@ -53,14 +53,16 @@ The issue description MUST include:
 ## Current State
 
 **Status**: In Progress
-**Active Task**: _ai/tasks/123-a-wizard-navigation/
+**Active Tasks**: 
+- _ai/tasks/123-wizard-navigation/ (in-progress)
+- _ai/tasks/123-step-content/ (planning)
 **Updated**: 2023-08-15 14:30
 **Blockers**: Waiting for design assets from @design-lead
 ```
 
 The Current State comment MUST include:
 - Status indicator (Planning/In Progress/Review/Complete)
-- Link to active task folder
+- List of active task folders with status
 - Last update timestamp
 - Current blockers (if any, otherwise "None")
 
@@ -131,7 +133,7 @@ Title: #124 Implement Password Reset Flow
 Description:
 Create secure password reset functionality with email verification.
 
-📁 **Tasks**: _ai/tasks/124-a-password-reset/
+📁 **Tasks**: _ai/tasks/124-password-reset/
 🔄 **Dependencies**: #118
 👥 **Stakeholders**: @security-team, @product-manager
 🔍 **Priority**: High
@@ -145,7 +147,7 @@ Title: #125 Fix Login Error on Safari
 Description:
 Address authentication failure affecting Safari browsers.
 
-📁 **Tasks**: _ai/tasks/125-a-safari-login-fix/
+📁 **Tasks**: _ai/tasks/125-safari-login-fix/
 🔄 **Dependencies**: None
 👥 **Stakeholders**: @front-end-lead
 🔍 **Priority**: Critical
@@ -159,7 +161,7 @@ Title: #123.2 Create Step Content Components for Onboarding
 Description:
 Implement individual step content components for the onboarding wizard.
 
-📁 **Tasks**: _ai/tasks/123-b-step-content/
+📁 **Tasks**: _ai/tasks/123-step-content/
 🔗 **Parent Issue**: #123
 🔄 **Dependencies**: #123.1
 👥 **Stakeholders**: @ux-designer

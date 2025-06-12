@@ -57,9 +57,9 @@ When operating at a specific level, explicitly state which level you are plannin
 ### 1. Task Folder and Technical Plan Creation
 
 **Create Task Folder Structure**:
-- Create folder: `_ai/tasks/[issue-id]-[task-letter]-[task-name]/`
-- Task naming pattern: `[issue-id]-[task-letter]-[descriptive-task-name]`
-- Examples: `478-a-xero-oauth-integration`, `123-b-profile-setup-forms`
+- Create folder: `_ai/tasks/[issue-id]-[task-name]/`
+- Task naming pattern: `[issue-id]-[descriptive-task-name]`
+- Examples: `478-xero-oauth-integration`, `123-profile-setup-forms`
 
 **Create Technical Plan**:
 - Create file: `technical-plan.md` in the task folder
@@ -270,7 +270,7 @@ The `technical-plan.md` file should follow this structure:
 # Technical Plan: [Task Name]
 
 **Issue**: #{issue-id}
-**Task**: {task-letter} 
+**Task**: {task-name} 
 **PRD Reference**: {prd-name}.md
 **Status**: Planning
 

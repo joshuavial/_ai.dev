@@ -93,9 +93,9 @@ if [[ -n "$active_issue" ]]; then
   Read _ai/issues/${active_issue}-*.md
   Read _ai/states/${active_issue}-current-state.md
   
-  # If there's an active task
-  if [[ -n "$active_task" ]]; then
-    Read _ai/tasks/${active_issue}-${active_task}.md
+  # If there are active tasks
+  if [[ active_tasks != "None" ]]; then
+    Read task folders and technical plans for active tasks
   fi
 fi
 
@@ -112,7 +112,7 @@ Based on my initialization:
 - Project: [from CLAUDE.md]
 - Current workflow: [workflow_phase]
 - Active issue: #[active_issue] [issue title]
-- Active task: [active_task]
+- Active tasks: [list of active tasks with status]
 - Current status: [from state document]
 - Next steps: [from todos or state document]
 

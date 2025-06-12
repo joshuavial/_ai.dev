@@ -23,7 +23,7 @@ This document outlines the recommended workflow for executing tickets, with a fo
 
 Execution operates from task folders with this structure:
 ```
-_ai/tasks/[issue-id]-[task-letter]-[task-name]/
+_ai/tasks/[issue-id]-[task-name]/
 ├── technical-plan.md    # Input: planning objectives and approach
 ├── qa-report.md         # Output: QA feedback (created by QA workflow)
 ├── implementation.md    # Optional: detailed execution notes
@@ -32,6 +32,8 @@ _ai/tasks/[issue-id]-[task-letter]-[task-name]/
 ```
 
 **Primary Document**: `technical-plan.md` contains objectives, approach, and Current State tracking
+
+**Note**: Execution workflow can operate on multiple tasks simultaneously. The developer manages task priorities and context switching as needed.
 
 ## Implementation Process
 
