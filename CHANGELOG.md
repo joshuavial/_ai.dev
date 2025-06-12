@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.1] - 2025-06-13
+
+### Changed
+- Simplified task naming convention:
+  - Removed task letter pattern (e.g., `123-a-task`) in favor of simpler naming (`123-task-name`)
+  - Updated all workflow documentation to reflect new naming pattern
+- Enhanced multi-task support:
+  - Updated system to support multiple active tasks instead of single active task
+  - Improved task status tracking across boot, current, and issue protocols
+  - Streamlined execution workflow to handle concurrent task management
+
 ## [0.6.0] - 2025-12-06
 
 ### Added
