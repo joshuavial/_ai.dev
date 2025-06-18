@@ -48,6 +48,43 @@ QA evaluation centers on three core questions:
 - Note specific package/library decisions made
 - Identify test coverage targets and TDD requirements
 
+### 1.5 CI Status Verification (MANDATORY FIRST STEP)
+
+**CRITICAL**: Before proceeding with any manual verification, you MUST verify that all automated CI checks are passing.
+
+**Check CI Status**:
+- Navigate to the GitHub PR or branch
+- Verify all CI checks show green ✅ status
+- Confirm builds are successful for all environments  
+- Ensure automated tests are passing
+- Verify linting and code quality checks pass
+
+**CI Status Requirements**:
+- ✅ All builds passing (admin, client-app, main app)
+- ✅ All automated tests passing
+- ✅ Linting checks passing (no errors)
+- ✅ Any other configured CI checks passing
+
+**If CI Checks Are Failing**:
+1. **STOP QA PROCESS** - Do not proceed with manual verification
+2. Return task to execution workflow with CI failure details
+3. Create action items for fixing CI issues
+4. Only restart QA after all CI checks are passing
+
+**CI Verification Template**:
+```markdown
+## CI Status Verification
+**STATUS**: ✅ PASS / ❌ FAIL
+
+**Build Status**: ✅ All builds passing / ❌ Build failures detected
+**Test Execution**: ✅ All tests passing / ❌ Test failures detected  
+**Linting**: ✅ No lint errors / ❌ Lint errors detected
+**Other Checks**: ✅ All checks passing / ❌ Additional failures detected
+
+**Action Required If Failing**: 
+Return to execution workflow to fix CI issues before proceeding with QA.
+```
+
 ### 2. Quality Verification
 
 #### 2.1 Objective Verification
@@ -113,8 +150,17 @@ QA evaluation centers on three core questions:
 **Technical Plan**: technical-plan.md
 **QA Status**: ✅ PASS / ⚠️ NEEDS WORK / ❌ FAIL
 
+## CI Status Verification
+**Build Status**: ✅ PASS / ❌ FAIL
+**Test Execution**: ✅ PASS / ❌ FAIL  
+**Linting**: ✅ PASS / ❌ FAIL
+**Other CI Checks**: ✅ PASS / ❌ FAIL
+
+**Notes**: [Any specific CI-related observations]
+
 ## Executive Summary
 
+- **CI Status Verification**: ✅ PASS / ❌ FAIL
 - **Objective Verification**: ✅ PASS / ❌ FAIL
 - **Functional Verification**: ✅ PASS / ❌ FAIL  
 - **Quality Assessment**: ✅ PASS / ❌ FAIL
@@ -180,7 +226,8 @@ QA evaluation centers on three core questions:
 ### 4. QA Status Classification
 
 #### ✅ PASS
-- All three verification areas pass
+- **CI Status Verification passes** (all automated checks green)
+- All three manual verification areas pass
 - No critical issues found
 - Ready for production
 
