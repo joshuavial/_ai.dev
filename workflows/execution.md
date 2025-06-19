@@ -46,6 +46,25 @@ _ai/tasks/[issue-id]-[task-name]/
 
 You MUST follow the TDD cycle for implementation. This is a strict requirement, not a suggestion. Each cycle must be documented with evidence of test execution.
 
+#### API Testing Requirements
+
+**CRITICAL**: When testing API endpoints, you MUST write integration tests that connect to a test database. NEVER write unit tests that mock database calls for API testing.
+
+- **Integration Tests Only**: All API tests must use real database connections
+- **Test Database**: Use the test database environment, never mock database interactions
+- **Real Dependencies**: API tests should exercise the full stack including database operations
+- **Database State**: Set up and tear down test data as needed for each test
+- **Mock External APIs**: DO mock external API calls (e.g., Stripe, Xero, email services) to avoid dependencies on external services
+- **Example**: Use `poetry pytest tests/test_api/` which connects to the test database
+
+**What to Mock vs Not Mock**:
+- ✅ **DO Mock**: External API calls (Stripe, Xero, email services, third-party APIs)
+- ❌ **DON'T Mock**: Database calls, internal application logic, data models
+- ✅ **DO Mock**: Network requests to external services
+- ❌ **DON'T Mock**: Internal service-to-service communication within the application
+
+**Forbidden Approach**: Do not create unit tests that mock out database calls when testing API endpoints. This defeats the purpose of verifying the complete API functionality.
+
 1. **RED Phase (Write Failing Tests):**
    - Start by writing a test that defines the expected behavior before any implementation
    - Make it specific and focused on a single functionality
