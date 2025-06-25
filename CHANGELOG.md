@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.3] - 2025-06-25
+
+### Enhanced
+- Zero-Tolerance Test Enforcement:
+  - Added ZERO TOLERANCE policy for failing tests across execution and QA workflows
+  - Mandated complete test suite verification before PR creation and task completion
+  - Required human sign-off for any test failures - no exceptions allowed
+  - Enhanced QA workflow to immediately stop if ANY tests fail, regardless of perceived relevance
+  - Added explicit test verification commands and requirements throughout workflows
+- File Management Enforcement:
+  - Added mandatory file management verification as second step in QA process
+  - Required verification that all changes are made to original files only
+  - Prohibited creation of duplicate files with suffixes (.new, .updated, .copy, .backup, .old, etc.)
+  - Added file detection commands to identify redundant files
+  - Enhanced both execution and QA workflows with file cleanup requirements
+
 ## [0.6.2] - 2025-06-18
 
 ### Enhanced

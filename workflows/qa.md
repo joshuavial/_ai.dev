@@ -50,7 +50,7 @@ QA evaluation centers on three core questions:
 
 ### 1.5 CI Status Verification (MANDATORY FIRST STEP)
 
-**CRITICAL**: Before proceeding with any manual verification, you MUST verify that all automated CI checks are passing.
+**CRITICAL - ZERO TOLERANCE FOR FAILING TESTS**: Before proceeding with any manual verification, you MUST verify that all automated CI checks are passing.
 
 **Check CI Status**:
 - Navigate to the GitHub PR or branch
@@ -61,15 +61,28 @@ QA evaluation centers on three core questions:
 
 **CI Status Requirements**:
 - ✅ All builds passing (admin, client-app, main app)
-- ✅ All automated tests passing
+- ✅ ALL automated tests passing (NO EXCEPTIONS)
 - ✅ Linting checks passing (no errors)
 - ✅ Any other configured CI checks passing
 
-**If CI Checks Are Failing**:
-1. **STOP QA PROCESS** - Do not proceed with manual verification
-2. Return task to execution workflow with CI failure details
-3. Create action items for fixing CI issues
-4. Only restart QA after all CI checks are passing
+**ZERO TOLERANCE POLICY**:
+- ✅ NO failing tests regardless of perceived relevance
+- ✅ NO subjective assessment of test "relatedness"
+- ✅ ALL tests must be green - NO EXCEPTIONS
+
+**If ANY CI Checks Are Failing**:
+1. **IMMEDIATELY STOP QA PROCESS** - Do not proceed with manual verification
+2. **RETURN TO EXECUTION** with CI failure details
+3. **NO MANUAL VERIFICATION** until all checks pass
+4. **NO EXCEPTIONS** for "unrelated" test failures
+5. Only restart QA after all CI checks are passing
+
+**Test Verification Commands**:
+```bash
+# Run complete test suite and verify ALL pass
+poetry pytest tests/ --verbose
+# All tests must show PASSED - no FAILED allowed
+```
 
 **CI Verification Template**:
 ```markdown
@@ -77,12 +90,53 @@ QA evaluation centers on three core questions:
 **STATUS**: ✅ PASS / ❌ FAIL
 
 **Build Status**: ✅ All builds passing / ❌ Build failures detected
-**Test Execution**: ✅ All tests passing / ❌ Test failures detected  
+**Test Execution**: ✅ ALL tests passing / ❌ Test failures detected  
 **Linting**: ✅ No lint errors / ❌ Lint errors detected
 **Other Checks**: ✅ All checks passing / ❌ Additional failures detected
 
 **Action Required If Failing**: 
-Return to execution workflow to fix CI issues before proceeding with QA.
+IMMEDIATELY return to execution workflow to fix ALL issues before proceeding with QA.
+```
+
+### 1.6 File Management Verification (MANDATORY SECOND STEP)
+
+**CRITICAL - CLEAN FILE MANAGEMENT**: Verify no redundant or duplicate files exist.
+
+**Mandatory File Management Checks**:
+- ✅ NO files with duplicate suffixes (.new, .updated, .copy, .backup, .old, etc.)
+- ✅ NO renamed files leaving old versions behind
+- ✅ ALL changes made directly to original files
+- ✅ NO temporary or alternate versions of modified files
+
+**If Redundant Files Found**:
+1. **STOP QA PROCESS**
+2. **RETURN TO EXECUTION** with file cleanup requirements
+3. **REQUIRE**: Consolidation of changes into original files
+4. **REQUIRE**: Removal of all duplicate/redundant files
+
+**File Detection Commands**:
+```bash
+# Check for common redundant file patterns
+find . -name "*.new" -o -name "*.updated" -o -name "*.copy" -o -name "*.backup" -o -name "*.old"
+
+# Look for potential duplicates with similar names
+find . -type f | sort | uniq -d
+
+# Check git status for renamed files
+git status --porcelain | grep "^R"
+```
+
+**File Management Verification Template**:
+```markdown
+## File Management Verification
+**STATUS**: ✅ PASS / ❌ FAIL
+
+**Redundant Files Check**: ✅ No duplicates found / ❌ Redundant files detected
+**Original File Modifications**: ✅ All changes in original files / ❌ Changes in alternate versions
+**Clean Repository**: ✅ No temporary files / ❌ Cleanup required
+
+**Action Required If Failing**: 
+Return to execution workflow to consolidate changes and remove redundant files.
 ```
 
 ### 2. Quality Verification
@@ -158,9 +212,17 @@ Return to execution workflow to fix CI issues before proceeding with QA.
 
 **Notes**: [Any specific CI-related observations]
 
+## File Management Verification
+**Redundant Files Check**: ✅ PASS / ❌ FAIL
+**Original File Modifications**: ✅ PASS / ❌ FAIL
+**Clean Repository**: ✅ PASS / ❌ FAIL
+
+**Notes**: [Any specific file management observations]
+
 ## Executive Summary
 
 - **CI Status Verification**: ✅ PASS / ❌ FAIL
+- **File Management Verification**: ✅ PASS / ❌ FAIL
 - **Objective Verification**: ✅ PASS / ❌ FAIL
 - **Functional Verification**: ✅ PASS / ❌ FAIL  
 - **Quality Assessment**: ✅ PASS / ❌ FAIL
@@ -227,6 +289,7 @@ Return to execution workflow to fix CI issues before proceeding with QA.
 
 #### ✅ PASS
 - **CI Status Verification passes** (all automated checks green)
+- **File Management Verification passes** (no redundant files)
 - All three manual verification areas pass
 - No critical issues found
 - Ready for production

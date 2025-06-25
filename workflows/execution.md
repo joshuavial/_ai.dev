@@ -313,28 +313,64 @@ During implementation:
 
 ### 6. PR Creation and Review
 
-- MANDATORY: Run the complete test suite before creating the PR
+**ZERO TOLERANCE FOR FAILING TESTS - MANDATORY VERIFICATION**
+
+Before creating any PR, you MUST complete the following verification steps:
+
+#### 6.1 Complete Test Suite Verification
+- **MANDATORY**: Run the complete test suite: `poetry pytest tests/ --verbose`
+- **VERIFY**: ALL tests show PASSED status - NO FAILED tests allowed
+- **DOCUMENT**: Test execution results with timestamp
+- **STOP IMMEDIATELY**: If ANY test fails, do not proceed with PR creation
+- **HUMAN SIGN-OFF REQUIRED**: Cannot skip any failing test without explicit human approval
+
+#### 6.2 File Management Verification
+- **MANDATORY**: Verify all code modifications made directly to original files
+- **CHECK**: No alternate versions created with suffixes (.updated, .new, .enhanced, .refactored, .copy, .backup, .old, etc.)
+- **VERIFY**: No redundant or duplicate files exist
+- **CLEAN**: Remove any temporary files created during development
+
+#### 6.3 PR Creation Requirements
 - Create PR with reference to ticket ID
 - Ensure PR description references the Technical Plan
 - Include evidence of TDD compliance in the PR description
-- Verify and document that all tests are passing with screenshots/logs
 - Include test coverage reports in the PR
-- MANDATORY: Verify that all code modifications have been made directly to original files, with no alternate versions created with suffixes like .updated, .new, .enhanced, .refactored, etc.
+- Document that all tests are passing with screenshots/logs
+
+#### 6.4 Review Process
 - Address review comments promptly
-- Run tests after addressing review comments to verify no regressions
+- **MANDATORY**: Run complete test suite after addressing review comments
 - Update the Current State comment to reflect PR review status
-- If any tests fail during review, follow the TDD cycle to fix them
+- **ZERO TOLERANCE**: If any tests fail during review, follow the TDD cycle to fix them - NO EXCEPTIONS
 
 ### 7. Completion
 
+**ZERO TOLERANCE FINAL VERIFICATION**
+
+Before marking any task complete, you MUST verify:
+
+#### 7.1 Implementation Verification
 - Verify all checklist items in `technical-plan.md` are complete
-- MANDATORY: Run the complete test suite to ensure ALL tests pass before considering the task complete
-- Document evidence of passing tests in `tdd-evidence/` folder
 - Update documentation if needed
-- Perform a final check to ensure all changes were made to original files directly, with no alternate versions created with suffixes like .updated, .new, .enhanced, .refactored, etc.
+
+#### 7.2 Test Verification (MANDATORY)
+- **MANDATORY**: Run the complete test suite: `poetry pytest tests/ --verbose`
+- **VERIFY**: ALL tests pass - NO FAILED tests allowed
+- **DOCUMENT**: Evidence of passing tests in `tdd-evidence/` folder
+- **HUMAN SIGN-OFF REQUIRED**: Cannot skip any failing test without explicit human approval
+
+#### 7.3 File Management Verification (MANDATORY)
+- **VERIFY**: All changes made to original files directly
+- **CHECK**: No alternate versions with suffixes (.updated, .new, .enhanced, .refactored, .copy, .backup, .old, etc.)
+- **CLEAN**: Remove any redundant or duplicate files
+- **CONFIRM**: Repository contains only necessary files
+
+#### 7.4 Task Completion
 - Update Current State section in `technical-plan.md` to "Ready for QA"
 - Close ticket with reference to the PR
 - Proceed to the QA workflow for final quality verification
+
+**CRITICAL**: Task cannot be marked complete with ANY failing tests or redundant files
 
 ### 8. QA Response Process
 
