@@ -1,0 +1,590 @@
+#!/bin/bash
+# Worktree management script for Git projects
+# Usage: ./wt new <name> - Creates a new worktree with branch <name>
+
+set -e
+
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+# Get the main worktree directory
+MAIN_DIR=$(git worktree list | head -1 | awk '{print $1}')
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Configuration defaults
+START_CONTAINERS=true
+
+# Load configuration from .wt.conf if it exists
+load_config() {
+    local config_file="${MAIN_DIR}/.wt.conf"
+    
+    if [ -f "$config_file" ]; then
+        # Source the config file to load variables
+        source "$config_file"
+        echo -e "${GREEN}📄 Loaded config from .wt.conf${NC}"
+        
+        # Convert string values to boolean
+        case "$(echo "$START_CONTAINERS" | tr '[:upper:]' '[:lower:]')" in
+            true|yes|1) START_CONTAINERS=true ;;
+            false|no|0) START_CONTAINERS=false ;;
+            *) START_CONTAINERS=true ;;
+        esac
+    fi
+}
+
+# Load configuration on script start
+load_config
+
+# Function to clone Docker volumes
+clone_volumes() {
+    if [ "$START_CONTAINERS" != true ]; then
+        return 0
+    fi
+    
+    local source_compose_project="$1"
+    local dest_compose_project="$2"
+    
+    echo -e "${YELLOW}📦 Cloning Docker volumes from main worktree...${NC}"
+    
+    # Check if main worktree has running containers
+    if ! docker ps | grep -q "${source_compose_project}_db"; then
+        echo -e "${YELLOW}⚠️  No running database found in main worktree. Skipping volume clone.${NC}"
+        echo "   To clone data later, run: ./wt clone-volumes"
+        return 0
+    fi
+    
+    # Clone PostgreSQL data using pg_dump/restore
+    echo "   Cloning PostgreSQL database..."
+    docker exec ${source_compose_project}_db_1 pg_dump -U web-app-db web-app-db | \
+        docker exec -i ${dest_compose_project}_db_1 psql -U web-app-db web-app-db 2>/dev/null || {
+        echo -e "${YELLOW}   Note: Database will be cloned after containers start${NC}"
+        return 0
+    }
+    
+    # Clone Qdrant data if exists
+    if docker volume ls | grep -q "${source_compose_project}_qdrant_data"; then
+        echo "   Cloning Qdrant vector data..."
+        docker run --rm \
+            -v ${source_compose_project}_qdrant_data:/source:ro \
+            -v ${dest_compose_project}_qdrant_data:/dest \
+            alpine sh -c "cp -a /source/. /dest/" 2>/dev/null || true
+    fi
+    
+    echo -e "${GREEN}✅ Volume clone complete${NC}"
+}
+
+# Function to create a worktree (without starting containers or opening)
+create_worktree() {
+    local name=""
+    local clone_data=true
+    
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --no-clone)
+                clone_data=false
+                shift
+                ;;
+            *)
+                name="$1"
+                shift
+                ;;
+        esac
+    done
+    
+    if [ -z "$name" ]; then
+        echo -e "${RED}Error: Please provide a name for the worktree${NC}"
+        echo "Usage: ./wt create <name> [--no-clone]"
+        exit 1
+    fi
+    
+    # Get project name from current directory
+    local project_name=$(basename "$(git rev-parse --show-toplevel)")
+    
+    # Create branch and directory names
+    local branch_name="${name}"
+    local worktree_dir="../${project_name}-${name}"
+    
+    # Check if branch already exists
+    if git show-ref --verify --quiet "refs/heads/${branch_name}"; then
+        echo -e "${RED}Error: Branch ${branch_name} already exists${NC}"
+        exit 1
+    fi
+    
+    # Check if directory already exists
+    if [ -d "$worktree_dir" ]; then
+        echo -e "${RED}Error: Directory ${worktree_dir} already exists${NC}"
+        exit 1
+    fi
+    
+    echo -e "${GREEN}🌳 Creating worktree: ${worktree_dir}${NC}"
+    echo -e "${GREEN}🌿 With branch: ${branch_name}${NC}"
+    
+    # Create the worktree
+    git worktree add "$worktree_dir" -b "$branch_name"
+    
+    # Change to the new worktree directory
+    cd "$worktree_dir"
+    
+    echo -e "${YELLOW}📋 Copying environment files...${NC}"
+    
+    # Copy .env and node_env files from main worktree
+    for env_file in ".env" "client-app/.env" "admin/.env" ".node_env" "node_env" ".node-env" "node.env"; do
+        if [ -f "$MAIN_DIR/$env_file" ]; then
+            echo "   Copying $env_file"
+            mkdir -p "$(dirname "$env_file")"
+            cp "$MAIN_DIR/$env_file" "$env_file"
+        elif [ -f "${env_file}.sample" ]; then
+            echo "   Creating $env_file from ${env_file}.sample"
+            mkdir -p "$(dirname "$env_file")"
+            cp "${env_file}.sample" "$env_file"
+        fi
+    done
+    
+    # Also check for node_env files in subdirectories
+    for subdir in "client-app" "admin" "server" "api"; do
+        for node_env_pattern in ".node_env" "node_env" ".node-env" "node.env"; do
+            env_file="$subdir/$node_env_pattern"
+            if [ -f "$MAIN_DIR/$env_file" ]; then
+                echo "   Copying $env_file"
+                mkdir -p "$(dirname "$env_file")"
+                cp "$MAIN_DIR/$env_file" "$env_file"
+            elif [ -f "${env_file}.sample" ]; then
+                echo "   Creating $env_file from ${env_file}.sample"
+                mkdir -p "$(dirname "$env_file")"
+                cp "${env_file}.sample" "$env_file"
+            fi
+        done
+    done
+    
+    # Create symlink to _ai.bws directory
+    echo -e "${YELLOW}🔗 Creating symlink to _ai.bws directory...${NC}"
+    if [ -d "$MAIN_DIR/_ai.bws" ]; then
+        ln -s "$MAIN_DIR/_ai.bws" "_ai.bws"
+        echo "   ✓ Created symlink: _ai.bws -> $MAIN_DIR/_ai.bws"
+    else
+        echo "   ⚠️  _ai.bws directory not found in main worktree"
+    fi
+    
+    echo -e "${GREEN}✅ Worktree created: ${worktree_dir}${NC}"
+    echo -e "${GREEN}🌿 Branch: ${branch_name}${NC}"
+    echo ""
+    echo "Next steps:"
+    echo "  ./wt start ${name}    # Start containers"
+    echo "  ./wt open ${name}     # Open tmux session"
+    echo "  # OR"
+    echo "  cd ${worktree_dir} && ./dev up"
+}
+
+# Function to start containers in a worktree
+start_worktree() {
+    local name="$1"
+    
+    if [ -z "$name" ]; then
+        echo -e "${RED}Error: Please provide a name for the worktree${NC}"
+        echo "Usage: ./wt start <name>"
+        exit 1
+    fi
+    
+    # Get project name from current directory
+    local project_name=$(basename "$(git rev-parse --show-toplevel)")
+    local worktree_dir="../${project_name}-${name}"
+    
+    if [ ! -d "$worktree_dir" ]; then
+        echo -e "${RED}Error: Worktree ${worktree_dir} not found${NC}"
+        echo "Use './wt create ${name}' to create it first"
+        exit 1
+    fi
+    
+    if [ "$START_CONTAINERS" = true ]; then
+        echo -e "${YELLOW}🚀 Starting containers in worktree: ${name}${NC}"
+        
+        # Change to worktree directory and start containers
+        (cd "$worktree_dir" && ./dev up -d)
+        
+        if [ $? -eq 0 ]; then
+            echo -e "${GREEN}✅ Containers started successfully${NC}"
+            echo "Use './wt open ${name}' to open tmux session"
+        else
+            echo -e "${RED}❌ Failed to start containers${NC}"
+            exit 1
+        fi
+    else
+        echo -e "${YELLOW}🚀 Container management disabled (start-containers=false)${NC}"
+        echo -e "${GREEN}✅ Worktree ready at: ${worktree_dir}${NC}"
+        echo "Use './wt open ${name}' to open tmux session"
+    fi
+}
+
+# Function to open tmux session for a worktree
+open_worktree() {
+    local name=""
+    local new_tab=false
+    local detached=false
+    local print_command=false
+    
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --new-tab)
+                new_tab=true
+                shift
+                ;;
+            --detached)
+                detached=true
+                shift
+                ;;
+            --print-command)
+                print_command=true
+                shift
+                ;;
+            *)
+                name="$1"
+                shift
+                ;;
+        esac
+    done
+    
+    if [ -z "$name" ]; then
+        echo -e "${RED}Error: Please provide a name for the worktree${NC}"
+        echo "Usage: ./wt open <name> [--new-tab] [--detached] [--print-command]"
+        exit 1
+    fi
+    
+    # Get project name from current directory
+    local project_name=$(basename "$(git rev-parse --show-toplevel)")
+    local worktree_dir="../${project_name}-${name}"
+    local session_name="${name}"
+    
+    if [ ! -d "$worktree_dir" ]; then
+        echo -e "${RED}Error: Worktree ${worktree_dir} not found${NC}"
+        echo "Use './wt create ${name}' to create it first"
+        exit 1
+    fi
+    
+    # Print command option
+    if [ "$print_command" = true ]; then
+        echo "cd ${worktree_dir} && tmux attach -t ${session_name}"
+        return 0
+    fi
+    
+    # Check if tmux is available
+    if ! command -v tmux &> /dev/null; then
+        echo -e "${RED}Error: tmux is not installed${NC}"
+        exit 1
+    fi
+    
+    # Create tmux session if it doesn't exist
+    if ! tmux has-session -t "$session_name" 2>/dev/null; then
+        echo -e "${YELLOW}🖥️  Creating tmux session: ${session_name}${NC}"
+        
+        # Create session in the worktree directory
+        tmux new-session -d -s "$session_name" -c "$worktree_dir"
+        
+        # Create vertical split (right pane)
+        tmux split-window -h -c "$worktree_dir" -t "$session_name"
+        
+        # Create horizontal split in right pane (bottom right)
+        tmux split-window -v -c "$worktree_dir" -t "$session_name:0.1"
+        
+        # Start claude in bottom right pane
+        tmux send-keys -t "$session_name:0.2" "claude" C-m
+        
+        # Check if containers are running, if not suggest starting them
+        if [ "$START_CONTAINERS" = true ]; then
+            local project_name=$(basename "$(git rev-parse --show-toplevel)")
+            if ! docker ps --filter "name=${project_name}-dev-${name}" --format "{{.Names}}" | grep -q .; then
+                tmux send-keys -t "$session_name:0.1" "echo 'Containers not running. Start with: ./dev up'" C-m
+            fi
+        fi
+        
+        # Select the left pane (main working area)
+        tmux select-pane -t "$session_name:0.0"
+    fi
+    
+    # Handle different opening modes
+    if [ "$detached" = true ]; then
+        echo -e "${GREEN}✅ Session ${session_name} is ready${NC}"
+        echo "Attach with: tmux attach -t ${session_name}"
+    elif [ "$new_tab" = true ]; then
+        # Use iTerm AppleScript to open new tab
+        if [[ "$TERM_PROGRAM" == "iTerm.app" ]] || command -v osascript &> /dev/null; then
+            echo -e "${YELLOW}🆕 Opening new iTerm tab...${NC}"
+            osascript <<EOF
+tell application "iTerm"
+    tell current window
+        create tab with default profile
+        tell current session of current tab
+            write text "cd ${worktree_dir} && tmux attach -t ${session_name}"
+        end tell
+    end tell
+end tell
+EOF
+        else
+            echo -e "${YELLOW}⚠️  iTerm not detected, falling back to current terminal${NC}"
+            echo -e "${GREEN}✅ Attaching to tmux session: ${session_name}${NC}"
+            tmux attach-session -t "$session_name"
+        fi
+    else
+        # Default: attach in current terminal
+        echo -e "${GREEN}✅ Attaching to tmux session: ${session_name}${NC}"
+        tmux attach-session -t "$session_name"
+    fi
+}
+
+# Function for full workflow (create + start + open)
+new_worktree() {
+    local name=""
+    local clone_data=true
+    
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --no-clone)
+                clone_data=false
+                shift
+                ;;
+            *)
+                name="$1"
+                shift
+                ;;
+        esac
+    done
+    
+    if [ -z "$name" ]; then
+        echo -e "${RED}Error: Please provide a name for the worktree${NC}"
+        echo "Usage: ./wt new <name> [--no-clone]"
+        exit 1
+    fi
+    
+    # Create the worktree
+    if [ "$clone_data" = true ]; then
+        create_worktree "$name"
+    else
+        create_worktree "$name" --no-clone
+    fi
+    
+    echo ""
+    echo -e "${YELLOW}🚀 Starting containers...${NC}"
+    start_worktree "$name"
+    
+    echo ""
+    echo -e "${YELLOW}🖥️  Opening tmux session...${NC}"
+    
+    # If cloning data, set up delayed clone in tmux
+    if [ "$clone_data" = true ]; then
+        open_worktree "$name" --detached
+        local session_name="${name}"
+        tmux send-keys -t "$session_name:0.0" "echo 'Waiting for containers to start...'; sleep 10 && ./wt clone-volumes && echo 'Data cloned successfully!'" C-m
+        tmux attach-session -t "$session_name"
+    else
+        open_worktree "$name"
+    fi
+}
+
+# Function to list worktrees
+list_worktrees() {
+    echo -e "${GREEN}📑 Git worktrees:${NC}"
+    git worktree list
+}
+
+# Function to cleanup worktree containers and volumes
+cleanup_worktree() {
+    local name="$1"
+    local remove_worktree_dir="$2"
+    
+    if [ -z "$name" ]; then
+        echo -e "${RED}Error: Please provide a name for the worktree to cleanup${NC}"
+        echo "Usage: ./wt cleanup <name> [--remove-dir]"
+        exit 1
+    fi
+    
+    # Get project name from current directory
+    local project_name=$(basename "$(git rev-parse --show-toplevel)")
+    local worktree_dir="../${project_name}-${name}"
+    local compose_project="${project_name}-dev-${name}"
+    
+    echo -e "${YELLOW}🧹 Cleaning up worktree: ${name}${NC}"
+    
+    if [ "$START_CONTAINERS" = true ]; then
+        # Stop and remove containers
+        if [ -d "$worktree_dir" ]; then
+            echo "   Stopping containers..."
+            (cd "$worktree_dir" && ./dev down --remove-orphans 2>/dev/null) || true
+            
+            # Force remove any lingering containers with the project name
+            docker ps -a --filter "name=${compose_project}" --format "{{.Names}}" | while read container; do
+                if [ ! -z "$container" ]; then
+                    echo "   Removing container: $container"
+                    docker rm -f "$container" 2>/dev/null || true
+                fi
+            done
+        fi
+        
+        # Remove Docker volumes
+        echo "   Removing Docker volumes..."
+        docker volume ls --filter "name=${compose_project}" --format "{{.Name}}" | while read volume; do
+            if [ ! -z "$volume" ]; then
+                echo "   Removing volume: $volume"
+                docker volume rm "$volume" 2>/dev/null || true
+            fi
+        done
+    fi
+    
+    # Remove tmux session if it exists
+    local session_name="${name}"
+    if tmux has-session -t "$session_name" 2>/dev/null; then
+        echo "   Killing tmux session: $session_name"
+        tmux kill-session -t "$session_name" 2>/dev/null || true
+    fi
+    
+    # Optionally remove worktree directory
+    if [ "$remove_worktree_dir" = true ]; then
+        # Remove git worktree first (this is required before we can delete the branch)
+        local branch_name="${name}"
+        echo "   Removing git worktree..."
+        git worktree remove "$worktree_dir" --force 2>/dev/null || {
+            # If the above fails, try to clean up manually
+            if [ -d "$worktree_dir" ]; then
+                echo "   Force removing worktree directory..."
+                rm -rf "$worktree_dir"
+            fi
+            git worktree prune 2>/dev/null || true
+        }
+        
+        # Now we can delete the branch
+        echo "   Deleting branch: $branch_name"
+        git branch -D "$branch_name" 2>/dev/null || true
+    fi
+    
+    echo -e "${GREEN}✅ Cleanup complete for worktree: ${name}${NC}"
+    
+    if [ "$remove_worktree_dir" != true ]; then
+        echo -e "${YELLOW}💡 Note: Worktree directory preserved. Use './wt cleanup ${name} --remove-dir' to delete it.${NC}"
+    fi
+}
+
+# Function to remove a worktree (legacy function, now calls cleanup)
+remove_worktree() {
+    local name="$1"
+    
+    if [ -z "$name" ]; then
+        echo -e "${RED}Error: Please provide a name for the worktree to remove${NC}"
+        echo "Usage: ./wt remove <name>"
+        exit 1
+    fi
+    
+    cleanup_worktree "$name" true
+}
+
+# Function to clone volumes standalone
+clone_volumes_standalone() {
+    # Detect current worktree name from directory
+    local current_dir=$(basename $(pwd))
+    local project_name=$(basename "$(git rev-parse --show-toplevel)")
+    local worktree_name=${current_dir#${project_name}-}
+    
+    if [ "$current_dir" = "$project_name" ]; then
+        echo -e "${RED}Error: Run this command from a worktree, not the main repository${NC}"
+        exit 1
+    fi
+    
+    # Get compose project names
+    local project_name=$(basename "$(git rev-parse --show-toplevel)")
+    local source_project="${project_name}-dev-main"
+    local dest_project="${project_name}-dev-${worktree_name}"
+    
+    clone_volumes "$source_project" "$dest_project"
+}
+
+# Parse cleanup command arguments
+parse_cleanup_args() {
+    local name=""
+    local remove_dir=false
+    
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --remove-dir)
+                remove_dir=true
+                shift
+                ;;
+            *)
+                name="$1"
+                shift
+                ;;
+        esac
+    done
+    
+    cleanup_worktree "$name" "$remove_dir"
+}
+
+# Main command dispatcher
+case "${1:-}" in
+    create)
+        shift
+        create_worktree "$@"
+        ;;
+    start)
+        shift
+        start_worktree "$@"
+        ;;
+    open)
+        shift
+        open_worktree "$@"
+        ;;
+    new)
+        shift
+        new_worktree "$@"
+        ;;
+    list|ls)
+        list_worktrees
+        ;;
+    remove|rm)
+        shift
+        remove_worktree "$@"
+        ;;
+    cleanup|clean)
+        shift
+        parse_cleanup_args "$@"
+        ;;
+    clone-volumes|clone)
+        clone_volumes_standalone
+        ;;
+    *)
+        echo "Git Worktree Manager"
+        echo ""
+        echo "Commands:"
+        echo "  ./wt create <name> [--no-clone]     - Create worktree (just directory + env files)"
+        echo "  ./wt start <name>                   - Start containers in existing worktree"
+        echo "  ./wt open <name> [options]          - Open tmux session for worktree"
+        echo "  ./wt new <name> [--no-clone]        - Full workflow (create + start + open)"
+        echo ""
+        echo "  ./wt list                           - List all worktrees"
+        echo "  ./wt cleanup <name> [--remove-dir]  - Clean containers/volumes"
+        echo "  ./wt remove <name>                  - Remove worktree completely"
+        echo "  ./wt clone-volumes                  - Clone volumes from main worktree"
+        echo ""
+        echo "Open Options:"
+        echo "  ./wt open <name>                    - Open in current terminal (default)"
+        echo "  ./wt open <name> --new-tab          - Open in new iTerm tab"
+        echo "  ./wt open <name> --detached         - Create session but don't attach"
+        echo "  ./wt open <name> --print-command    - Just print the attach command"
+        echo ""
+        echo "Workflow Examples:"
+        echo "  # Minimal control"
+        echo "  ./wt create user-auth               # Just create worktree"
+        echo "  ./wt start user-auth                # Start containers when ready"
+        echo "  ./wt open user-auth --new-tab       # Open in new tab"
+        echo ""
+        echo "  # Quick start (original behavior)"
+        echo "  ./wt new user-auth                  # Everything at once"
+        echo ""
+        echo "Notes:"
+        echo "  - Data cloning copies PostgreSQL and Qdrant data from main worktree"
+        echo "  - Use 'cleanup' after merging to clean Docker resources"
+        exit 1
+        ;;
+esac
