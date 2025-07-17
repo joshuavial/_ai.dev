@@ -2,9 +2,8 @@
 
 # Setup script for _ai.bws directory
 # This script:
-# 1. Creates a symlink from parent/wt to _ai.bws/wt
-# 2. Creates a .wt.conf file in the parent directory
-# 3. Updates .gitignore to exclude _ai.bws, wt, and .wt.conf
+# 1. Creates a .wt.conf file in the parent directory
+# 2. Updates .gitignore to exclude _ai.bws and .wt.conf
 
 set -e  # Exit on error
 
@@ -17,35 +16,8 @@ echo "Setting up _ai.bws configuration..."
 # Track if any changes were made
 CHANGES_MADE=false
 
-# 1. Create symlink from parent/wt to _ai.bws/wt
-echo "Checking symlink from parent/wt to _ai.bws/wt..."
-EXPECTED_TARGET="_ai.bws/wt"
-if [ -L "$PARENT_DIR/wt" ]; then
-    # Check if existing symlink points to the correct location
-    CURRENT_TARGET=$(readlink "$PARENT_DIR/wt")
-    if [ "$CURRENT_TARGET" = "$EXPECTED_TARGET" ]; then
-        echo "✓ Symlink already exists and points to the correct location"
-    else
-        echo "× Symlink exists but points to: $CURRENT_TARGET"
-        echo "  Expected: $EXPECTED_TARGET"
-        echo "  Removing and recreating with relative path..."
-        rm "$PARENT_DIR/wt"
-        cd "$PARENT_DIR" && ln -s "$EXPECTED_TARGET" "wt"
-        echo "✓ Symlink recreated with relative path"
-        CHANGES_MADE=true
-    fi
-elif [ -e "$PARENT_DIR/wt" ]; then
-    echo "× Error: wt exists in parent directory but is not a symlink"
-    exit 1
-else
-    echo "Creating relative symlink from $PARENT_DIR/wt to _ai.bws/wt"
-    cd "$PARENT_DIR" && ln -s "$EXPECTED_TARGET" "wt"
-    echo "✓ Symlink created with relative path"
-    CHANGES_MADE=true
-fi
-
-# 2. Create .wt.conf file in parent directory
-echo -e "\nChecking .wt.conf file..."
+# Create .wt.conf file in parent directory
+echo "Checking .wt.conf file..."
 if [ -f "$PARENT_DIR/.wt.conf" ]; then
     echo "✓ .wt.conf already exists in parent directory"
 else
@@ -58,7 +30,7 @@ EOF
     CHANGES_MADE=true
 fi
 
-# 3. Update .gitignore
+# Update .gitignore
 GITIGNORE="$PARENT_DIR/.gitignore"
 
 # Function to add entry to .gitignore if not already present
@@ -81,7 +53,6 @@ add_to_gitignore() {
 
 echo -e "\nChecking .gitignore entries..."
 add_to_gitignore "_ai.bws"
-add_to_gitignore "wt"
 add_to_gitignore ".wt.conf"
 
 # Final status
