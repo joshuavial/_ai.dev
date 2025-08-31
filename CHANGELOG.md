@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2024-08-31
+
+### Added
+- **Port Management Protocol** - Standardized port allocation system with 100-port blocks per project
+- **Supabase Test Database Protocol** - Isolated test DB setup with snapshot system and migration tracking
+- **Developer Helper Scripts Protocol** - Standardized patterns for development shortcuts and automation
+- **Manual Functional Testing** - Integrated Playwright-based test plans into planning and QA workflows
+
+### Removed
+- **Reflection Workflow** - Merged into management workflow
+- **Fast Track Workflow** - Simplified workflow options
+
+### Changed
+- **Planning Workflow** - Added manual test plan requirements
+- **QA Workflow** - Added mandatory functional testing with Playwright
+- **Management Workflow** - Absorbed reflection workflow responsibilities
+
 ## [0.6.3] - 2025-06-25
 
 ### Enhanced
