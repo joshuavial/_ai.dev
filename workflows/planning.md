@@ -177,7 +177,7 @@ The parent ticket maintains the comprehensive technical plan, while sub-tickets 
 
 ### 6. Testing Strategy Planning
 
-Every technical plan must include a comprehensive testing strategy that explicitly prepares for Test-Driven Development:
+Every technical plan must include a comprehensive testing strategy that explicitly prepares for Test-Driven Development and manual functional testing:
 
 - **Test Categories & Coverage Goals:**
   - Unit Tests: Identify specific units requiring testing and coverage targets
@@ -185,6 +185,7 @@ Every technical plan must include a comprehensive testing strategy that explicit
   - UI Tests: Identify UI components requiring test coverage
   - Edge Cases: List specific edge cases to be tested
   - Regression Tests: Identify related functionality that needs regression testing
+  - Manual Functional Tests: Reference sections of `_ai/manual-test-plan.md` that need verification
 
 - **Test-First Implementation Plan:**
   For each component to be modified or created, define the following test-first approach:
@@ -260,6 +261,17 @@ Example testing strategy section:
 - Screenshot or log of GREEN phase (passing tests) after implementation 
 - Screenshot or log of tests passing after REFACTOR phase
 - Test coverage report showing minimum 85% coverage
+- Manual test execution results from Playwright testing
+
+#### Manual Functional Testing Plan
+- Sections from `_ai/manual-test-plan.md` affected:
+  - Section 2.3: User Profile Export (all test cases)
+  - Section 4.1: Authorization (export permissions)
+  - Section 5.2: File Downloads (PDF/CSV generation)
+- New test cases to add to manual test plan:
+  - Export with special characters in user data
+  - Export with maximum file size limits
+  - Concurrent export requests handling
 ```
 
 ### 7. Technical Plan Template
@@ -291,6 +303,10 @@ The `technical-plan.md` file should follow this structure:
 
 ## Test-Driven Implementation Strategy
 [Detailed TDD approach - see section 6 for requirements]
+
+## Manual Functional Testing Requirements
+[List specific sections from _ai/manual-test-plan.md that need verification]
+[Any new test cases to be added to the manual test plan]
 
 ## Implementation Checklist
 [Detailed checklist with TDD steps - see examples in section 8]
@@ -609,6 +625,22 @@ Use xero-node because:
 - May need to adjust API rate limits for production deployment
 ```
 
+## Manual Test Plan Maintenance
+
+The project should maintain a comprehensive manual test plan at `_ai/manual-test-plan.md` that documents all functional test scenarios. During planning:
+
+1. **Review Existing Test Plan**: Check which sections of the manual test plan are affected by the new feature
+2. **Identify Test Gaps**: Determine what new test cases need to be added
+3. **Reference in Technical Plan**: List specific test plan sections that need verification
+4. **Update Test Plan**: Add new test cases for the feature being planned
+
+The manual test plan should be organized by functional areas and include:
+- Test case ID and description
+- Prerequisites and test data
+- Step-by-step test procedures
+- Expected results
+- Links to relevant Playwright scripts for automation
+
 ## Next Steps
 
 After completing the planning phase, the next step is typically to move into execution. This is done by:
@@ -616,7 +648,8 @@ After completing the planning phase, the next step is typically to move into exe
 1. Ensuring task folder is created with `technical-plan.md`
 2. Confirming the technical plan with stakeholders  
 3. Updating `_ai/current.md` to reference the task folder
-4. Activating the Execution Workflow with: `workflow execution`
+4. Updating `_ai/manual-test-plan.md` with any new test cases identified
+5. Activating the Execution Workflow with: `workflow execution`
 
 The execution workflow will work from the `technical-plan.md` file in the task folder and update the Current State section as implementation progresses.
 

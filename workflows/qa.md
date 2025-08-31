@@ -139,23 +139,62 @@ git status --porcelain | grep "^R"
 Return to execution workflow to consolidate changes and remove redundant files.
 ```
 
-### 2. Quality Verification
+### 2. Manual Functional Testing with Playwright
 
-#### 2.1 Objective Verification
+**Execute Manual Test Plan**:
+- Load `_ai/manual-test-plan.md` and identify relevant test sections
+- Review sections specified in the technical plan
+- Use Playwright for browser-based functional testing
+- Document test execution results
+
+**Playwright Testing Process**:
+1. **Setup Playwright Session**: Launch browser in headed mode for visibility
+2. **Execute Test Cases**: Follow test procedures from manual test plan
+3. **Capture Evidence**: Take screenshots of key test points
+4. **Document Results**: Record pass/fail status and any issues found
+
+**Manual Test Execution Template**:
+```markdown
+## Manual Functional Testing Results
+
+**Test Plan Sections Executed**: 
+- Section X.Y: [Section Name] - ✅ PASS / ❌ FAIL
+- Section X.Z: [Section Name] - ✅ PASS / ❌ FAIL
+
+**New Test Cases Executed**:
+- [Test Case Description] - ✅ PASS / ❌ FAIL
+
+**Playwright Session Details**:
+- Browser: Chromium/Firefox/Safari
+- Test Date: [Date]
+- Tester: [Name/Role]
+
+**Issues Found**:
+- [Issue description and severity]
+
+**Screenshots/Evidence**:
+- [Links to screenshots in artifacts/ folder]
+```
+
+### 3. Quality Verification
+
+#### 3.1 Objective Verification
 **Questions to Answer**:
 - Were all planning objectives achieved?
 - Was user-approved scope delivered completely?
 - Were all acceptance criteria met?
 - Were technical plan commitments honored?
 - Were package/library decisions followed as planned?
+- Were manual test plan requirements satisfied?
 
 **Verification Methods**:
 - Compare deliverables against technical plan objectives
 - Check that implementation matches planned approach
 - Verify all checklist items from technical plan are complete
 - Confirm user sign-off requirements were met
+- Verify manual test plan sections passed
 
-#### 2.2 Functional Verification
+#### 3.2 Functional Verification
 **Questions to Answer**:
 - Does core functionality work as specified?
 - Do error handling mechanisms function properly?
@@ -170,7 +209,7 @@ Return to execution workflow to consolidate changes and remove redundant files.
 - Run automated tests if available
 - Test edge cases and boundary conditions
 
-#### 2.3 Quality Assessment
+#### 3.3 Quality Assessment
 **Questions to Answer**:
 - Is code readable and well-structured?
 - Are appropriate abstractions and patterns used?
@@ -191,7 +230,7 @@ Return to execution workflow to consolidate changes and remove redundant files.
 - Assess technical debt impact
 - Evaluate maintainability and readability
 
-### 3. QA Documentation
+### 4. QA Documentation
 
 **Create QA Report**: `qa-report.md` in the task folder
 
@@ -219,10 +258,20 @@ Return to execution workflow to consolidate changes and remove redundant files.
 
 **Notes**: [Any specific file management observations]
 
+## Manual Functional Testing
+**Test Plan Sections Executed**: [List sections from _ai/manual-test-plan.md]
+**Test Cases Passed**: X/Y
+**Critical Issues Found**: Yes/No
+**Browser Used**: Chromium/Firefox/Safari
+**Evidence Captured**: Yes/No (see artifacts/)
+
+**Notes**: [Test execution observations and issues]
+
 ## Executive Summary
 
 - **CI Status Verification**: ✅ PASS / ❌ FAIL
 - **File Management Verification**: ✅ PASS / ❌ FAIL
+- **Manual Functional Testing**: ✅ PASS / ❌ FAIL
 - **Objective Verification**: ✅ PASS / ❌ FAIL
 - **Functional Verification**: ✅ PASS / ❌ FAIL  
 - **Quality Assessment**: ✅ PASS / ❌ FAIL
@@ -285,12 +334,13 @@ Return to execution workflow to consolidate changes and remove redundant files.
 **Re-QA Required**: Yes/No (if action items are addressed)
 ```
 
-### 4. QA Status Classification
+### 5. QA Status Classification
 
 #### ✅ PASS
 - **CI Status Verification passes** (all automated checks green)
 - **File Management Verification passes** (no redundant files)
-- All three manual verification areas pass
+- **Manual Functional Testing passes** (test plan requirements met)
+- All three quality verification areas pass
 - No critical issues found
 - Ready for production
 
@@ -420,9 +470,10 @@ For each QA issue being addressed in execution:
 Once QA is complete:
 
 1. **Save QA Report**: Ensure `qa-report.md` is saved in task folder
-2. **Update Current State**: If returning to execution, update technical plan
-3. **Archive on Completion**: Move entire task folder to `_ai/archive/` when done
-4. **Transition**: 
+2. **Update Manual Test Plan**: Add any new test cases discovered during QA to `_ai/manual-test-plan.md`
+3. **Update Current State**: If returning to execution, update technical plan
+4. **Archive on Completion**: Move entire task folder to `_ai/archive/` when done
+5. **Transition**: 
    - If PASS: Ready for production or deployment
    - If NEEDS WORK/FAIL: Return to execution workflow
 
