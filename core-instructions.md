@@ -128,6 +128,12 @@ protocol playwright
    - When configuring test runners with Supabase integration
    - When optimizing test performance with database restoration
 
+10. **Developer Helper Scripts Protocol**: File: `_ai.bws/protocols/dev-helper-scripts.md`
+   - When creating shortcuts for common development tasks
+   - When setting up port-aware development scripts
+   - When wrapping complex commands with environment configuration
+   - When standardizing team development workflows
+
 ### Workflow Phases
 
 1. **Planning**: File: `_ai.bws/workflows/planning.md`
@@ -173,6 +179,7 @@ protocol playwright
    protocol issue
    protocol port-management
    protocol supabase-test-db
+   protocol dev-helper-scripts
    ```
 
 2. This will trigger loading of the appropriate document
