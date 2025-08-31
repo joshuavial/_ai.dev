@@ -119,6 +119,11 @@ protocol playwright
    - When creating UI tests
    - When documenting UI testing approaches
 
+8. **Port Management Protocol**: File: `_ai.bws/protocols/port-management.md`
+   - When managing port assignments for development projects
+   - When organizing port allocation across multiple instances
+   - When preventing port conflicts in development environments
+
 ### Workflow Phases
 
 1. **Planning**: File: `_ai.bws/workflows/planning.md`
@@ -169,6 +174,7 @@ protocol playwright
    protocol tdd
    protocol boot
    protocol issue
+   protocol port-management
    ```
 
 2. This will trigger loading of the appropriate document

@@ -9,7 +9,13 @@
 
 This document outlines the structured approach for managing, improving, and evolving the development process itself. The Management Workflow defines how process changes are identified, evaluated, implemented, and validated.
 
-> **IMPORTANT USAGE NOTE**: When using the Management workflow, you should ONLY modify workflow and process documentation in `_ai.bws` directories. Never modify project-specific files in the `_ai` directory or other project directories during management workflow activities. All improvement planning and documentation should be placed in the `_ai.bws/_improvements` directory to keep meta-documentation separate from the actual workflow files.
+> **CRITICAL SCOPE LIMITATION**: The Management workflow is strictly limited to the `_ai.bws` directory only. This workflow MUST NEVER:
+> - Modify files in the parent repository or project directories
+> - Create or update project-specific configuration files
+> - Make changes to application code, tests, or documentation outside of `_ai.bws`
+> - Alter database configurations, port settings, or other infrastructure in the main project
+> 
+> The scope is exclusively focused on workflow documentation, protocols, and process improvement within the `_ai.bws` directory structure. All improvement planning and documentation should be placed in the `_ai.bws/_improvements` directory to keep meta-documentation separate from the actual workflow files.
 
 ## Purpose and Scope
 

@@ -26,6 +26,7 @@ This approach offers several advantages:
 - File: `_ai.bws/protocols/current.md` - Managing current work state
 - File: `_ai.bws/protocols/boot.md` - Boot sequence protocol
 - File: `_ai.bws/protocols/playwright.md` - Browser automation handling
+- File: `_ai.bws/protocols/port-management.md` - Port assignment and management policy
 
 ### Specialized Protocols
 
