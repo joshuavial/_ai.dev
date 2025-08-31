@@ -124,6 +124,12 @@ protocol playwright
    - When organizing port allocation across multiple instances
    - When preventing port conflicts in development environments
 
+9. **Supabase Test Database Protocol**: File: `_ai.bws/protocols/supabase-test-db.md`
+   - When setting up isolated test databases for Supabase projects
+   - When implementing database snapshot systems for testing
+   - When configuring test runners with Supabase integration
+   - When optimizing test performance with database restoration
+
 ### Workflow Phases
 
 1. **Planning**: File: `_ai.bws/workflows/planning.md`
@@ -175,6 +181,7 @@ protocol playwright
    protocol boot
    protocol issue
    protocol port-management
+   protocol supabase-test-db
    ```
 
 2. This will trigger loading of the appropriate document

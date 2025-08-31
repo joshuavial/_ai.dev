@@ -27,6 +27,7 @@ This approach offers several advantages:
 - File: `_ai.bws/protocols/boot.md` - Boot sequence protocol
 - File: `_ai.bws/protocols/playwright.md` - Browser automation handling
 - File: `_ai.bws/protocols/port-management.md` - Port assignment and management policy
+- File: `_ai.bws/protocols/supabase-test-db.md` - Supabase test database setup and management
 
 ### Specialized Protocols
 
