@@ -166,13 +166,6 @@ When in QA phase, additionally:
 - Check testing requirements
 - Verify implementation completeness
 
-### Reflection Phase Boot
-
-When in reflection phase, additionally:
-- Load metrics and project history
-- Review execution timeline
-- Prepare reflection templates
-
 ## Implementation Details
 
 ### current.md Format
@@ -184,7 +177,7 @@ The current.md file should be a structured JSON or YAML file:
   "active_prd": "string | null",
   "active_issue": "number | null",
   "active_task": "string | null",
-  "workflow_phase": "planning | execution | qa | reflection | management",
+  "workflow_phase": "planning | execution | qa | management",
   "next_workflow": "string | null",
   "state_notes": "string",
   "last_updated": "ISO timestamp",
@@ -201,7 +194,6 @@ Workflows are identified by simple string identifiers:
 - `planning` - Planning phase
 - `execution` - Execution phase 
 - `qa` - Quality Assurance phase
-- `reflection` - Reflection phase
 - `management` - Process improvement and workflow evolution
 
 ### Example Boot Sequence

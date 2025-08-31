@@ -24,8 +24,7 @@ kb/
 │   ├── issue-123/
 │   │   ├── planning.md
 │   │   ├── execution.md
-│   │   ├── qa.md
-│   │   └── reflection.md
+│   │   └── qa.md
 │   └── issue-456/
 ├── templates/
 │   ├── planning-template.md

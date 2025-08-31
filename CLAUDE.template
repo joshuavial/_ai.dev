@@ -42,13 +42,8 @@ Development follows these phases in sequence:
 3. **Quality Assurance**: Verify the implementation meets quality standards and requirements
    - See File: `_ai.bws/workflows/qa.md`
    
-4. **Reflection**: Analyze the process, capture learnings, and identify improvements
-   - See File: `_ai.bws/workflows/reflection.md`
-
-### Fast Track for Small Changes
-
-For small bug fixes and minor enhancements, use the streamlined Fast Track workflow:
-- See File: `_ai.bws/workflows/fast-track.md`
+4. **Management**: Improve development processes and workflow evolution
+   - See File: `_ai.bws/workflows/management.md`
 
 ### Core Instructions
 
@@ -76,7 +71,7 @@ This document contains core definitions, instruction types, activation syntax, a
    - Ask the user any clarifying questions before beginning planning or execution
    - Do not proceed until you have a complete understanding of all requirements and processes
 
-8. **Workflow Adoption**: When the user asks you to adopt a specific workflow (e.g., "use the Fast Track workflow" or "use Planning workflow"):
+8. **Workflow Adoption**: When the user asks you to adopt a specific workflow (e.g., "use Planning workflow" or "use Execution workflow"):
    - IMMEDIATELY trigger the Boot Protocol
    - Confirm your understanding of the request and current state
    - Only proceed after user confirmation

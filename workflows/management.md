@@ -33,7 +33,7 @@ The Management Workflow serves as a structured approach to evolve and improve th
 
 The Management Workflow covers:
 
-1. **Process Changes**: Updates to any existing workflow (Planning, Execution, QA, Reflection, Fast Track)
+1. **Process Changes**: Updates to any existing workflow (Planning, Execution, QA, Management)
 2. **Template Evolution**: Refinements to issue templates, PRD formats, and documentation structures
 3. **Tool Integration**: Guidelines for introducing new tools or methods into the process
 4. **Role Responsibilities**: Clarification of team member roles in different workflow phases
@@ -56,9 +56,9 @@ This phase focuses on identifying opportunities for process improvement and capt
 
 #### Key Steps:
 
-1. **Review Reflection Documents**
-   - Analyze completed project reflections for process improvement suggestions
-   - Look for patterns across multiple reflections
+1. **Review Process Feedback**
+   - Analyze completed project reviews for process improvement suggestions
+   - Look for patterns across multiple projects
    - Identify recurring pain points or inefficiencies
    - Pay particular attention to TDD compliance issues and test execution gaps
 
@@ -76,7 +76,7 @@ This phase focuses on identifying opportunities for process improvement and capt
 
 4. **Create Process Improvement Tickets**
    - Document each potential improvement with a clear problem statement
-   - Link to relevant reflections or feedback sources
+   - Link to relevant feedback sources
    - Assign an initial priority based on impact and frequency
    - Ensure tickets address both procedural and technical aspects
 
@@ -362,7 +362,7 @@ The following criteria should be used to evaluate proposed process changes:
 
 **Key Questions:**
 - Does the proposed change address a documented pain point or problem?
-- Is there evidence (from reflections, feedback, or metrics) supporting the need for this change?
+- Is there evidence (from feedback or metrics) supporting the need for this change?
 - Will the change likely solve the identified problem?
 - Does the solution align with best practices in software development?
 
@@ -639,7 +639,7 @@ Process improvement tickets should follow this structure:
 1. **Main Issue Description:**
    - Title clearly identifying the process area to improve
    - Brief summary of the current problem or opportunity
-   - References to related reflections or feedback sources
+   - References to related feedback sources
    - Labels: process-improvement, [affected-workflow]
 
 2. **First Comment - Problem Statement:**
@@ -676,7 +676,7 @@ Description:
 The current planning workflow includes package analysis but lacks standardized evaluation criteria and documentation requirements. This leads to inconsistent analysis quality and difficulty comparing options.
 
 References:
-- Reflection from Project X (link)
+- Feedback from Project X (link)
 - Team feedback from Q1 Review (link)
 
 Labels: process-improvement, planning-workflow
@@ -711,10 +711,10 @@ However, there is no standardized format for documenting this analysis or clear 
 
 ### Affected Workflows
 - Planning Workflow (primary)
-- Reflection Workflow (references to package decisions)
+- Management Workflow (process improvement tracking)
 
 ### Evidence
-1. In Project X reflection, the team noted: "Package selection process was ad-hoc and we missed critical security issues"
+1. In Project X review, the team noted: "Package selection process was ad-hoc and we missed critical security issues"
 2. Three recent PRs had to add or replace packages due to inadequate initial analysis
 3. Survey shows 65% of developers find the current package analysis process unclear
 4. Package selection discussions take up average of 45 minutes in planning meetings

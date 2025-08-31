@@ -12,8 +12,7 @@ This document serves as the single source of truth for workflow instructions acr
 1. Planning: Requirements analysis and technical planning
 2. Execution: Implementation using TDD
 3. QA: Quality verification and testing
-4. Reflection: Process evaluation and improvement
-5. Management: Process improvement and workflow evolution
+4. Management: Process improvement and workflow evolution
 
 [DEFINITION:TDD-01] The TDD cycle consists of three phases:
 1. RED: Write failing tests before implementation
@@ -37,7 +36,6 @@ To activate a specific document, use these standard patterns:
 workflow planning
 workflow execution
 workflow qa
-workflow reflection
 workflow management
 
 # Protocol usage
@@ -153,14 +151,7 @@ protocol playwright
    - When validating acceptance criteria
    - When identifying any issues or bugs
 
-4. **Reflection**: File: `_ai.bws/workflows/reflection.md`
-   - When evaluating the development process
-   - When capturing lessons learned
-   - When identifying improvement opportunities
-   - When documenting successes and challenges
-   - When creating actionable improvement tasks
-
-5. **Management**: File: `_ai.bws/workflows/management.md`
+4. **Management**: File: `_ai.bws/workflows/management.md`
    - When improving development processes
    - When refining workflows and documentation
    - When standardizing approaches

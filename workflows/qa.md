@@ -423,7 +423,7 @@ Once QA is complete:
 2. **Update Current State**: If returning to execution, update technical plan
 3. **Archive on Completion**: Move entire task folder to `_ai/archive/` when done
 4. **Transition**: 
-   - If PASS: Ready for reflection or production
+   - If PASS: Ready for production or deployment
    - If NEEDS WORK/FAIL: Return to execution workflow
 
 The QA workflow ensures systematic quality verification while providing clear, actionable feedback for the execution workflow to address any identified issues.
