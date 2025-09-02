@@ -4,6 +4,7 @@
 # This script:
 # 1. Creates a .wt.conf file in the parent directory
 # 2. Updates .gitignore to exclude _ai.bws and .wt.conf
+# 3. Sets up Claude Code sub-agents for the project
 
 set -e  # Exit on error
 
@@ -55,10 +56,144 @@ echo -e "\nChecking .gitignore entries..."
 add_to_gitignore "_ai.bws"
 add_to_gitignore ".wt.conf"
 
+# Setup Claude Code sub-agents
+echo -e "\n========================================="
+echo "Claude Code Sub-Agent Setup"
+echo "========================================="
+
+# Check if .claude directory exists
+CLAUDE_DIR="$PARENT_DIR/.claude"
+AGENTS_SOURCE="$SCRIPT_DIR/agents"
+COMMANDS_SOURCE="$SCRIPT_DIR/commands"
+
+# Also setup in _ai.bws directory for management mode
+AI_BWS_CLAUDE_DIR="$SCRIPT_DIR/.claude"
+
+echo -e "\nSetting up Claude Code sub-agents..."
+
+# Function to setup agents (always symlink)
+setup_agents() {
+    # Check if agents already exist
+    if [ -e "$CLAUDE_DIR/agents" ]; then
+        if [ -L "$CLAUDE_DIR/agents" ] && [ "$(readlink "$CLAUDE_DIR/agents")" = "$AGENTS_SOURCE" ]; then
+            echo "  ✓ .claude/agents already symlinked to _ai.bws/agents"
+        else
+            echo "  ⚠️  .claude/agents exists - replacing with symlink"
+            rm -rf "$CLAUDE_DIR/agents"
+            ln -s "$AGENTS_SOURCE" "$CLAUDE_DIR/agents"
+            echo "  ✓ Replaced with symlink to _ai.bws/agents"
+            CHANGES_MADE=true
+        fi
+    else
+        # Create .claude directory if needed
+        if [ ! -d "$CLAUDE_DIR" ]; then
+            mkdir -p "$CLAUDE_DIR"
+            echo "  ✓ Created .claude directory"
+        fi
+        
+        ln -s "$AGENTS_SOURCE" "$CLAUDE_DIR/agents"
+        echo "  ✓ Created symlink to _ai.bws/agents"
+        CHANGES_MADE=true
+    fi
+}
+
+# Function to setup commands (always symlink)
+setup_commands() {
+    # Check if commands already exist
+    if [ -e "$CLAUDE_DIR/commands" ]; then
+        if [ -L "$CLAUDE_DIR/commands" ] && [ "$(readlink "$CLAUDE_DIR/commands")" = "$COMMANDS_SOURCE" ]; then
+            echo "  ✓ .claude/commands already symlinked to _ai.bws/commands"
+        else
+            echo "  ⚠️  .claude/commands exists - replacing with symlink"
+            rm -rf "$CLAUDE_DIR/commands"
+            ln -s "$COMMANDS_SOURCE" "$CLAUDE_DIR/commands"
+            echo "  ✓ Replaced with symlink to _ai.bws/commands"
+            CHANGES_MADE=true
+        fi
+    else
+        # Create .claude directory if needed
+        if [ ! -d "$CLAUDE_DIR" ]; then
+            mkdir -p "$CLAUDE_DIR"
+            echo "  ✓ Created .claude directory"
+        fi
+        
+        ln -s "$COMMANDS_SOURCE" "$CLAUDE_DIR/commands"
+        echo "  ✓ Created symlink to _ai.bws/commands"
+        CHANGES_MADE=true
+    fi
+}
+
+# Run setup functions for parent directory
+setup_agents
+echo ""
+setup_commands
+
+# Also setup in _ai.bws directory for management mode
+echo -e "\nSetting up agents in _ai.bws directory for management mode..."
+
+# Setup agents in _ai.bws/.claude
+if [ -e "$AI_BWS_CLAUDE_DIR/agents" ]; then
+    if [ -L "$AI_BWS_CLAUDE_DIR/agents" ] && [ "$(readlink "$AI_BWS_CLAUDE_DIR/agents")" = "$AGENTS_SOURCE" ]; then
+        echo "  ✓ _ai.bws/.claude/agents already symlinked"
+    else
+        echo "  ⚠️  _ai.bws/.claude/agents exists - replacing with symlink"
+        rm -rf "$AI_BWS_CLAUDE_DIR/agents"
+        ln -s "$AGENTS_SOURCE" "$AI_BWS_CLAUDE_DIR/agents"
+        echo "  ✓ Replaced with symlink in _ai.bws/.claude"
+        CHANGES_MADE=true
+    fi
+else
+    # Create .claude directory if needed
+    if [ ! -d "$AI_BWS_CLAUDE_DIR" ]; then
+        mkdir -p "$AI_BWS_CLAUDE_DIR"
+        echo "  ✓ Created _ai.bws/.claude directory"
+    fi
+    
+    ln -s "$AGENTS_SOURCE" "$AI_BWS_CLAUDE_DIR/agents"
+    echo "  ✓ Created symlink in _ai.bws/.claude/agents"
+    CHANGES_MADE=true
+fi
+
+# Setup commands in _ai.bws/.claude
+if [ -e "$AI_BWS_CLAUDE_DIR/commands" ]; then
+    if [ -L "$AI_BWS_CLAUDE_DIR/commands" ] && [ "$(readlink "$AI_BWS_CLAUDE_DIR/commands")" = "$COMMANDS_SOURCE" ]; then
+        echo "  ✓ _ai.bws/.claude/commands already symlinked"
+    else
+        echo "  ⚠️  _ai.bws/.claude/commands exists - replacing with symlink"
+        rm -rf "$AI_BWS_CLAUDE_DIR/commands"
+        ln -s "$COMMANDS_SOURCE" "$AI_BWS_CLAUDE_DIR/commands"
+        echo "  ✓ Replaced with symlink in _ai.bws/.claude"
+        CHANGES_MADE=true
+    fi
+else
+    # Create .claude directory if needed
+    if [ ! -d "$AI_BWS_CLAUDE_DIR" ]; then
+        mkdir -p "$AI_BWS_CLAUDE_DIR"
+        echo "  ✓ Created _ai.bws/.claude directory"
+    fi
+    
+    ln -s "$COMMANDS_SOURCE" "$AI_BWS_CLAUDE_DIR/commands"
+    echo "  ✓ Created symlink in _ai.bws/.claude/commands"
+    CHANGES_MADE=true
+fi
+
+# Add _ai.bws/.claude to .gitignore
+add_to_gitignore "_ai.bws/.claude"
+
+# Since we always use symlinks now, no need to add .claude to parent .gitignore
+
 # Final status
 echo -e "\n========================================="
 if [ "$CHANGES_MADE" = true ]; then
     echo "Setup complete! Changes were made."
+    echo ""
+    echo "Claude Code sub-agents are now available!"
+    echo "Use these slash commands in Claude Code:"
+    echo "  /plan    - Planning orchestrator"
+    echo "  /execute - Execution orchestrator"
+    echo "  /qa      - QA orchestrator"
+    echo "  /manage  - Management orchestrator"
+    echo "  /test    - Manual testing agent"
 else
     echo "Setup complete! Everything was already configured correctly."
 fi

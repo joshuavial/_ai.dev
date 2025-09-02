@@ -1,5 +1,10 @@
 # Repository Management Guidelines
 
+## Port Configuration
+- **Check `_ai/port.md` for project port assignments** - This file contains all ports used by the project
+- Use these ports when constructing URLs or running services
+- Never assume default ports - always check port.md first
+
 ## Structure
 - Keep all scripts in their own dedicated folders
 - Group related scripts together in the same folder
@@ -20,6 +25,10 @@
 - Setup: `[YOUR_SETUP_COMMAND_HERE]`
 - Follow existing code style patterns
 - Document script usage and parameters
+- **NEVER start or stop the development server** - The user manages this
+- **NEVER run commands like `npm run dev`, `npm start`, `pnpm dev`, etc.** - Server is already running
+- **NEVER call `psql` directly** - Always use `./psql` wrapper script for database access
+- **Database access**: Use `./psql -c "SQL_QUERY"` for queries, not `psql` directly
 
 ## Ticket Workflow System
 
@@ -49,6 +58,23 @@ Development follows these phases in sequence:
 
 All workflows and protocols use a standardized instruction system defined in File: `_ai.bws/core-instructions.md`.
 This document contains core definitions, instruction types, activation syntax, and the protocol registry.
+
+### Sub-Agent Acceleration
+
+The workflow system integrates with Claude Code sub-agents for dramatic efficiency improvements:
+
+1. **Available Agents**: Specialized agents for planning, execution, QA, and management workflows
+   - See File: `_ai.bws/protocols/sub-agents.md` for complete documentation
+   - Agent configurations in: `_ai.bws/agents/`
+
+2. **Slash Commands**: Quick workflow activation
+   - `/plan` - Activate planning orchestrator for parallel analysis
+   - `/execute` - Activate execution orchestrator for TDD implementation
+   - `/qa` - Activate QA orchestrator for comprehensive verification
+   - `/manage` - Activate management orchestrator for process improvement
+   - `/test` - Run manual testing agent via MCP Playwright
+
+3. **Setup**: Run `_ai.bws/setup.sh` to configure agents for your project
 
 ### Important Workflow Guidelines
 

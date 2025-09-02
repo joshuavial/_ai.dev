@@ -45,6 +45,14 @@ protocol issue
 protocol tasks
 protocol current
 protocol playwright
+protocol sub-agents
+
+# Agent activation (via slash commands)
+/plan       # Planning orchestrator
+/execute    # Execution orchestrator
+/qa         # QA orchestrator
+/manage     # Management orchestrator
+/test       # Manual testing agent
 ```
 
 ---
@@ -133,6 +141,12 @@ protocol playwright
    - When setting up port-aware development scripts
    - When wrapping complex commands with environment configuration
    - When standardizing team development workflows
+
+11. **Sub-Agents Protocol**: File: `_ai.bws/protocols/sub-agents.md`
+   - When using Claude Code sub-agents for workflow acceleration
+   - When setting up agents for new projects
+   - When invoking specialized agents for tasks
+   - When coordinating parallel agent execution
 
 ### Workflow Phases
 
@@ -225,3 +239,61 @@ protocol playwright
 - **BOOT**: Boot Procedures
 - **TASK**: Task Management
 - **PROTO**: Protocol Management
+- **AGENT**: Sub-Agent Operations
+
+---
+
+## Sub-Agent Integration [AGENT]
+
+[DEFINITION:AGENT-01] Sub-agents are specialized AI assistants that:
+1. Operate in independent 200k token contexts
+2. Can run in parallel (up to 10 simultaneously)
+3. Are invoked via the Task tool
+4. Return structured results to parent context
+
+[REQUIREMENT:AGENT-02] When using sub-agents:
+1. Agents are defined in `_ai.bws/agents/` directory
+2. Workflow orchestrators coordinate specialized agents
+3. Clear task definition required for each invocation
+4. Results must be validated before use
+
+[GUIDELINE:AGENT-03] Agent best practices:
+1. Use orchestrators for workflow phases
+2. Delegate specialized tasks to appropriate agents
+3. Run independent tasks in parallel
+4. Provide sufficient context in prompts
+5. Monitor agent performance and refine prompts
+
+[REGISTRY:AGENT-04] Available agent types:
+1. **Workflow Orchestrators**: 
+   - `planning-orchestrator` - Coordinates planning with parallel analysis
+   - `execution-orchestrator` - Manages TDD implementation
+   - `qa-orchestrator` - Runs quality verification
+   - `management-orchestrator` - Handles process improvement
+
+2. **Specialized Agents**: 
+   - `code-analyzer` - Deep codebase analysis
+   - `code-generator` - Pattern-aware code generation
+   - `tdd-enforcer` - Strict TDD compliance
+   - `test-writer` - Comprehensive test suites
+   - `package-evaluator` - Package scoring matrix
+   - `manual-tester` - MCP Playwright UI testing
+   - `security-scanner` - Vulnerability detection
+   - `refactor-specialist` - Code improvement
+
+3. **Protocol Agents**: 
+   - `boot-agent` - Context initialization
+   - `issue-sync-agent` - GitHub-KB synchronization
+
+[PROCESS:AGENT-05] Agent invocation process:
+1. Identify task requiring specialization
+2. Select appropriate agent from registry
+3. Provide clear context and requirements
+4. Invoke via Task tool or slash command
+5. Validate and integrate results
+
+[WORKFLOW:AGENT-06] Workflow-specific agent usage:
+- **Planning**: Use planning-orchestrator to coordinate analysis
+- **Execution**: Use execution-orchestrator for TDD implementation
+- **QA**: Use qa-orchestrator for parallel verification
+- **Management**: Use management-orchestrator for improvements

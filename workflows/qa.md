@@ -41,6 +41,7 @@ QA evaluation centers on three core questions:
 - Review: `technical-plan.md` for objectives and commitments
 - Check: TDD evidence in `tdd-evidence/` folder (if present)
 - Review: Any artifacts in `artifacts/` folder
+- Check: Bug investigation evidence in `bug-investigation/` folder (if bug fix task)
 
 **Understand Planning Commitments**:
 - Read planning objectives from technical plan
@@ -139,7 +140,95 @@ git status --porcelain | grep "^R"
 Return to execution workflow to consolidate changes and remove redundant files.
 ```
 
-### 2. Manual Functional Testing with Playwright
+### 2. Bug Investigation Validation (When Applicable)
+
+**For Bug Fix Tasks Only**: When the task involves bug fixes, perform systematic validation of the investigation and resolution process.
+
+#### 2.1 Bug Investigation Evidence Review
+
+**Check Investigation Completeness**:
+```markdown
+### Bug Investigation Evidence Checklist
+
+#### Investigation Structure Present
+- [ ] `bug-investigation/reproduction/` folder exists
+- [ ] `bug-investigation/root-cause/` folder exists  
+- [ ] `bug-investigation/resolution/` folder exists
+
+#### Reproduction Evidence
+- [ ] Failing test that captures original bug behavior
+- [ ] Manual reproduction steps documented (if UI bug)
+- [ ] Playwright evidence for UI issues (screenshots/videos)
+- [ ] Error logs and system state captured
+
+#### Root Cause Analysis  
+- [ ] Code path analysis completed
+- [ ] Data flow tracing documented
+- [ ] Dependency analysis performed
+- [ ] Timing/race condition investigation (if applicable)
+
+#### Resolution Validation
+- [ ] TDD evidence shows RED-GREEN-REFACTOR cycle
+- [ ] Original failing test now passes
+- [ ] Regression prevention tests added
+- [ ] No side effects introduced to existing functionality
+```
+
+#### 2.2 Bug Fix Validation Process
+
+**Verify Bug Resolution**:
+1. **Original Bug Reproduction**: Confirm the failing test from investigation actually captured the bug
+2. **Fix Effectiveness**: Verify the implemented fix resolves the specific issue
+3. **Regression Prevention**: Ensure comprehensive test coverage prevents similar bugs
+4. **No Side Effects**: Confirm fix doesn't break existing functionality
+
+**Bug Fix Verification Commands**:
+```bash
+# Run the original failing test to confirm it now passes
+npm test -- --testNamePattern="Bug.*[BUG-ID]"
+
+# Run regression prevention test suite
+npm test -- --testPathPattern="regression"
+
+# Verify no existing functionality broken
+npm test
+```
+
+#### 2.3 Bug Investigation Quality Gates
+
+**Investigation Quality Requirements**:
+- ✅ Root cause definitively identified and documented
+- ✅ Bug reproducible through automated test
+- ✅ Fix follows TDD methodology with full cycle evidence
+- ✅ Comprehensive regression tests prevent recurrence
+- ✅ Pattern documented for team learning
+- ✅ Resolution validated across environments
+- ✅ Performance impact assessed and acceptable
+
+**Bug Investigation Template**:
+```markdown
+## Bug Investigation Validation
+**STATUS**: ✅ PASS / ❌ FAIL
+
+### Investigation Completeness
+**Evidence Structure**: ✅ Complete / ❌ Missing elements
+**Root Cause Analysis**: ✅ Definitive / ❌ Inconclusive
+**Reproduction Method**: ✅ Reliable / ❌ Inconsistent
+
+### Resolution Quality
+**TDD Compliance**: ✅ Full cycle documented / ❌ Incomplete evidence
+**Regression Prevention**: ✅ Comprehensive tests / ❌ Insufficient coverage
+**Side Effects**: ✅ None detected / ❌ Issues found
+
+### Investigation Learning
+**Pattern Documentation**: ✅ Complete / ❌ Missing
+**Team Knowledge**: ✅ Shared / ❌ Not documented
+
+**Action Required If Failing**: 
+Return to bug investigation process to address gaps before continuing.
+```
+
+### 3. Manual Functional Testing with Playwright
 
 **Execute Manual Test Plan**:
 - Load `_ai/manual-test-plan.md` and identify relevant test sections
@@ -176,9 +265,9 @@ Return to execution workflow to consolidate changes and remove redundant files.
 - [Links to screenshots in artifacts/ folder]
 ```
 
-### 3. Quality Verification
+### 4. Quality Verification
 
-#### 3.1 Objective Verification
+#### 4.1 Objective Verification
 **Questions to Answer**:
 - Were all planning objectives achieved?
 - Was user-approved scope delivered completely?
@@ -186,6 +275,7 @@ Return to execution workflow to consolidate changes and remove redundant files.
 - Were technical plan commitments honored?
 - Were package/library decisions followed as planned?
 - Were manual test plan requirements satisfied?
+- For bug fixes: Was the specific bug resolved completely?
 
 **Verification Methods**:
 - Compare deliverables against technical plan objectives
@@ -193,14 +283,16 @@ Return to execution workflow to consolidate changes and remove redundant files.
 - Verify all checklist items from technical plan are complete
 - Confirm user sign-off requirements were met
 - Verify manual test plan sections passed
+- For bug fixes: Validate original issue no longer occurs
 
-#### 3.2 Functional Verification
+#### 4.2 Functional Verification
 **Questions to Answer**:
 - Does core functionality work as specified?
 - Do error handling mechanisms function properly?
 - Do integration points work correctly?
 - Does performance meet requirements?
 - Do user workflows function end-to-end?
+- For bug fixes: Does the fix work in all edge cases?
 
 **Verification Methods**:
 - Test core functionality manually
@@ -208,8 +300,9 @@ Return to execution workflow to consolidate changes and remove redundant files.
 - Check integration with existing components
 - Run automated tests if available
 - Test edge cases and boundary conditions
+- For bug fixes: Test original bug scenario plus related edge cases
 
-#### 3.3 Quality Assessment
+#### 4.3 Quality Assessment
 **Questions to Answer**:
 - Is code readable and well-structured?
 - Are appropriate abstractions and patterns used?
@@ -221,6 +314,7 @@ Return to execution workflow to consolidate changes and remove redundant files.
 - Is TDD evidence complete (RED-GREEN-REFACTOR cycles)?
 - Was any obvious technical debt introduced?
 - Were maintainability considerations addressed?
+- For bug fixes: Are regression prevention measures adequate?
 
 **Verification Methods**:
 - Review code quality and structure
@@ -229,8 +323,9 @@ Return to execution workflow to consolidate changes and remove redundant files.
 - Review TDD evidence for completeness
 - Assess technical debt impact
 - Evaluate maintainability and readability
+- For bug fixes: Validate regression test comprehensiveness
 
-### 4. QA Documentation
+### 5. QA Documentation
 
 **Create QA Report**: `qa-report.md` in the task folder
 
@@ -242,6 +337,7 @@ Return to execution workflow to consolidate changes and remove redundant files.
 **Date**: [Current Date]
 **Technical Plan**: technical-plan.md
 **QA Status**: ✅ PASS / ⚠️ NEEDS WORK / ❌ FAIL
+**Task Type**: Feature Development / Bug Fix / Enhancement
 
 ## CI Status Verification
 **Build Status**: ✅ PASS / ❌ FAIL
@@ -258,6 +354,14 @@ Return to execution workflow to consolidate changes and remove redundant files.
 
 **Notes**: [Any specific file management observations]
 
+## Bug Investigation Validation (If Applicable)
+**Investigation Completeness**: ✅ PASS / ❌ FAIL / N/A
+**Root Cause Analysis**: ✅ PASS / ❌ FAIL / N/A
+**Resolution Quality**: ✅ PASS / ❌ FAIL / N/A
+**Regression Prevention**: ✅ PASS / ❌ FAIL / N/A
+
+**Notes**: [Bug investigation and resolution quality observations]
+
 ## Manual Functional Testing
 **Test Plan Sections Executed**: [List sections from _ai/manual-test-plan.md]
 **Test Cases Passed**: X/Y
@@ -271,6 +375,7 @@ Return to execution workflow to consolidate changes and remove redundant files.
 
 - **CI Status Verification**: ✅ PASS / ❌ FAIL
 - **File Management Verification**: ✅ PASS / ❌ FAIL
+- **Bug Investigation Validation**: ✅ PASS / ❌ FAIL / N/A
 - **Manual Functional Testing**: ✅ PASS / ❌ FAIL
 - **Objective Verification**: ✅ PASS / ❌ FAIL
 - **Functional Verification**: ✅ PASS / ❌ FAIL  
@@ -334,11 +439,12 @@ Return to execution workflow to consolidate changes and remove redundant files.
 **Re-QA Required**: Yes/No (if action items are addressed)
 ```
 
-### 5. QA Status Classification
+### 6. QA Status Classification
 
 #### ✅ PASS
 - **CI Status Verification passes** (all automated checks green)
 - **File Management Verification passes** (no redundant files)
+- **Bug Investigation Validation passes** (if applicable - investigation complete and resolution validated)
 - **Manual Functional Testing passes** (test plan requirements met)
 - All three quality verification areas pass
 - No critical issues found
@@ -406,6 +512,12 @@ For each QA issue being addressed in execution:
 - Ensure tests will catch regressions
 - Validate that TDD cycles were genuinely followed
 
+### Bug Investigation Quality Assessment
+- Verify root cause analysis is definitive, not speculative
+- Ensure bug reproduction is reliable and automated
+- Validate that regression prevention is comprehensive
+- Confirm fix addresses the specific issue without side effects
+
 ### Documentation Standards
 - Keep QA reports concise but thorough
 - Use clear, specific language in action items
@@ -415,54 +527,60 @@ For each QA issue being addressed in execution:
 ## Example QA Report
 
 ```markdown
-# QA Report: Xero OAuth Integration
+# QA Report: User Login Timeout Bug Fix
 
 **Date**: 2024-12-06
 **Technical Plan**: technical-plan.md  
-**QA Status**: ⚠️ NEEDS WORK
+**QA Status**: ✅ PASS
+**Task Type**: Bug Fix
 
 ## Executive Summary
 
+- **CI Status Verification**: ✅ PASS
+- **File Management Verification**: ✅ PASS
+- **Bug Investigation Validation**: ✅ PASS
+- **Manual Functional Testing**: ✅ PASS
 - **Objective Verification**: ✅ PASS
 - **Functional Verification**: ✅ PASS
-- **Quality Assessment**: ❌ FAIL
+- **Quality Assessment**: ✅ PASS
+
+## Bug Investigation Validation
+**Investigation Completeness**: ✅ PASS
+**Root Cause Analysis**: ✅ PASS  
+**Resolution Quality**: ✅ PASS
+**Regression Prevention**: ✅ PASS
+
+**Notes**: Comprehensive investigation with clear root cause identified (session token expiration race condition). TDD resolution with extensive regression tests covering various timeout scenarios.
 
 ## 1. Objective Verification
 
 ### ✅ Requirements Met
-- OAuth flow implemented as planned
-- Token refresh mechanism working
-- Integration with existing auth system complete
+- Login timeout bug resolved completely
+- Session handling improved as planned
+- User experience restored to expected behavior
+- All acceptance criteria met
 
 ## 2. Functional Verification
 
 ### ✅ Functions Correctly
-- OAuth authorization completes successfully
-- Token refresh triggers automatically
-- Error cases return appropriate responses
+- Login process handles timeouts gracefully
+- Session refresh mechanism works correctly
+- Error messages provide clear user guidance
+- All user workflows function end-to-end
 
 ## 3. Quality Assessment
 
-### ❌ Quality Issues
-- Test coverage at 67%, target was 85%
-- Hardcoded API endpoints should be configurable
-- Error handling inconsistent with project patterns
-
-## Action Items for Execution
-
-### Critical (Must Fix Before Production)
-- [ ] Increase test coverage to minimum 85% for XeroAuthService
-- [ ] Move API endpoints to configuration file
-
-### Recommended (Should Fix)
-- [ ] Standardize error handling to match existing auth patterns
-- [ ] Add logging for OAuth flow steps
+### ✅ Quality Standards Met
+- Test coverage increased to 94% (exceeded 85% target)
+- Code follows established patterns
+- Comprehensive regression test suite added
+- Documentation updated with timeout handling patterns
 
 ## QA Sign-off
 
-**Overall Result**: Needs Rework
-**Next Steps**: Address critical items and update test coverage
-**Re-QA Required**: Yes
+**Overall Result**: Ready for Production
+**Next Steps**: Deploy to production
+**Re-QA Required**: No
 ```
 
 ## QA Completion and Next Steps

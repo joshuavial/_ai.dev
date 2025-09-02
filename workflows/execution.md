@@ -28,6 +28,7 @@ _ai/tasks/[issue-id]-[task-name]/
 ├── qa-report.md         # Output: QA feedback (created by QA workflow)
 ├── implementation.md    # Optional: detailed execution notes
 ├── tdd-evidence/        # Optional: test artifacts and screenshots
+├── bug-investigation/   # Bug-specific: investigation evidence and analysis
 └── artifacts/           # Optional: other task-related files
 ```
 
@@ -40,9 +41,131 @@ _ai/tasks/[issue-id]-[task-name]/
 ### 1. Branch Creation
 
 - Always use ticket ID in branch name (e.g., `2-stripe-xero-integration` for issue #2)
+- For bug fixes, use format: `bugfix/[issue-id]-[bug-description]` (e.g., `bugfix/45-user-login-timeout`)
 - Reference the issue in commit messages
 
-### 2. Test-Driven Development (TDD)
+### 2. Bug Investigation Process (When Applicable)
+
+For tickets involving bug fixes, follow this systematic investigation process before implementation:
+
+#### 2.1 Bug Analysis Phase
+```markdown
+## Bug Investigation Checklist
+
+### Initial Assessment
+- [ ] Severity classification (Critical/High/Medium/Low)
+- [ ] User impact analysis
+- [ ] Environment identification (Prod/Staging/Dev)
+- [ ] Reproduction reliability assessment
+
+### Symptom Documentation
+- [ ] Error messages captured
+- [ ] Unexpected behaviors documented
+- [ ] Performance issues identified
+- [ ] User workflow disruptions noted
+```
+
+#### 2.2 Reproduction Strategy
+```javascript
+// Create failing test that captures the bug
+describe('Bug Reproduction: [BUG-ID]', () => {
+  it('should demonstrate the reported issue', async () => {
+    // Setup: Recreate user's conditions
+    const problematicState = setupBugConditions();
+    
+    // Action: Perform the problematic action
+    const result = await performProblematicAction(problematicState);
+    
+    // Assert: Document the unexpected behavior
+    expect(result).not.toEqual(expectedBehavior);
+    // This test should FAIL to confirm bug exists
+  });
+});
+```
+
+#### 2.3 Root Cause Analysis
+```markdown
+### Investigation Evidence Structure
+```
+bug-investigation/
+├── reproduction/
+│   ├── automated-test.js    # Failing test that captures bug
+│   ├── manual-steps.md      # Manual reproduction steps
+│   ├── playwright-evidence/ # UI bug evidence
+│   └── error-logs.txt      # System logs and errors
+├── root-cause/
+│   ├── code-analysis.md     # Code path analysis
+│   ├── data-flow-trace.md   # Data transformation tracking
+│   └── dependency-check.md  # External system interactions
+└── resolution/
+    ├── tdd-evidence/        # Fix implementation evidence
+    └── regression-tests/    # Additional prevention tests
+```
+```
+
+#### 2.4 Bug-Specific TDD Cycle
+
+**Bug Fix TDD Process:**
+
+1. **RED Phase - Bug Capture:**
+   ```javascript
+   // Write test that fails and captures the bug
+   it('should handle edge case that causes bug', () => {
+     const result = buggyFunction(edgeCaseInput);
+     expect(result).toEqual(expectedCorrectBehavior);
+     // This SHOULD fail initially
+   });
+   ```
+
+2. **GREEN Phase - Minimal Fix:**
+   ```javascript
+   // Implement just enough to fix the bug
+   function fixedFunction(input) {
+     // Add specific handling for the bug condition
+     if (isBugTriggeringCondition(input)) {
+       return handleEdgeCase(input);
+     }
+     return originalLogic(input);
+   }
+   ```
+
+3. **REFACTOR Phase - Robust Solution:**
+   ```javascript
+   // Improve the fix and add defensive programming
+   function robustFunction(input) {
+     validateInput(input);
+     try {
+       return processInput(input);
+     } catch (error) {
+       logger.error('Processing failed', { input, error });
+       return createSafeDefault();
+     }
+   }
+   ```
+
+#### 2.5 Regression Prevention
+```javascript
+// Add comprehensive tests for related scenarios
+describe('Bug [BUG-ID] Regression Prevention', () => {
+  it('should handle boundary values correctly', () => {
+    testBoundaryConditions();
+  });
+  
+  it('should handle null and undefined inputs', () => {
+    testNullHandling();
+  });
+  
+  it('should maintain performance under load', () => {
+    testPerformanceRequirements();
+  });
+  
+  it('should not break existing functionality', () => {
+    testExistingWorkflows();
+  });
+});
+```
+
+### 3. Test-Driven Development (TDD)
 
 You MUST follow the TDD cycle for implementation. This is a strict requirement, not a suggestion. Each cycle must be documented with evidence of test execution.
 
@@ -158,7 +281,7 @@ Example TDD workflow with required documentation for a new feature:
 (Continue cycle for each component with documentation of all three phases)
 ```
 
-### 3. Implementation Flow
+### 4. Implementation Flow
 
 Follow this sequence for most efficient implementation:
 
@@ -185,7 +308,7 @@ Follow this sequence for most efficient implementation:
 
 **CRITICAL REQUIREMENT**: When using Playwright, you MUST immediately stop execution if any Playwright operation fails. Never attempt to install browsers as they are already installed. See Playwright Protocol (File: `_ai.bws/protocols/playwright.md`) for complete details.
 
-### 4. TDD Verification and State Tracking
+### 5. TDD Verification and State Tracking
 
 #### Retrieving GitHub Issues
 
@@ -302,7 +425,55 @@ Example state tracking updates with explicit TDD documentation:
 - Current test suite run time: 3.45s
 ```
 
-### 5. Continuous Improvement
+### 6. Bug Investigation with Debug Agent
+
+For systematic bug investigation and resolution, use the specialized bug-investigator agent:
+
+#### 6.1 Debug Agent Activation
+```bash
+# Activate the bug investigator for systematic diagnosis
+/debug
+```
+
+The bug-investigator agent provides:
+- **Systematic diagnostic investigation** with log analysis and state reconstruction
+- **Automated bug reproduction** using failing tests that capture the issue
+- **Root cause analysis** through code path tracing and dependency analysis
+- **TDD-driven bug resolution** with comprehensive regression prevention
+- **Integration with manual-tester** for UI bug reproduction via Playwright
+- **Quality gates** to ensure thorough resolution before completion
+
+#### 6.2 Bug Investigation Process
+```markdown
+### Bug Investigation Workflow
+
+#### Phase 1: Analysis & Reproduction
+- [ ] Bug report analysis and severity assessment
+- [ ] Systematic diagnostic investigation
+- [ ] Create failing test that captures bug behavior
+- [ ] Manual reproduction via Playwright (if UI bug)
+- [ ] Document investigation evidence
+
+#### Phase 2: Root Cause Analysis
+- [ ] Code path tracing and data flow analysis
+- [ ] Dependency and integration point analysis
+- [ ] Timing and race condition investigation
+- [ ] Document root cause findings
+
+#### Phase 3: TDD Resolution
+- [ ] RED: Failing test that captures bug
+- [ ] GREEN: Minimal fix implementation
+- [ ] REFACTOR: Robust solution with error handling
+- [ ] Regression prevention tests
+
+#### Phase 4: Validation
+- [ ] Complete test suite passes
+- [ ] No side effects introduced
+- [ ] Performance impact acceptable
+- [ ] Documentation and pattern capture complete
+```
+
+### 7. Continuous Improvement
 
 During implementation:
 
@@ -311,68 +482,68 @@ During implementation:
 - Document any new improvement opportunities discovered during implementation
 - Create separate tickets for improvements beyond the scope of the current work
 
-### 6. PR Creation and Review
+### 8. PR Creation and Review
 
 **ZERO TOLERANCE FOR FAILING TESTS - MANDATORY VERIFICATION**
 
 Before creating any PR, you MUST complete the following verification steps:
 
-#### 6.1 Complete Test Suite Verification
+#### 8.1 Complete Test Suite Verification
 - **MANDATORY**: Run the complete test suite: `poetry pytest tests/ --verbose`
 - **VERIFY**: ALL tests show PASSED status - NO FAILED tests allowed
 - **DOCUMENT**: Test execution results with timestamp
 - **STOP IMMEDIATELY**: If ANY test fails, do not proceed with PR creation
 - **HUMAN SIGN-OFF REQUIRED**: Cannot skip any failing test without explicit human approval
 
-#### 6.2 File Management Verification
+#### 8.2 File Management Verification
 - **MANDATORY**: Verify all code modifications made directly to original files
 - **CHECK**: No alternate versions created with suffixes (.updated, .new, .enhanced, .refactored, .copy, .backup, .old, etc.)
 - **VERIFY**: No redundant or duplicate files exist
 - **CLEAN**: Remove any temporary files created during development
 
-#### 6.3 PR Creation Requirements
+#### 8.3 PR Creation Requirements
 - Create PR with reference to ticket ID
 - Ensure PR description references the Technical Plan
 - Include evidence of TDD compliance in the PR description
 - Include test coverage reports in the PR
 - Document that all tests are passing with screenshots/logs
 
-#### 6.4 Review Process
+#### 8.4 Review Process
 - Address review comments promptly
 - **MANDATORY**: Run complete test suite after addressing review comments
 - Update the Current State comment to reflect PR review status
 - **ZERO TOLERANCE**: If any tests fail during review, follow the TDD cycle to fix them - NO EXCEPTIONS
 
-### 7. Completion
+### 9. Completion
 
 **ZERO TOLERANCE FINAL VERIFICATION**
 
 Before marking any task complete, you MUST verify:
 
-#### 7.1 Implementation Verification
+#### 9.1 Implementation Verification
 - Verify all checklist items in `technical-plan.md` are complete
 - Update documentation if needed
 
-#### 7.2 Test Verification (MANDATORY)
+#### 9.2 Test Verification (MANDATORY)
 - **MANDATORY**: Run the complete test suite: `poetry pytest tests/ --verbose`
 - **VERIFY**: ALL tests pass - NO FAILED tests allowed
 - **DOCUMENT**: Evidence of passing tests in `tdd-evidence/` folder
 - **HUMAN SIGN-OFF REQUIRED**: Cannot skip any failing test without explicit human approval
 
-#### 7.3 File Management Verification (MANDATORY)
+#### 9.3 File Management Verification (MANDATORY)
 - **VERIFY**: All changes made to original files directly
 - **CHECK**: No alternate versions with suffixes (.updated, .new, .enhanced, .refactored, .copy, .backup, .old, etc.)
 - **CLEAN**: Remove any redundant or duplicate files
 - **CONFIRM**: Repository contains only necessary files
 
-#### 7.4 Task Completion
+#### 9.4 Task Completion
 - Update Current State section in `technical-plan.md` to "Ready for QA"
 - Close ticket with reference to the PR
 - Proceed to the QA workflow for final quality verification
 
 **CRITICAL**: Task cannot be marked complete with ANY failing tests or redundant files
 
-### 8. QA Response Process
+### 10. QA Response Process
 
 When QA returns work with issues (creates `qa-report.md` in task folder):
 
@@ -493,6 +664,47 @@ function ExportButton({ userId }) {
 }
 
 // Step 3: Refactor for better styling, accessibility, etc.
+```
+
+### Example 3: Bug Fix TDD Approach
+
+```javascript
+// Step 1: Write failing test that captures the bug
+test('should handle user input with special characters correctly', () => {
+  // Arrange
+  const inputWithSpecialChars = 'user@domain.com & <script>alert("xss")</script>';
+  
+  // Act
+  const result = sanitizeUserInput(inputWithSpecialChars);
+  
+  // Assert - This should initially fail, capturing the bug
+  expect(result).not.toContain('<script>');
+  expect(result).toContain('user@domain.com');
+  expect(result).not.toContain('&lt;script&gt;'); // Should be properly escaped
+});
+
+// Step 2: Implement minimal fix
+function sanitizeUserInput(input) {
+  // Add basic sanitization to fix the security bug
+  return input
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
+// Step 3: Refactor for comprehensive solution
+function sanitizeUserInput(input) {
+  if (!input || typeof input !== 'string') {
+    return '';
+  }
+  
+  // Use a robust sanitization library
+  return DOMPurify.sanitize(input, {
+    ALLOWED_TAGS: [],
+    ALLOWED_ATTR: []
+  });
+}
 ```
 
 ## Working with Sub-Tickets

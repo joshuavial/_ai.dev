@@ -28,6 +28,11 @@ CLAUDE.md contains:
 
 This establishes foundational knowledge about the project and its structure.
 
+Additionally, check for port configuration:
+```
+Read _ai/port.md  # If exists - contains project port assignments
+```
+
 ## 2. Load current.md
 
 After establishing baseline understanding, determine the current project state:
@@ -110,6 +115,7 @@ After completing the boot sequence, provide a concise summary to the user:
 ```
 Based on my initialization:
 - Project: [from CLAUDE.md]
+- Ports: [from port.md if available]
 - Current workflow: [workflow_phase]
 - Active issue: #[active_issue] [issue title]
 - Active tasks: [list of active tasks with status]
