@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-09-20
+
+### Changed
+- Boot protocol now keeps management sessions scoped to `_ai.dev`, including a dedicated management boot example and guidance for state notes.
+- Management workflow explicitly instructs agents to skip `_ai/` artefacts during boot and review `_ai.dev` process documents instead.
+
 ## [1.0.0] - 2025-09-19
 
 ### Changed
