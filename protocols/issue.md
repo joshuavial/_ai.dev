@@ -172,8 +172,8 @@ Implement individual step content components for the onboarding wizard.
 
 For complete GitHub-KB synchronization processes:
 
-1. **GitHub → KB**: See [KB Sync Extract Protocol](_ai.bws/protocols/kb-sync/github-extraction.md)
-2. **KB → GitHub**: See [KB Sync Update Protocol](_ai.bws/protocols/kb-sync/kb-github-sync.md)
+1. **GitHub → KB**: See [KB Sync Extract Protocol](_ai.dev/protocols/kb-sync/github-extraction.md)
+2. **KB → GitHub**: See [KB Sync Update Protocol](_ai.dev/protocols/kb-sync/kb-github-sync.md)
 
 ## Accessing GitHub Issues
 

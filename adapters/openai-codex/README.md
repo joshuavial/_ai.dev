@@ -1,6 +1,6 @@
 # OpenAI Codex CLI Adapter
 
-This adapter explains how to use the `_ai.bws` workflows and agents with OpenAI Codex CLI. It does not change any core logic; it only maps the existing system to Codex CLI conventions and tools.
+This adapter explains how to use the `_ai.dev` workflows and agents with OpenAI Codex CLI. It does not change any core logic; it only maps the existing system to Codex CLI conventions and tools.
 
 ## Quick Start
 
@@ -9,11 +9,11 @@ This adapter explains how to use the `_ai.bws` workflows and agents with OpenAI 
 3. Say: “workflow planning” or “workflow execution” as needed.
 4. To use orchestrators, say: “Activate [orchestrator] for [context]” (see Agents below).
 
-Core references live in `_ai.bws/` and remain provider‑agnostic:
-- Core Instructions: `_ai.bws/core-instructions.md`
-- Workflows: `_ai.bws/workflows/*.md`
-- Protocols: `_ai.bws/protocols/*.md`
-- Agents: `_ai.bws/agents/*`
+Core references live in `_ai.dev/` and remain provider‑agnostic:
+- Core Instructions: `_ai.dev/core-instructions.md`
+- Workflows: `_ai.dev/workflows/*.md`
+- Protocols: `_ai.dev/protocols/*.md`
+- Agents: `_ai.dev/agents/*`
 
 ## Invocation Patterns
 
@@ -49,17 +49,17 @@ Core references live in `_ai.bws/` and remain provider‑agnostic:
 
 ## Agents (Using Orchestrators with Codex CLI)
 
-Orchestrators and specialized agents are defined under `_ai.bws/agents/`. Use neutral prompts:
+Orchestrators and specialized agents are defined under `_ai.dev/agents/`. Use neutral prompts:
 
 - Planning: “Activate planning orchestrator for issue <ID>. Produce technical plan and risks.”
 - Execution: “Activate execution orchestrator for task <path>. Enforce strict TDD and update state.”
 - QA: “Activate QA orchestrator for <feature>. Validate acceptance criteria and regression tests.”
 - Management: “Activate management orchestrator. Propose process improvements and next steps.”
 
-See `_ai.bws/adapters/openai-codex/agents.md` for more examples.
+See `_ai.dev/adapters/openai-codex/agents.md` for more examples.
 
 ## Notes
 
-- This adapter does not modify `_ai.bws/setup.sh` or `.claude/` symlinks. Claude integration remains intact.
-- Future providers (e.g., Gemini) follow the same adapter contract under `_ai.bws/adapters/`.
+- This adapter does not modify `_ai.dev/setup.sh` or `.claude/` symlinks. Claude integration remains intact.
+- Future providers (e.g., Gemini) follow the same adapter contract under `_ai.dev/adapters/`.
 

@@ -3,14 +3,14 @@
 # IMPORTANT: Read Boot Protocol First
 > **CRITICAL**: When adopting this workflow, you MUST first read the core instructions and follow the boot protocol to ensure proper initialization. Do NOT skip this step as it's essential for correct workflow operation.
 >
-> 1. Read core instructions: `_ai.bws/core-instructions.md`
-> 2. Follow boot protocol: `_ai.bws/protocols/boot.md`
+> 1. Read core instructions: `_ai.dev/core-instructions.md`
+> 2. Follow boot protocol: `_ai.dev/protocols/boot.md`
 > 3. Only then proceed with this workflow
 
-**Primary Protocol**: File: `_ai.bws/workflows/planning.md`
+**Primary Protocol**: File: `_ai.dev/workflows/planning.md`
 **Required Protocols**: 
-- Boot Protocol (File: `_ai.bws/protocols/boot.md`)
-- Tasks Protocol (File: `_ai.bws/protocols/tasks.md`)
+- Boot Protocol (File: `_ai.dev/protocols/boot.md`)
+- Tasks Protocol (File: `_ai.dev/protocols/tasks.md`)
 **Activation**: `workflow planning`
 
 This document outlines the recommended workflow for planning tickets, with a focus on thorough planning and structured preparation. The planning phase is where requirements are analyzed, technical approaches are defined, and implementation is prepared.
@@ -647,10 +647,10 @@ After completing the planning phase, the next step is typically to move into exe
 
 The execution workflow will work from the `technical-plan.md` file in the task folder and keep `status.md` current as implementation progresses.
 
-For details on implementation, refer to Execution Workflow (File: `_ai.bws/workflows/execution.md`).
+For details on implementation, refer to Execution Workflow (File: `_ai.dev/workflows/execution.md`).
 
 ## Related Protocols
 
-- Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) - For work breakdown
-- TDD Protocol (File: `_ai.bws/protocols/tdd.md`) - For test planning
-- Issue Protocol (File: `_ai.bws/protocols/issue.md`, optional) - For GitHub issue structure when external coordination is needed
+- Tasks Protocol (File: `_ai.dev/protocols/tasks.md`) - For work breakdown
+- TDD Protocol (File: `_ai.dev/protocols/tdd.md`) - For test planning
+- Issue Protocol (File: `_ai.dev/protocols/issue.md`, optional) - For GitHub issue structure when external coordination is needed

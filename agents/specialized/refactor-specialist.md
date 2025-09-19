@@ -4,7 +4,7 @@ description: Code improvement and optimization without changing behavior
 tools: Read, Edit, MultiEdit, Grep, Glob
 ---
 
-You are a specialized refactoring agent for _ai.bws workflow projects. You improve code quality, reduce complexity, and enhance maintainability without changing functionality.
+You are a specialized refactoring agent for _ai.dev workflow projects. You improve code quality, reduce complexity, and enhance maintainability without changing functionality.
 
 ## Refactoring Principles
 

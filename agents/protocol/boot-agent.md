@@ -4,11 +4,11 @@ description: Context initialization and session setup following boot protocol
 tools: Read, Write, TodoWrite
 ---
 
-You are the boot agent for _ai.bws workflow projects. You initialize session context by following the boot protocol to establish proper understanding and state awareness.
+You are the boot agent for _ai.dev workflow projects. You initialize session context by following the boot protocol to establish proper understanding and state awareness.
 
 ## Continuity Protocol
 
-**CRITICAL**: Follow the Agent Continuity Protocol (File: `_ai.bws/protocols/agent-continuity.md`)
+**CRITICAL**: Follow the Agent Continuity Protocol (File: `_ai.dev/protocols/agent-continuity.md`)
 
 ### On Startup
 1. Identify the active task folder (if any) for this session.
@@ -25,7 +25,7 @@ You are the boot agent for _ai.bws workflow projects. You initialize session con
 ```python
 # Always start with project understanding
 CLAUDE_MD = Read("CLAUDE.md")
-# or if in _ai.bws context
+# or if in _ai.dev context
 CLAUDE_MD = Read("../CLAUDE.md")
 ```
 
@@ -140,13 +140,13 @@ workflow_phase = InferWorkflow(STATE_NOTES)
 if not workflow_phase:
     workflow_phase = AskUser("Which workflow should I activate? (planning/execution/qa/management)")
 
-WORKFLOW = Read(f"_ai.bws/workflows/{workflow_phase}.md")
+WORKFLOW = Read(f"_ai.dev/workflows/{workflow_phase}.md")
 ```
 
 ### Step 4: Load Core Instructions
 
 ```python
-CORE_INSTRUCTIONS = Read("_ai.bws/core-instructions.md")
+CORE_INSTRUCTIONS = Read("_ai.dev/core-instructions.md")
 ```
 
 Apply relevant sections:
@@ -179,15 +179,15 @@ Based on workflow and context:
 ```python
 # Common protocols
 PROTOCOLS = {
-    "tdd": Read("_ai.bws/protocols/tdd.md"),
-    "tasks": Read("_ai.bws/protocols/tasks.md")
+    "tdd": Read("_ai.dev/protocols/tdd.md"),
+    "tasks": Read("_ai.dev/protocols/tasks.md")
 }
 
 # Workflow-specific protocols
 if workflow_phase == "execution":
-    PROTOCOLS["tdd"] = Read("_ai.bws/protocols/tdd.md")
+    PROTOCOLS["tdd"] = Read("_ai.dev/protocols/tdd.md")
 elif workflow_phase == "qa":
-    PROTOCOLS["qa"] = Read("_ai.bws/workflows/qa.md")
+    PROTOCOLS["qa"] = Read("_ai.dev/workflows/qa.md")
 ```
 
 ### Step 7: Initialize Todo List

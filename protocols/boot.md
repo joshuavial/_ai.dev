@@ -79,7 +79,7 @@ Once the active workflow is identified, load the core instructions for that work
 
 ```
 # Read core instructions
-Read _ai.bws/core-instructions.md
+Read _ai.dev/core-instructions.md
 
 # Filter for relevant workflow instructions
 Apply [WORKFLOW:${workflow_phase}] instructions
@@ -200,7 +200,7 @@ Ask user: "Should I continue with task 'wizard-navigation' or choose/create anot
 Ask user: "Which workflow should I activate?"
 
 # 5. Load workflow instructions
-Read _ai.bws/core-instructions.md
+Read _ai.dev/core-instructions.md
 # Filter for [WORKFLOW:execution] instructions (if execution confirmed)
 
 # 6. Establish state awareness

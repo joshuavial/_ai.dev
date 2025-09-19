@@ -1,6 +1,6 @@
-# Sub-Agents Protocol for _ai.bws Workflows
+# Sub-Agents Protocol for _ai.dev Workflows
 
-This protocol defines how to use the Claude Code sub-agent system with _ai.bws workflows. All agent configurations are stored in `_ai.bws/agents/` for portability across projects.
+This protocol defines how to use the Claude Code sub-agent system with _ai.dev workflows. All agent configurations are stored in `_ai.dev/agents/` for portability across projects.
 
 ## Overview
 
@@ -14,35 +14,35 @@ Sub-agents are specialized AI assistants that extend Claude Code's capabilities 
 
 ### Option 1: Symlink (Recommended)
 ```bash
-# Link agents from _ai.bws to project
-ln -s /path/to/_ai.bws/agents .claude/agents
-ln -s /path/to/_ai.bws/commands .claude/commands
+# Link agents from _ai.dev to project
+ln -s /path/to/_ai.dev/agents .claude/agents
+ln -s /path/to/_ai.dev/commands .claude/commands
 ```
 
 ### Option 2: Copy
 ```bash
 # Copy agents to project
-cp -r /path/to/_ai.bws/agents .claude/agents
-cp -r /path/to/_ai.bws/commands .claude/commands
+cp -r /path/to/_ai.dev/agents .claude/agents
+cp -r /path/to/_ai.dev/commands .claude/commands
 ```
 
 ### Option 3: Global Installation
 ```bash
 # Install globally for all projects
-cp -r /path/to/_ai.bws/agents ~/.claude/agents
+cp -r /path/to/_ai.dev/agents ~/.claude/agents
 ```
 
 ## Agent Categories
 
 ### Workflow Orchestrators
-Located in `_ai.bws/agents/workflow/`:
+Located in `_ai.dev/agents/workflow/`:
 - `planning-orchestrator` - Coordinates planning phase
 - `execution-orchestrator` - Manages TDD implementation
 - `qa-orchestrator` - Runs quality verification
 - `management-orchestrator` - Handles process improvement
 
 ### Specialized Task Agents
-Located in `_ai.bws/agents/specialized/`:
+Located in `_ai.dev/agents/specialized/`:
 - `code-analyzer` - Deep codebase analysis
 - `code-generator` - Pattern-aware code generation
 - `tdd-enforcer` - Strict TDD compliance
@@ -53,7 +53,7 @@ Located in `_ai.bws/agents/specialized/`:
 - `refactor-specialist` - Code improvement
 
 ### Protocol Enforcement Agents
-Located in `_ai.bws/agents/protocol/`:
+Located in `_ai.dev/agents/protocol/`:
 - `boot-agent` - Context initialization
 - `issue-sync-agent` - GitHub-KB synchronization
 
@@ -295,7 +295,7 @@ Solution: Queue additional agents or reduce parallelism
 5. Agent marketplace
 
 ### Version Management
-- Agents versioned with _ai.bws
+- Agents versioned with _ai.dev
 - Backward compatibility maintained
 - Migration guides for updates
 - Changelog for agent changes

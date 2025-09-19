@@ -9,7 +9,7 @@ This placeholder documents the adapter contract for future Gemini integration. C
 - Sub‑agents: Strategy for parallelization or delegation consistent with agent docs.
 - Continuity: Use `_ai/agent-state/...` for state when applicable.
 - Approvals & safety: When to request elevated permissions or confirm destructive actions.
-- Onboarding: Quick start for using `_ai.bws` with Gemini.
+- Onboarding: Quick start for using `_ai.dev` with Gemini.
 
 ## To Do (when implementing)
 

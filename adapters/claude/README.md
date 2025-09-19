@@ -4,10 +4,10 @@ This repository already includes integration for Claude Code via symlinked agent
 
 ## Setup
 
-- Run `_ai.bws/setup.sh` from the repo root to configure symlinks:
-  - Creates/updates `.claude/agents` → `_ai.bws/agents`
-  - Creates/updates `.claude/commands` → `_ai.bws/commands`
-  - Adds `_ai.bws`, `_ai.bws/.claude`, and `.wt.conf` to `.gitignore` if missing
+- Run `_ai.dev/setup.sh` from the repo root to configure symlinks:
+  - Creates/updates `.claude/agents` → `_ai.dev/agents`
+  - Creates/updates `.claude/commands` → `_ai.dev/commands`
+  - Adds `_ai.dev`, `_ai.dev/.claude`, and `.wt.conf` to `.gitignore` if missing
 
 ## Usage
 
@@ -18,10 +18,10 @@ This repository already includes integration for Claude Code via symlinked agent
   - `/manage` → management orchestrator
   - `/test` → manual testing agent
 
-- Core instruction and workflow files remain under `_ai.bws/` and are provider‑agnostic.
+- Core instruction and workflow files remain under `_ai.dev/` and are provider‑agnostic.
 
 ## Notes
 
-- This adapter is documentation‑only; the actual behavior is implemented by `_ai.bws/setup.sh` and the symlinked agent definitions.
+- This adapter is documentation‑only; the actual behavior is implemented by `_ai.dev/setup.sh` and the symlinked agent definitions.
 - No changes to Claude integration were made as part of the provider‑agnostic adapter work.
 

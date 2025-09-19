@@ -3,15 +3,15 @@
 # IMPORTANT: Read Boot Protocol First
 > **CRITICAL**: When adopting this workflow, you MUST first read the core instructions and follow the boot protocol to ensure proper initialization. Do NOT skip this step as it's essential for correct workflow operation.
 >
-> 1. Read core instructions: `_ai.bws/core-instructions.md`
-> 2. Follow boot protocol: `_ai.bws/protocols/boot.md`
+> 1. Read core instructions: `_ai.dev/core-instructions.md`
+> 2. Follow boot protocol: `_ai.dev/protocols/boot.md`
 > 3. Only then proceed with this workflow
 
-**Primary Protocol**: File: `_ai.bws/workflows/execution.md`
+**Primary Protocol**: File: `_ai.dev/workflows/execution.md`
 **Required Protocols**: 
-- Boot Protocol (File: `_ai.bws/protocols/boot.md`)
-- Tasks Protocol (File: `_ai.bws/protocols/tasks.md`)
-- TDD Protocol (File: `_ai.bws/protocols/tdd.md`)
+- Boot Protocol (File: `_ai.dev/protocols/boot.md`)
+- Tasks Protocol (File: `_ai.dev/protocols/tasks.md`)
+- TDD Protocol (File: `_ai.dev/protocols/tdd.md`)
 **Activation**: `workflow execution`
 
 This document outlines the recommended workflow for executing tickets, with a focus on structured implementation using Test-Driven Development (TDD) and continuous improvement. Execution works from task folders created by the planning workflow.
@@ -297,7 +297,7 @@ Follow this sequence for most efficient implementation:
    - Build UI components
    - Integrate with back-end services
    - Implement user interactions
-   - **IMPORTANT**: When using Playwright for browser automation, strictly follow the Playwright Protocol (File: `_ai.bws/protocols/playwright.md`)
+   - **IMPORTANT**: When using Playwright for browser automation, strictly follow the Playwright Protocol (File: `_ai.dev/protocols/playwright.md`)
 
 4. **Cross-Cutting Concerns:**
    - Add error handling
@@ -305,13 +305,13 @@ Follow this sequence for most efficient implementation:
    - Apply security measures
    - Address performance considerations
 
-**CRITICAL REQUIREMENT**: When using Playwright, you MUST immediately stop execution if any Playwright operation fails. Never attempt to install browsers as they are already installed. See Playwright Protocol (File: `_ai.bws/protocols/playwright.md`) for complete details.
+**CRITICAL REQUIREMENT**: When using Playwright, you MUST immediately stop execution if any Playwright operation fails. Never attempt to install browsers as they are already installed. See Playwright Protocol (File: `_ai.dev/protocols/playwright.md`) for complete details.
 
 ### 5. TDD Verification and State Tracking
 
 #### Retrieving GitHub Issues (Optional)
 
-When external coordination requires GitHub context, refer to the Issue Protocol (File: `_ai.bws/protocols/issue.md`), section "Accessing GitHub Issues".
+When external coordination requires GitHub context, refer to the Issue Protocol (File: `_ai.dev/protocols/issue.md`), section "Accessing GitHub Issues".
 
 **IMPORTANT:** If you access GitHub issues, always use GitHub CLI commands (like `gh issue view`). Never attempt to locate GitHub issues by searching local directories.
 
@@ -730,7 +730,7 @@ When implementing a feature that has been broken down into sub-tickets:
 When working with AI tools to implement features:
 
 1. **Clear Context:** Provide task folder path, PRD links, and any external references
-2. **GitHub Issue Access (Optional):** When referencing GitHub issues, use the GitHub CLI commands described in the Issue Protocol (File: `_ai.bws/protocols/issue.md`), section "Accessing GitHub Issues"
+2. **GitHub Issue Access (Optional):** When referencing GitHub issues, use the GitHub CLI commands described in the Issue Protocol (File: `_ai.dev/protocols/issue.md`), section "Accessing GitHub Issues"
 3. **Chunked Tasks:** Break down implementation into small, manageable steps
 4. **Sequential Progression:** Complete one logical component before moving to the next
 5. **Test-First Approach:** Define expected behavior before implementation
@@ -752,11 +752,11 @@ After completing the execution phase, the next step is typically to move into qu
 3. Ensuring all items in the technical plan have been addressed
 4. Activating the QA Workflow with: `workflow qa`
 
-For details on quality verification, refer to QA Workflow (File: `_ai.bws/workflows/qa.md`).
+For details on quality verification, refer to QA Workflow (File: `_ai.dev/workflows/qa.md`).
 
 ## Related Protocols
 
-- TDD Protocol (File: `_ai.bws/protocols/tdd.md`) - For test-driven development process
-- Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) - For work tracking
-- Issue Protocol (File: `_ai.bws/protocols/issue.md`, optional) - For GitHub issue structure when coordination is needed
-- Playwright Protocol (File: `_ai.bws/protocols/playwright.md`) - For browser automation
+- TDD Protocol (File: `_ai.dev/protocols/tdd.md`) - For test-driven development process
+- Tasks Protocol (File: `_ai.dev/protocols/tasks.md`) - For work tracking
+- Issue Protocol (File: `_ai.dev/protocols/issue.md`, optional) - For GitHub issue structure when coordination is needed
+- Playwright Protocol (File: `_ai.dev/protocols/playwright.md`) - For browser automation

@@ -36,28 +36,28 @@ The repository uses a structured workflow system for development tasks. Each tas
 
 ### Task Documentation
 
-Active work is planned and tracked through task folders under `_ai/tasks/`, following the guidance in `_ai.bws/protocols/tasks.md`.
-GitHub issues remain optional and can be referenced for external coordination using `_ai.bws/protocols/issue.md` when needed.
+Active work is planned and tracked through task folders under `_ai/tasks/`, following the guidance in `_ai.dev/protocols/tasks.md`.
+GitHub issues remain optional and can be referenced for external coordination using `_ai.dev/protocols/issue.md` when needed.
 
 ### Workflow Phases
 
 Development follows these phases in sequence:
 
 1. **Planning**: Define requirements, analyze technical approach, and create a detailed plan
-   - See File: `_ai.bws/workflows/planning.md`
+   - See File: `_ai.dev/workflows/planning.md`
    
 2. **Execution**: Implement the solution using TDD and continuous state tracking
-   - See File: `_ai.bws/workflows/execution.md`
+   - See File: `_ai.dev/workflows/execution.md`
    
 3. **Quality Assurance**: Verify the implementation meets quality standards and requirements
-   - See File: `_ai.bws/workflows/qa.md`
+   - See File: `_ai.dev/workflows/qa.md`
    
 4. **Management**: Improve development processes and workflow evolution
-   - See File: `_ai.bws/workflows/management.md`
+   - See File: `_ai.dev/workflows/management.md`
 
 ### Core Instructions
 
-All workflows and protocols use a standardized instruction system defined in File: `_ai.bws/core-instructions.md`.
+All workflows and protocols use a standardized instruction system defined in File: `_ai.dev/core-instructions.md`.
 This document contains core definitions, instruction types, activation syntax, and the protocol registry.
 
 ### Sub-Agent Acceleration
@@ -65,8 +65,8 @@ This document contains core definitions, instruction types, activation syntax, a
 The workflow system integrates with Claude Code sub-agents for dramatic efficiency improvements:
 
 1. **Available Agents**: Specialized agents for planning, execution, QA, and management workflows
-   - See File: `_ai.bws/protocols/sub-agents.md` for complete documentation
-   - Agent configurations in: `_ai.bws/agents/`
+   - See File: `_ai.dev/protocols/sub-agents.md` for complete documentation
+   - Agent configurations in: `_ai.dev/agents/`
 
 2. **Slash Commands**: Quick workflow activation
    - `/plan` - Activate planning orchestrator for parallel analysis
@@ -75,7 +75,7 @@ The workflow system integrates with Claude Code sub-agents for dramatic efficien
    - `/manage` - Activate management orchestrator for process improvement
    - `/test` - Run manual testing agent via MCP Playwright
 
-3. **Setup**: Run `_ai.bws/setup.sh` to configure agents for your project
+3. **Setup**: Run `_ai.dev/setup.sh` to configure agents for your project
 
 ### Important Workflow Guidelines
 
@@ -92,7 +92,7 @@ The workflow system integrates with Claude Code sub-agents for dramatic efficien
 6. **Workflow Adherence**: Continuously reference the current workflow document during work. If ever in doubt about process or next steps, re-read the relevant workflow document.
 
 7. **Context Loading and Boot**: When beginning a new workflow phase:
-   - Follow the Boot Protocol (File: `_ai.bws/protocols/boot.md`) to locate yourself in the project hierarchy
+   - Follow the Boot Protocol (File: `_ai.dev/protocols/boot.md`) to locate yourself in the project hierarchy
    - Thoroughly read the workflow document in its entirety
    - Read ALL linked documents referenced in the workflow
    - Ask the user any clarifying questions before beginning planning or execution

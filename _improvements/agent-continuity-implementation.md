@@ -9,7 +9,7 @@ The previous design wrote workflow state into separate agent-specific directorie
 ## Implementation Highlights
 
 ### 1. Protocol Rewrite
-- **File**: `_ai.bws/protocols/agent-continuity.md`
+- **File**: `_ai.dev/protocols/agent-continuity.md`
 - **Strategy**: Task-folder artefacts (`status.md`, `todos.md`, `handoff.md`)
 - **Outcome**: No standalone state directories required
 

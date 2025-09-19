@@ -3,19 +3,19 @@
 # IMPORTANT: Read Boot Protocol First
 > **CRITICAL**: When adopting this workflow, you MUST first read the core instructions and follow the boot protocol to ensure proper initialization. Do NOT skip this step as it's essential for correct workflow operation.
 >
-> 1. Read core instructions: `_ai.bws/core-instructions.md`
-> 2. Follow boot protocol: `_ai.bws/protocols/boot.md`
+> 1. Read core instructions: `_ai.dev/core-instructions.md`
+> 2. Follow boot protocol: `_ai.dev/protocols/boot.md`
 > 3. Only then proceed with this workflow
 
 This document outlines the structured approach for managing, improving, and evolving the development process itself. The Management Workflow defines how process changes are identified, evaluated, implemented, and validated.
 
-> **CRITICAL SCOPE LIMITATION**: The Management workflow is strictly limited to the `_ai.bws` directory only. This workflow MUST NEVER:
+> **CRITICAL SCOPE LIMITATION**: The Management workflow is strictly limited to the `_ai.dev` directory only. This workflow MUST NEVER:
 > - Modify files in the parent repository or project directories
 > - Create or update project-specific configuration files
-> - Make changes to application code, tests, or documentation outside of `_ai.bws`
+> - Make changes to application code, tests, or documentation outside of `_ai.dev`
 > - Alter database configurations, port settings, or other infrastructure in the main project
 > 
-> The scope is exclusively focused on workflow documentation, protocols, and process improvement within the `_ai.bws` directory structure. All improvement planning and documentation should be placed in the `_ai.bws/_improvements` directory to keep meta-documentation separate from the actual workflow files.
+> The scope is exclusively focused on workflow documentation, protocols, and process improvement within the `_ai.dev` directory structure. All improvement planning and documentation should be placed in the `_ai.dev/_improvements` directory to keep meta-documentation separate from the actual workflow files.
 
 ## Purpose and Scope
 
@@ -549,15 +549,15 @@ Considerations:
 
 ### Modification Guidelines
 
-**IMPORTANT:** The Management Workflow should only ever change workflow documents and shared files in the `_ai.bws` directory. Never create or modify PRDs (Product Requirement Documents) or any project-specific files in the `_ai` directory as part of the management workflow.
+**IMPORTANT:** The Management Workflow should only ever change workflow documents and shared files in the `_ai.dev` directory. Never create or modify PRDs (Product Requirement Documents) or any project-specific files in the `_ai` directory as part of the management workflow.
 
 **CRITICAL:** Never create separate "update" versions of workflow documents with suffixes like `.updated` or `.new`. Always modify the original workflow files directly to maintain a single source of truth. All changes must be made within the existing workflow structure.
 
-**ORGANIZATION:** Use the `_ai.bws/_improvements` directory for all documentation about planning and implementing process improvements. This keeps meta-documentation separate from the actual workflow files and makes it easier to track improvement initiatives. Do not include timeline estimates with specific weeks or dates in these documents - they are for ongoing collaboration between user and AI, not for formal project planning.
+**ORGANIZATION:** Use the `_ai.dev/_improvements` directory for all documentation about planning and implementing process improvements. This keeps meta-documentation separate from the actual workflow files and makes it easier to track improvement initiatives. Do not include timeline estimates with specific weeks or dates in these documents - they are for ongoing collaboration between user and AI, not for formal project planning.
 
 ### _improvements Directory Guidelines
 
-The `_ai.bws/_improvements` directory is a specialized location for process improvement documentation that follows these guidelines:
+The `_ai.dev/_improvements` directory is a specialized location for process improvement documentation that follows these guidelines:
 
 #### 1. Purpose and Content
 

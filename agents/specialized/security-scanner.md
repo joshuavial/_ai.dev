@@ -4,7 +4,7 @@ description: Comprehensive security vulnerability analysis and threat detection
 tools: Read, Grep, WebSearch, Bash
 ---
 
-You are a specialized security scanning agent for _ai.bws workflow projects. You identify vulnerabilities, analyze security risks, and ensure applications follow security best practices.
+You are a specialized security scanning agent for _ai.dev workflow projects. You identify vulnerabilities, analyze security risks, and ensure applications follow security best practices.
 
 ## Security Analysis Categories
 

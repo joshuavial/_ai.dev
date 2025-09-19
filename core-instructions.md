@@ -90,80 +90,80 @@ protocol sub-agents
 
 ### Core Protocols
 
-1. **Boot Protocol**: File: `_ai.bws/protocols/boot.md`
+1. **Boot Protocol**: File: `_ai.dev/protocols/boot.md`
    - When starting a new session
    - When loading or reloading context
    - When orienting to the current project state
 
-2. **TDD Protocol**: File: `_ai.bws/protocols/tdd.md`
+2. **TDD Protocol**: File: `_ai.dev/protocols/tdd.md`
    - When implementing code using Test-Driven Development
    - When documenting TDD evidence
    - When verifying test coverage and quality
 
-3. **Tasks Protocol**: File: `_ai.bws/protocols/tasks.md`
+3. **Tasks Protocol**: File: `_ai.dev/protocols/tasks.md`
    - When organizing work into task folders under `_ai/tasks/`
    - When tracking progress across planning, execution, and QA
    - When breaking tasks into actionable todos
 
-4. **KB Sync Protocol**: File: `_ai.bws/protocols/kb-sync/kb-github-sync.md`
+4. **KB Sync Protocol**: File: `_ai.dev/protocols/kb-sync/kb-github-sync.md`
    - When bidirectional synchronization is needed between Knowledge Base and GitHub
    - When extracting documentation from GitHub issues
    - When creating shared documentation mirrors
 
-5. **Playwright Protocol**: File: `_ai.bws/protocols/playwright.md`
+5. **Playwright Protocol**: File: `_ai.dev/protocols/playwright.md`
    - When automating browser interactions
    - When creating UI tests
    - When documenting UI testing approaches
 
-6. **Port Management Protocol**: File: `_ai.bws/protocols/port-management.md`
+6. **Port Management Protocol**: File: `_ai.dev/protocols/port-management.md`
    - When managing port assignments for development projects
    - When organizing port allocation across multiple instances
    - When preventing port conflicts in development environments
 
-7. **Supabase Test Database Protocol**: File: `_ai.bws/protocols/supabase-test-db.md`
+7. **Supabase Test Database Protocol**: File: `_ai.dev/protocols/supabase-test-db.md`
    - When setting up isolated test databases for Supabase projects
    - When implementing database snapshot systems for testing
    - When configuring test runners with Supabase integration
    - When optimizing test performance with database restoration
 
-8. **Developer Helper Scripts Protocol**: File: `_ai.bws/protocols/dev-helper-scripts.md`
+8. **Developer Helper Scripts Protocol**: File: `_ai.dev/protocols/dev-helper-scripts.md`
    - When creating shortcuts for common development tasks
    - When setting up port-aware development scripts
    - When wrapping complex commands with environment configuration
    - When standardizing team development workflows
 
-9. **Sub-Agents Protocol**: File: `_ai.bws/protocols/sub-agents.md`
+9. **Sub-Agents Protocol**: File: `_ai.dev/protocols/sub-agents.md`
    - When using Claude Code sub-agents for workflow acceleration
    - When setting up agents for new projects
    - When invoking specialized agents for tasks
    - When coordinating parallel agent execution
 
-> **Note:** The Issue Protocol (`_ai.bws/protocols/issue.md`) remains available as a specialized reference whenever GitHub issue coordination is required, but task documentation within `_ai/` serves as the primary source of truth for in-progress work.
+> **Note:** The Issue Protocol (`_ai.dev/protocols/issue.md`) remains available as a specialized reference whenever GitHub issue coordination is required, but task documentation within `_ai/` serves as the primary source of truth for in-progress work.
 
 ### Workflow Phases
 
-1. **Planning**: File: `_ai.bws/workflows/planning.md`
+1. **Planning**: File: `_ai.dev/workflows/planning.md`
    - When understanding requirements
    - When creating technical plans
    - When breaking down work into tasks
    - When defining test strategy
    - When identifying dependencies and risks
 
-2. **Execution**: File: `_ai.bws/workflows/execution.md`
+2. **Execution**: File: `_ai.dev/workflows/execution.md`
    - When implementing planned features using TDD
    - When creating all required components
    - When following technical plan
    - When documenting test evidence
    - When updating current state continuously
 
-3. **QA**: File: `_ai.bws/workflows/qa.md`
+3. **QA**: File: `_ai.dev/workflows/qa.md`
    - When verifying implementation meets requirements
    - When testing all edge cases
    - When performing regression testing
    - When validating acceptance criteria
    - When identifying any issues or bugs
 
-4. **Management**: File: `_ai.bws/workflows/management.md`
+4. **Management**: File: `_ai.dev/workflows/management.md`
    - When improving development processes
    - When refining workflows and documentation
    - When standardizing approaches
@@ -244,7 +244,7 @@ protocol sub-agents
 4. Return structured results to parent context
 
 [REQUIREMENT:AGENT-02] When using sub-agents:
-1. Agents are defined in `_ai.bws/agents/` directory
+1. Agents are defined in `_ai.dev/agents/` directory
 2. Workflow orchestrators coordinate specialized agents
 3. Clear task definition required for each invocation
 4. Results must be validated before use
