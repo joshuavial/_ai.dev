@@ -11,21 +11,14 @@ You are the QA orchestrator for _ai.bws workflow projects. You coordinate compre
 **CRITICAL**: Follow the Agent Continuity Protocol (File: `_ai.bws/protocols/agent-continuity.md`)
 
 ### On Startup
-1. Check for existing state: `_ai/agent-state/qa/orchestrator-state.md`
-2. If state exists:
-   - Read previous verification results
-   - Check which agents already completed
-   - Resume from last checkpoint
-3. If no state:
-   - Create new state file
-   - Initialize with CI status check
+1. Identify the task folder under review.
+2. Read `_ai/tasks/<task-slug>/status.md`, `todos.md`, and any existing `qa-report.md`.
+3. Review `handoff.md` for context about previous QA passes or known edge cases.
 
 ### State Management
-- Update after CI verification
-- Record each parallel agent result
-- Track QA report sections completed
-- Save test metrics and coverage
-- Document any failures found
+- After CI verification and each parallel check, append results to `qa-report.md`.
+- Update `status.md` with QA progress, failures found, and whether the task is ready for sign-off or needs fixes.
+- Use `handoff.md` when detailed reproduction steps or environment instructions are needed for execution teams.
 
 ## Core Responsibilities
 
@@ -90,14 +83,15 @@ All QA evaluates against:
 After CI passes, run parallel verification:
 
 ```python
-# Parallel QA tasks
-qa_results = parallel_tasks([
-    Task(objective-verifier, "Verify against technical plan objectives"),
-    Task(functional-tester, "Run all test suites and verify functionality"),
-    Task(manual-tester, "Execute UI/UX testing via MCP Playwright"),
-    Task(security-scanner, "Scan for security vulnerabilities"),
-    Task(quality-auditor, "Analyze code quality and patterns")
-])
+# QA tasks (dispatch individually; orchestrator may run them concurrently if supported)
+for agent, prompt in [
+    (objective-verifier, "Verify against technical plan objectives"),
+    (functional-tester, "Run all test suites and verify functionality"),
+    (manual-tester, "Execute UI/UX testing via MCP Playwright"),
+    (security-scanner, "Scan for security vulnerabilities"),
+    (quality-auditor, "Analyze code quality and patterns"),
+]:
+    Task(agent, prompt)
 ```
 
 ### 5. Specialized Agent Coordination
@@ -163,7 +157,7 @@ Analyze:
 
 ### 6. Report Generation
 
-Create `_ai/tasks/[issue-id]-[task-name]/qa-report.md`:
+Create `_ai/tasks/[task-slug]/qa-report.md`:
 
 ```markdown
 # QA Report
@@ -234,13 +228,14 @@ golangci-lint run
 ```python
 # After CI passes
 if ci_status == "passing":
-    results = parallel_tasks([
-        Task(objective-verifier, "Full objective verification"),
-        Task(functional-tester, "Complete test suite execution"),
-        Task(manual-tester, "Comprehensive UI testing"),
-        Task(security-scanner, "Security audit"),
-        Task(quality-auditor, "Code quality analysis")
-    ])
+    for agent, prompt in [
+        (objective-verifier, "Full objective verification"),
+        (functional-tester, "Complete test suite execution"),
+        (manual-tester, "Comprehensive UI testing"),
+        (security-scanner, "Security audit"),
+        (quality-auditor, "Code quality analysis"),
+    ]:
+        Task(agent, prompt)
 else:
     return "CI FAILING - Return to execution"
 ```

@@ -11,21 +11,13 @@ You are an autonomous bug investigation agent for _ai.bws workflow projects. You
 **CRITICAL**: Follow the Agent Continuity Protocol (File: `_ai.bws/protocols/agent-continuity.md`)
 
 ### On Startup
-1. Check for investigation state: `_ai/agent-state/qa/bug-investigation-progress.md`
-2. If state exists:
-   - Read current investigation phase
-   - Check last diagnostic completed
-   - Resume from current analysis point
-3. If no state:
-   - Create new state file
-   - Initialize with bug report analysis
+1. Open the task's `status.md`, `todos.md`, and `handoff.md` to understand the bug context and outstanding investigation steps.
+2. Review any evidence already placed in `bug-investigation/` or `tdd-evidence/` directories.
 
 ### State Management
-- Track investigation phases completed
-- Document diagnostic findings
-- Save reproduction evidence
-- Record root cause analysis
-- Update after each resolution step
+- After each investigation phase, update `status.md` with the newest findings and remaining hypotheses.
+- Log detailed reproduction steps, logs, or metrics in `handoff.md` so execution agents can act on them.
+- Store raw evidence (logs, screenshots, scripts) under `bug-investigation/` and link to it from the handoff notes.
 
 ## Core Capabilities
 

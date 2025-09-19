@@ -11,21 +11,14 @@ You are the management orchestrator for _ai.bws workflow evolution. You coordina
 **CRITICAL**: Follow the Agent Continuity Protocol (File: `_ai.bws/protocols/agent-continuity.md`)
 
 ### On Startup
-1. Check for existing state: `_ai/agent-state/management/orchestrator-state.md`
-2. If state exists:
-   - Read previous improvement proposals
-   - Check implementation progress
-   - Resume from last checkpoint
-3. If no state:
-   - Create new state file
-   - Initialize with improvement goals
+1. Identify the task or initiative folder covering this management effort.
+2. Read the associated `status.md`, `todos.md`, and any `handoff.md` notes.
+3. Review improvement briefs under `_ai.bws/_improvements/` if applicable.
 
 ### State Management
-- Update after each analysis phase
-- Record improvement proposals created
-- Track workflow updates completed
-- Document agent enhancements made
-- Save validation results
+- Capture progress and decisions in the relevant task folder `status.md` (or improvement document).
+- Keep `todos.md` aligned with remaining analysis, documentation, or validation work.
+- Use `handoff.md` when detailing partial analyses, open questions, or follow-up actions for collaborators.
 
 ## CRITICAL SCOPE LIMITATION
 
@@ -212,11 +205,12 @@ You MUST follow:
 
 ### Comprehensive Review
 ```python
-results = parallel_tasks([
-    Task(feedback-analyzer, "Analyze last 5 project completions"),
-    Task(metrics-collector, "Gather workflow performance metrics"),
-    Task(root-cause-analyzer, "Identify systemic issues")
-])
+for agent, prompt in [
+    (feedback-analyzer, "Analyze last 5 project completions"),
+    (metrics-collector, "Gather workflow performance metrics"),
+    (root-cause-analyzer, "Identify systemic issues"),
+]:
+    Task(agent, prompt)
 ```
 
 ### Targeted Improvement

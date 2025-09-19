@@ -47,7 +47,7 @@ Current State Comment:
 ## Current State
 
 **Status**: In Progress
-**KB Document**: _ai/states/123-current-state.md
+**Task Status**: _ai/tasks/onboarding-wizard-navigation/status.md
 **Last Updated**: 2023-08-15 14:30
 **Blockers**: Waiting for design assets from @design-lead
 
@@ -64,11 +64,15 @@ Store comprehensive documentation in KB:
 _ai/
   issues/
     123-user-onboarding-wizard.md  # Complete planning documentation
-  states/
-    123-current-state.md           # Complete state tracking
   tasks/
-    123-wizard-navigation.md       # Individual task documentation
-    123-step-content.md
+    onboarding-wizard-navigation/
+      technical-plan.md
+      status.md                    # Concise progress snapshot
+      todos.md
+    onboarding-step-content/
+      technical-plan.md
+      status.md
+      todos.md
   tdd/
     123-tdd-evidence/              # TDD evidence folder
       navigation-component-red.png
@@ -96,28 +100,27 @@ Each issue documentation file (`_ai/issues/123-user-onboarding-wizard.md`) conta
 - GitHub Issue: #123
 - PRD: _ai/prds/user-onboarding.md
 - Tasks:
-  - _ai/tasks/123-wizard-navigation.md
-  - _ai/tasks/123-step-content.md
+  - _ai/tasks/onboarding-wizard-navigation/
+  - _ai/tasks/onboarding-step-content/
 ```
 
-Each current state file (`_ai/states/123-current-state.md`) contains:
+Each task status file (`_ai/tasks/onboarding-wizard-navigation/status.md`) contains:
 
 ```markdown
-# Current State: User Onboarding Wizard
+# Status: User Onboarding Wizard
 
-**Status**: In Progress
-**Last Updated**: 2023-08-15 14:30
-**Branch**: feature/123-user-onboarding
+**Updated**: 2025-01-04 14:30
+**Progress**:
+- Planning complete
+- Navigation component implemented
+  - RED/ GREEN/ REFACTOR evidence in `_ai/tdd/123-tdd-evidence/`
+- Branch: feature/onboarding-wizard-navigation
 
-## Progress
-- [x] Planning complete
-- [x] Branch created
-- [x] Navigation component implemented
-  - [x] RED phase - [Evidence](_ai/tdd/123-tdd-evidence/navigation-component-red.png)
-  - [x] GREEN phase - [Evidence](_ai/tdd/123-tdd-evidence/navigation-component-green.png)
-  - [x] REFACTOR phase - [Evidence](_ai/tdd/123-tdd-evidence/navigation-component-refactor.png)
-- [ ] Step content implementation
-- [ ] Integration testing
+**Next Steps**:
+- [ ] Implement step content components
+- [ ] Run integration tests
+
+**Blockers**: Waiting for design assets from @design-lead
 
 ## Blockers
 - Waiting for design assets from @design-lead
@@ -135,7 +138,7 @@ When a new GitHub issue is created:
 
 1. **Create KB Files**:
    - Generate `_ai/issues/[number]-[name].md`
-   - Generate `_ai/states/[number]-current-state.md`
+   - Ensure `_ai/tasks/[task-slug]/status.md` exists for live updates
    - Create task files as needed in `_ai/tasks/`
 
 2. **Update KB from Issue**:

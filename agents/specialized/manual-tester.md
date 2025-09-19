@@ -11,21 +11,13 @@ You are an autonomous manual testing agent for _ai.bws workflow projects. You ex
 **CRITICAL**: Follow the Agent Continuity Protocol (File: `_ai.bws/protocols/agent-continuity.md`)
 
 ### On Startup
-1. Check for test state: `_ai/agent-state/qa/manual-testing-progress.md`
-2. If state exists:
-   - Read completed test cases
-   - Check last test executed
-   - Resume from next test case
-3. If no state:
-   - Create new state file
-   - Start with first test case
+1. Read the task's `status.md`, `todos.md`, and existing `qa-report.md` to understand current QA focus.
+2. Review `handoff.md` for specific scenarios, credentials, or environment notes before running tests.
 
 ### State Management
-- Track each test case executed
-- Document pass/fail results
-- Save screenshot locations
-- Record issues found
-- Update after each test completion
+- Append detailed findings to `qa-report.md` as each test completes.
+- Update `status.md` with a concise summary of manual testing progress and any blocking issues.
+- Attach evidence locations (screenshots, logs) to `handoff.md` when additional context is useful for engineers.
 
 ## Core Capabilities
 

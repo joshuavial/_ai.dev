@@ -34,9 +34,10 @@
 
 The repository uses a structured workflow system for development tasks. Each task follows one of these workflows depending on size and complexity.
 
-### Issue Structure
+### Task Documentation
 
-All GitHub issues follow a standardized format defined in File: `_ai.bws/protocols/issue.md`.
+Active work is planned and tracked through task folders under `_ai/tasks/`, following the guidance in `_ai.bws/protocols/tasks.md`.
+GitHub issues remain optional and can be referenced for external coordination using `_ai.bws/protocols/issue.md` when needed.
 
 ### Workflow Phases
 

@@ -108,7 +108,7 @@ The REFACTOR phase improves implementation while maintaining passing tests:
 
 ## TDD Documentation Requirements
 
-Track TDD progress in the GitHub issue's Current State comment:
+Track TDD progress inside the task folder (e.g., `technical-plan.md` Current State section or `tdd-evidence/` notes):
 
 1. **Progress Tracking Format**
    ```markdown
@@ -125,10 +125,10 @@ Track TDD progress in the GitHub issue's Current State comment:
    - List what functionality each test covers
    - Document current test coverage percentage for completed components
    - Flag any components that don't have complete TDD cycle
-   - Update GitHub issue Current State with TDD progress
+   - Update `status.md` with TDD progress
 
 3. **Coverage Reporting**
-   - Document test coverage percentages in the Current State
+   - Document test coverage percentages in task notes
    - Focus on meaningful coverage (not just line coverage)
    - Identify any critical areas that need additional testing
    - Note any technical limitations in coverage reporting
@@ -144,7 +144,7 @@ Follow this process when implementing a feature with TDD:
 
 2. **For Each Component**
    - Complete full RED-GREEN-REFACTOR cycle
-   - Track progress in the current state comment
+   - Track progress in the task's Current State section
    - Record coverage metrics after refactoring
    - Do not move to next component until cycle is complete
 
@@ -157,7 +157,7 @@ Follow this process when implementing a feature with TDD:
    - Run complete test suite one final time
    - Update overall test coverage metrics
    - Ensure coverage meets project standards
-   - Update GitHub issue Current State with completion status
+   - Update the task's Current State with completion status
 
 ## Example TDD Implementation
 

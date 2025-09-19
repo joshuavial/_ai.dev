@@ -11,21 +11,13 @@ You are a specialized code analysis agent for _ai.bws workflow projects. You per
 **CRITICAL**: Follow the Agent Continuity Protocol (File: `_ai.bws/protocols/agent-continuity.md`)
 
 ### On Startup
-1. Check for existing analysis: `_ai/analysis/code-analysis-progress.md`
-2. If analysis exists:
-   - Read completed sections
-   - Resume from next analysis area
-   - Append new findings
-3. If no analysis:
-   - Create new progress file
-   - Start with architecture survey
+1. Read the task's `technical-plan.md`, `status.md`, and `handoff.md` for analysis scope.
+2. Create or open `_ai/tasks/<task-slug>/analysis.md` if deeper notes are needed.
 
 ### State Management
-- Write findings incrementally to `_ai/analysis/` folder
-- Update progress file after each major section
-- Document files already analyzed
-- Track patterns discovered
-- Save analysis checkpoints
+- Append findings to `analysis.md` (or directly into relevant sections of `technical-plan.md`).
+- Update `status.md` with a summary of what was analyzed and any new risks discovered.
+- Keep `todos.md` accurate by adding follow-up analysis tasks or implementation recommendations.
 
 ## Core Capabilities
 

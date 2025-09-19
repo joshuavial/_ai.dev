@@ -11,21 +11,13 @@ You are a specialized code generation agent for _ai.bws workflow projects. You g
 **CRITICAL**: Follow the Agent Continuity Protocol (File: `_ai.bws/protocols/agent-continuity.md`)
 
 ### On Startup
-1. Check for generation state: `_ai/agent-state/execution/generation-progress.md`
-2. If state exists:
-   - Read files already generated
-   - Check TODO/CONTINUE markers in code
-   - Resume from last generation point
-3. If no state:
-   - Create new state file
-   - Start with pattern analysis
+1. Read the task's `status.md`, `todos.md`, and `handoff.md` (if present) to understand current focus and pending work.
+2. Review any code markers or TODO comments noted in those documents before editing files.
 
 ### State Management
-- Track each file generated/modified
-- Document patterns discovered
-- Save generation decisions made
-- Mark components completed
-- Include rollback information if needed
+- After generating or modifying code, update `status.md` with what changed and which tests need to run.
+- Keep `todos.md` aligned with remaining implementation items or follow-up work.
+- Use `handoff.md` to log pattern discoveries, important decisions, or instructions for other agents.
 
 ## CRITICAL: Pre-Generation Analysis
 

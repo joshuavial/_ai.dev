@@ -21,9 +21,10 @@ This document serves as the single source of truth for workflow instructions acr
 
 [DEFINITION:TASK-01] Work hierarchy consists of:
 1. PRD: High-level feature area (weeks/months)
-2. Issue/Ticket: Substantial component (days)
-3. Task: Significant unit of work (hours)
-4. Todo: Small, actionable item (minutes)
+2. Task: Significant unit of work tracked in `_ai/tasks/` (hours)
+3. Todo: Small, actionable item (minutes)
+
+> External trackers (e.g., GitHub issues) can mirror or reference tasks when collaboration outside `_ai/` is required, but they are not part of the core hierarchy.
 
 ---
 
@@ -43,7 +44,6 @@ protocol boot
 protocol tdd
 protocol issue
 protocol tasks
-protocol current
 protocol playwright
 protocol sub-agents
 
@@ -100,60 +100,52 @@ protocol sub-agents
    - When documenting TDD evidence
    - When verifying test coverage and quality
 
-3. **Issue Protocol**: File: `_ai.bws/protocols/issue.md`
-   - When creating or updating GitHub issues
-   - When synchronizing with Knowledge Base
-   - When managing issue state and comments
+3. **Tasks Protocol**: File: `_ai.bws/protocols/tasks.md`
+   - When organizing work into task folders under `_ai/tasks/`
+   - When tracking progress across planning, execution, and QA
+   - When breaking tasks into actionable todos
 
 4. **KB Sync Protocol**: File: `_ai.bws/protocols/kb-sync/kb-github-sync.md`
-   - When bidirectional synchronization is needed between KB and GitHub
+   - When bidirectional synchronization is needed between Knowledge Base and GitHub
    - When extracting documentation from GitHub issues
-   - When creating KB structure for new issues
+   - When creating shared documentation mirrors
 
-5. **Tasks Protocol**: File: `_ai.bws/protocols/tasks.md`
-   - When breaking down work into PRD/Issue/Task/Todo hierarchy
-   - When tracking progress across work levels
-   - When organizing and prioritizing tasks
-
-6. **Current Protocol**: File: `_ai.bws/protocols/current.md`
-   - When switching between tasks or issues
-   - When updating work state across sessions
-   - When documenting context for a task
-
-7. **Playwright Protocol**: File: `_ai.bws/protocols/playwright.md`
+5. **Playwright Protocol**: File: `_ai.bws/protocols/playwright.md`
    - When automating browser interactions
    - When creating UI tests
    - When documenting UI testing approaches
 
-8. **Port Management Protocol**: File: `_ai.bws/protocols/port-management.md`
+6. **Port Management Protocol**: File: `_ai.bws/protocols/port-management.md`
    - When managing port assignments for development projects
    - When organizing port allocation across multiple instances
    - When preventing port conflicts in development environments
 
-9. **Supabase Test Database Protocol**: File: `_ai.bws/protocols/supabase-test-db.md`
+7. **Supabase Test Database Protocol**: File: `_ai.bws/protocols/supabase-test-db.md`
    - When setting up isolated test databases for Supabase projects
    - When implementing database snapshot systems for testing
    - When configuring test runners with Supabase integration
    - When optimizing test performance with database restoration
 
-10. **Developer Helper Scripts Protocol**: File: `_ai.bws/protocols/dev-helper-scripts.md`
+8. **Developer Helper Scripts Protocol**: File: `_ai.bws/protocols/dev-helper-scripts.md`
    - When creating shortcuts for common development tasks
    - When setting up port-aware development scripts
    - When wrapping complex commands with environment configuration
    - When standardizing team development workflows
 
-11. **Sub-Agents Protocol**: File: `_ai.bws/protocols/sub-agents.md`
+9. **Sub-Agents Protocol**: File: `_ai.bws/protocols/sub-agents.md`
    - When using Claude Code sub-agents for workflow acceleration
    - When setting up agents for new projects
    - When invoking specialized agents for tasks
    - When coordinating parallel agent execution
+
+> **Note:** The Issue Protocol (`_ai.bws/protocols/issue.md`) remains available as a specialized reference whenever GitHub issue coordination is required, but task documentation within `_ai/` serves as the primary source of truth for in-progress work.
 
 ### Workflow Phases
 
 1. **Planning**: File: `_ai.bws/workflows/planning.md`
    - When understanding requirements
    - When creating technical plans
-   - When breaking down issues into tasks
+   - When breaking down work into tasks
    - When defining test strategy
    - When identifying dependencies and risks
 
