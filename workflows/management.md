@@ -17,6 +17,8 @@ This document outlines the structured approach for managing, improving, and evol
 > 
 > The scope is exclusively focused on workflow documentation, protocols, and process improvement within the `_ai.dev` directory structure. All improvement planning and documentation should be placed in the `_ai.dev/_improvements` directory to keep meta-documentation separate from the actual workflow files.
 
+> **BOOT ALIGNMENT**: When following the Boot protocol for this workflow, skip the `_ai/` state artefacts entirely. Instead, review `_ai.dev/_improvements/`, `_ai.dev/CHANGELOG.md`, agent docs, and related workflow files to understand current process work before proceeding.
+
 ## Purpose and Scope
 
 ### Purpose of the Management Workflow

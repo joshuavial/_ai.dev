@@ -37,23 +37,30 @@ Read _ai/port.md  # If exists - contains project port assignments
 
 ## 2. Review State References
 
-After establishing baseline understanding, gather current context by scanning the shared artifacts maintained under `_ai/`:
+After establishing baseline understanding, gather current context from the location that matches the active workflow:
 
-- `_ai/ports.md` for port assignments (when applicable)
-- `_ai/prds/` for product context and other background materials referenced by tasks
-- Each active task folder under `_ai/tasks/`:
-  - `technical-plan.md` for objectives and approach
-  - `status.md` for current progress, blockers, and next steps
-  - `todos.md` for actionable checklist items
-  - Optional artifacts (`qa-report.md`, `tdd-evidence/`, etc.)
+- **Delivery workflows (planning / execution / QA)**
+  - Use `_ai/` artefacts to understand product work in flight
+  - Review `_ai/ports.md`, `_ai/prds/`, and the relevant folders under `_ai/tasks/`
+  - Within each task folder inspect `technical-plan.md`, `status.md`, `todos.md`, and any QA/TDD evidence
+- **Management workflow**
+  - Stay inside `_ai.dev/` and focus on process artefacts
+  - Review `_ai.dev/_improvements/` for outstanding proposals, retrospectives, and session notes
+  - Check `_ai.dev/CHANGELOG.md`, `_ai.dev/AGENTS.md`, and workflow documents for recent updates or open questions
+  - Only reference `_ai/` materials when a process change explicitly requires current product-state examples
 
-If these documents do not make the active effort clear, ask the user to clarify the current focus before proceeding.
+If the appropriate documents do not make the active effort clear, ask the user to clarify the current focus before proceeding.
 
-Review `_ai/tasks.md` to see the current task index. The table should list each task slug, workflow, status, timestamp, and any notes. If the index is missing or out of date, fall back to the Tasks Protocol to reconstruct it before proceeding (or, as a temporary measure, enumerate `_ai/tasks/*/` manually).
+For delivery workflows, review `_ai/tasks.md` to see the current task index. The table should list each task slug, workflow, status, timestamp, and any notes. If the index is missing or out of date, fall back to the Tasks Protocol to reconstruct it before proceeding (or, as a temporary measure, enumerate `_ai/tasks/*/` manually).
 
 ## 3. Select Active Task
 
-After reviewing the task index:
+After reviewing the relevant backlog:
+
+- **Delivery workflows**: use `_ai/tasks.md` (or the individual task folders) as described below.
+- **Management workflow**: identify the improvement initiative to focus on (e.g., a document in `_ai.dev/_improvements/` or a management-specific ticket). If no improvement is currently active, confirm with the user whether to create a new proposal or review the backlog before continuing.
+
+For delivery workflows, follow these rules after reviewing the task index:
 
 1. **Zero Tasks Detected**
    - Ask: “No existing tasks found. Do you want to create a new task folder, work without a task, or point me to an existing path?”
@@ -92,20 +99,25 @@ The core-instructions.md contains tagged instructions for each workflow phase.
 Before taking any action, establish awareness of the current state and confirm understanding:
 
 ```
-# If state docs or the user identify a specific task
-if [[ -n "$active_task" ]]; then
-  # Load the task plan and status
+# Delivery workflows: load the active task artefacts
+if [[ -n "$active_task" && "$workflow_phase" != "management" ]]; then
   Read _ai/tasks/${active_task}/technical-plan.md
   Read _ai/tasks/${active_task}/status.md
-
-  # Review supporting notes (if present)
   Read _ai/tasks/${active_task}/qa-report.md
   Read _ai/tasks/${active_task}/todos.md
 
-  # Optional: if the task references external artifacts (e.g., GitHub issues), open them for context
   if [[ -n "$linked_issue" ]]; then
     gh issue view $linked_issue
   fi
+fi
+
+# Management workflow: review process improvement context
+if [[ "$workflow_phase" == "management" ]]; then
+  # Focus on `_ai.dev/` artefacts only
+  ls _ai.dev/_improvements/
+  Read _ai.dev/CHANGELOG.md
+  Read _ai.dev/workflows/management.md
+  # Optional: open specific improvement proposals or session notes as directed by the user
 fi
 
 # Check other running lists (e.g., shared backlog, meeting notes) if maintained separately
@@ -174,6 +186,8 @@ Maintain a lightweight source of truth within `_ai/` that captures:
 
 The format can be Markdown checklists, structured JSON, or short status notes—as long as it is easy to locate and kept up to date.
 
+> For management workflow efforts, keep analogous notes under `_ai.dev/_improvements/` rather than `_ai/`.
+
 ### Workflow Identification
 
 Workflows are identified by simple string identifiers:
@@ -182,7 +196,7 @@ Workflows are identified by simple string identifiers:
 - `qa` - Quality Assurance phase
 - `management` - Process improvement and workflow evolution
 
-### Example Boot Sequence
+### Example Boot Sequence (Delivery Workflow)
 
 ```
 # 1. Read base project configuration
@@ -213,6 +227,32 @@ Review _ai/tasks/wizard-navigation/todos.md
 # Provide state summary and await confirmation
 ```
 
+### Example Boot Sequence (Management Workflow)
+
+```
+# 1. Read base project configuration
+Read CLAUDE.md
+
+# 2. Review state references inside `_ai.dev/`
+ls _ai.dev/_improvements/
+Read _ai.dev/CHANGELOG.md
+
+# 3. Identify active improvement effort
+Ask user which document under `_ai.dev/_improvements/` to focus on
+
+# 4. Confirm workflow focus
+Confirm "management" with user
+
+# 5. Load workflow instructions
+Read _ai.dev/workflows/management.md
+
+# 6. Establish state awareness
+Open the selected improvement proposal or session notes for review
+
+# 7. Confirm understanding with user
+Summarize process-improvement status and next steps before acting
+```
+
 ## Benefits of This Approach
 
 This boot sequence approach offers several advantages:
@@ -226,7 +266,7 @@ This boot sequence approach offers several advantages:
 
 ## Implementation Notes
 
-1. Keep shared `_ai/` notes updated:
+1. Keep shared `_ai/` notes updated (or `_ai.dev/_improvements/` when in management workflow):
    - When starting a new feature
    - When completing a workflow phase
    - When transitioning between workflows
