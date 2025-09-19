@@ -21,9 +21,7 @@ This approach offers several advantages:
 ### Core Development Protocols
 
 - File: `_ai.bws/protocols/tdd.md` - Test-Driven Development protocol
-- File: `_ai.bws/protocols/issue.md` - GitHub issue structure and management
 - File: `_ai.bws/protocols/tasks.md` - Work breakdown and task tracking
-- File: `_ai.bws/protocols/current.md` - Managing current work state
 - File: `_ai.bws/protocols/boot.md` - Boot sequence protocol
 - File: `_ai.bws/protocols/playwright.md` - Browser automation handling
 - File: `_ai.bws/protocols/port-management.md` - Port assignment and management policy
@@ -35,6 +33,7 @@ This approach offers several advantages:
 - Directory: `_ai.bws/protocols/kb-sync/` - Knowledge Base synchronization protocols
   - File: `_ai.bws/protocols/kb-sync/kb-github-sync.md` - Bidirectional KB-GitHub sync
   - File: `_ai.bws/protocols/kb-sync/github-extraction.md` - Extracting KB content from GitHub
+- File: `_ai.bws/protocols/issue.md` - Optional reference for GitHub issue formatting and sync
 
 ## Protocol Structure
 

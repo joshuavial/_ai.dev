@@ -8,50 +8,59 @@ The project uses a consistent hierarchy to organize work:
 
 ### 1. PRD (Product Requirements Document)
 - High-level document defining a feature area or product component
-- Contains multiple issues/tickets that together implement the feature
-- Typically takes weeks to months to complete all associated issues
+- Provides long-term context for clusters of tasks
+- Maintained under `_ai/prds/`
 - Example: "User Onboarding System PRD"
 
-### 2. Issue/Ticket
-- Substantial piece of work within a PRD
-- Tracked in GitHub issues with the standardized format
-- Typically takes days to complete
-- Self-contained but related to other issues in the PRD
-- Example: "Implement Onboarding Wizard UI Component"
+### 2. Task (Primary Work Unit)
+- Significant unit of work planned and executed within `_ai/tasks/`
+- Non-trivial effort requiring multiple steps and verification
+- Tied to a specific goal or acceptance criteria
+- May optionally reference GitHub issues or other external trackers
+- Example: "Create responsive onboarding step navigation"
 
-### 3. Task
-- Significant unit of work within an issue
-- Non-trivial effort requiring multiple steps
-- Tracked in _ai/tasks/ directory as individual markdown files
-- Typically takes hours to complete
-- Example: "Create responsive step navigation component"
-
-### 4. Todo
+### 3. Todo
 - Small, actionable item within a task
-- Tracked using the internal TodoWrite/TodoRead tools
+- Tracked using the internal `TodoWrite`/`TodoRead` tools
 - Typically takes minutes to an hour to complete
 - Example: "Add hover states to navigation buttons"
+
+> GitHub issues remain available for collaboration or status sharing, but `_ai/tasks/` is the authoritative source of truth for day-to-day progress.
 
 ## Tracking Mechanisms
 
 ### PRD Tracking
-- Store in _ai/prds/ directory as markdown files
-- Use YAML frontmatter for metadata (status, related issues)
-- Update status as issues are completed
-
-### Issue Tracking
-- Use GitHub issues with standardized format
-- Update third comment (Current State) regularly
-- Link to related tasks in _ai/tasks/
+- Store in `_ai/prds/` directory as markdown files
+- Use YAML frontmatter for metadata (status, key contacts, related docs)
+- Update status as core supporting tasks are completed
 
 ### Task Tracking
-- Create markdown files in _ai/tasks/
-- Use consistent naming: `issue-number-short-description.md`
-- Include sections for description, acceptance criteria, notes, and progress
-- Update progress section as work advances
+- Create a dedicated folder in `_ai/tasks/` for each active task
+- Use consistent, descriptive slugs (e.g., `onboarding-step-navigation`)
+- Maintain the standard file set:
+  - `technical-plan.md` — objectives, scope, acceptance criteria
+  - `status.md` — concise progress snapshot, blockers, next steps
+  - `todos.md` — actionable checklist maintained with TodoWrite/TodoRead
+  - `qa-report.md` — QA findings (added during QA workflow)
+  - `handoff.md` — optional detailed notes for future sessions or collaborators
+- Add supporting artifacts as needed (`tdd-evidence/`, `artifacts/`, `implementation.md`, etc.)
+- Reference external trackers (GitHub issues, design docs) inside the task folder only when necessary
+- Keep `_ai/tasks.md` (task index) up to date with the task slug, workflow, status, and last-updated timestamp
+
+### Task Index (`_ai/tasks.md`)
+- Store a single Markdown table that inventories every active and recently completed task
+- Recommended columns: `Task`, `Workflow`, `Status`, `Updated`, `Notes`
+- Example:
+  ```markdown
+  | Task                         | Workflow  | Status         | Updated           | Notes                     |
+  | ---------------------------- | --------- | -------------- | ----------------- | ------------------------- |
+  | onboarding-step-navigation   | execution | in progress    | 2025-01-04 15:12  | waiting on design assets  |
+  | onboarding-data-storage      | planning  | ready for impl | 2025-01-02 09:45  | pending security review   |
+  ```
+- When a task is closed, either move it to a "Completed" section or mark the Status column accordingly so future agents have historical context
 
 ### Todo Tracking
-- Use internal TodoWrite/TodoRead tools
+- Use internal TodoWrite/TodoRead tools to maintain the task's `todos.md`
 - Create todos at the beginning of implementing each task
 - Mark todos as in_progress and completed as you work
 - Keep todos small and actionable
@@ -61,8 +70,9 @@ The project uses a consistent hierarchy to organize work:
 ```markdown
 # Task: [Short Title]
 
-## Related Issue
-Issue #[number] - [title]
+## References (Optional)
+- GitHub Issue: #[number] - [title]
+- PRD: [link or filename]
 
 ## Description
 [Detailed description of the task]
@@ -76,13 +86,29 @@ Issue #[number] - [title]
 - [Any technical notes, approaches, or decisions]
 - [References to relevant code or documentation]
 
-## Progress
-- [yyyy-mm-dd] Started task
-- [yyyy-mm-dd] [Progress update]
-- [yyyy-mm-dd] Completed task
+## Status Snapshot
+- **Workflow**: planning | execution | qa | management
+- **Updated**: [yyyy-mm-dd HH:MM]
+- **Progress**: [Short bullet summary]
+- **Next Steps**: [Top 2-3 todos]
+- **Blockers**: [Any current blockers, or "None" if none exist]
+```
 
-## Blockers
-- [Any current blockers, or "None" if none exist]
+### Status.md Example
+
+```markdown
+# Status: onboarding-step-navigation
+
+- **Workflow**: execution
+- **Updated**: 2025-01-04 15:12
+- **Progress**:
+  - RED/GREEN complete for navigation state manager (coverage 92%)
+  - Refactored button group to use shared `PrimaryButton`
+  - Added analytics event for "next" clicks
+- **Next Steps**:
+  - [ ] Wire countdown timer UI
+  - [ ] Update integration test `onboarding-flow.spec.ts`
+- **Blockers**: Waiting on final copy for tooltip content from design (@alex)
 ```
 
 ## Responsibilities by Workflow Phase
@@ -91,44 +117,43 @@ Issue #[number] - [title]
 
 The Planning phase is responsible for structuring and organizing work:
 
-1. **PRD Breakdown**
-   - Analyze PRD requirements
-   - Break down into logical issues
-   - Ensure issues are properly sized (not too large/small)
-   - Create GitHub issues for each identified work unit
+1. **PRD Alignment**
+   - Analyze PRD requirements and current goals
+   - Identify the discrete tasks needed to satisfy the requirements
+   - Confirm scope and exclusions with stakeholders
 
-2. **Issue Breakdown**
-   - Break down each issue into tasks
-   - Create task files in _ai/tasks/ directory
-   - Define clear acceptance criteria for each task
-   - Ensure tasks are substantial but manageable
+2. **Task Definition**
+   - Create task folders in `_ai/tasks/`
+   - Capture acceptance criteria and completion signals in `technical-plan.md`
+   - Draft initial `status.md` with known context, open questions, and dependencies
+   - Note any relevant references (PRDs, GitHub issues, design docs)
+   - Add a new row to `_ai/tasks.md` (or update an existing one) to reflect the task's workflow, status, and timestamp
 
 3. **Task Organization**
-   - Prioritize tasks within issues
-   - Identify dependencies between tasks
-   - Document any required sequencing in the issue's technical plan
+   - Prioritize tasks based on impact and dependencies
+   - Document sequencing expectations directly in the task plans
+   - Ensure tasks are substantial but manageable (hours-scale)
 
 ### Execution Workflow
 
 The Execution phase is responsible for implementing and tracking work:
 
 1. **Task Implementation**
-   - Reference task files from _ai/tasks/ directory
-   - Break down tasks into todos using TodoWrite
-   - Update task file with progress notes
-   - Follow TDD cycle for implementation
+   - Reference the task folder continuously during implementation
+   - Break down work into `todos.md` items using TodoWrite
+   - Update `status.md` with succinct progress notes
+   - Follow the TDD cycle for implementation
 
 2. **Progress Tracking**
    - Mark todos as in_progress → completed as you work
-   - Update task file progress section regularly
-   - Update issue Current State with overall progress
+   - Refresh `status.md` regularly with progress, blockers, and next steps
    - Document any blockers encountered
 
 3. **Task Completion**
    - Verify all acceptance criteria are met
    - Mark all related todos as completed
-   - Update task file with completion notes
-   - Update issue Current State to reflect task completion
+   - Update `status.md` with completion notes and final status
+    - Update `_ai/tasks.md` to reflect the final status (e.g., mark as completed or archive)
 
 ### Managing New Requests During Implementation
 
@@ -143,8 +168,8 @@ When new task requests come in during a workflow:
    - Mark with special tag for traceability
 
 3. **Substantial New Requests**
-   - Create a new task file in _ai/tasks/
-   - Link to current issue if related
+   - Create a new task folder in `_ai/tasks/`
+   - Copy or link relevant context (PRDs, GitHub issues, etc.) into the folder
    - Discuss prioritization with user
 
 4. **Critical Interruptions**
@@ -157,13 +182,6 @@ When new task requests come in during a workflow:
 ## Size Guidelines
 
 To maintain consistency in work breakdown:
-
-### Issue Size
-- Should take 1-5 days to complete
-- Contains 3-10 substantial tasks
-- Has clear, testable acceptance criteria
-- Too large: Requires multiple developers or > 1 week
-- Too small: Can be completed in < 2 hours
 
 ### Task Size
 - Should take 1-8 hours to complete
@@ -185,18 +203,13 @@ To maintain consistency in work breakdown:
 
 **PRD**: User Onboarding System
 
-**Issues**:
-- #123 Implement onboarding wizard UI
-- #124 Create onboarding data storage
-- #125 Integration with user accounts
+**Tasks**:
+- onboarding-wizard-navigation
+- onboarding-step-content
+- onboarding-progress-tracking
+- onboarding-responsive-layouts
 
-**Tasks for Issue #123**:
-- 123-wizard-navigation-component.md
-- 123-step-content-components.md
-- 123-progress-tracking.md
-- 123-responsive-layouts.md
-
-**Todos for Task "123-wizard-navigation-component.md"**:
+**Todos for Task `onboarding-wizard-navigation`**:
 - Create basic navigation container component
 - Implement next/previous buttons
 - Add step indicator display
@@ -224,14 +237,14 @@ To maintain consistency in work breakdown:
    - Ensure partially-completed work is well-documented
 
 4. **Maintain Traceability**
-   - Always link between hierarchy levels (PRD → Issue → Task)
+   - Link task folders back to their parent PRD (and optional external trackers)
    - Reference specific tasks in commit messages
-   - Update parent items when child items are completed
+   - Update parent documents when child tasks are completed
 
 5. **Handle Scope Changes Appropriately**
    - For small scope changes, add todos
    - For significant scope changes, create new tasks
-   - For major scope changes, discuss creating new issues
+   - For major scope changes, coordinate any necessary updates to external trackers (e.g., GitHub issues)
    
 ## Implementation in Existing Workflows
 
@@ -245,7 +258,7 @@ This task management approach should be integrated into all existing workflows:
 2. **Execution Workflow**
    - Reference tasks at the beginning of implementation
    - Break tasks into todos using TodoWrite
-   - Update task files alongside Current State comments
+   - Update task files (`status.md`, `handoff.md`, `todos.md`) as progress is made
 
 
 3. **QA Workflow**

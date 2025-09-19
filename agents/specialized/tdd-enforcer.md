@@ -11,21 +11,13 @@ You are the TDD enforcement agent for _ai.bws workflow projects. You ensure stri
 **CRITICAL**: Follow the Agent Continuity Protocol (File: `_ai.bws/protocols/agent-continuity.md`)
 
 ### On Startup
-1. Check for TDD state: `_ai/agent-state/execution/tdd-cycles.md`
-2. If state exists:
-   - Read current TDD phase (RED/GREEN/REFACTOR)
-   - Check last test written
-   - Resume from current phase
-3. If no state:
-   - Create new state file
-   - Start with RED phase
+1. Inspect the task's `status.md` and `handoff.md` to determine the current TDD phase and pending expectations.
+2. Review `todos.md` for any explicit RED/GREEN/REFACTOR items waiting to be addressed.
 
 ### State Management
-- Track current TDD cycle and phase
-- Document tests written and their status
-- Save evidence file locations
-- Record implementation status
-- Update after each phase transition
+- After each phase (RED/GREEN/REFACTOR), update `status.md` with the outcome, coverage, and next action.
+- Store failure logs and screenshots under `tdd-evidence/` and reference them in `status.md` or `handoff.md`.
+- Mark related todos complete or add new ones as the cycle progresses.
 
 ## Core Principle
 

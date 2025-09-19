@@ -92,7 +92,7 @@ def parse_github_issue(issue_json):
 
 ### 3. Create Knowledge Base Documents
 
-Generate KB documents based on the parsed content:
+Generate KB documents based on the parsed content (set `TASK_SLUG` to the task folder slug you want to use for the synchronized work item):
 
 ```bash
 # Create the issue documentation file
@@ -109,18 +109,19 @@ ${TECHNICAL_PLAN}
 ## Related
 - GitHub Issue: #${ISSUE_NUMBER}
 - Tasks:
-  - _ai/tasks/${ISSUE_NUMBER}-task1.md
-  - _ai/tasks/${ISSUE_NUMBER}-task2.md
+  - _ai/tasks/${TASK_SLUG}/technical-plan.md
+  - _ai/tasks/${TASK_SLUG}/status.md
 EOF
 
-# Create the current state file
-mkdir -p _ai/states
-cat << EOF > _ai/states/${ISSUE_NUMBER}-current-state.md
-# Current State: ${ISSUE_TITLE}
+# Create a task status snapshot (set TASK_SLUG to the primary task name)
+mkdir -p _ai/tasks/${TASK_SLUG}
+cat << EOF > _ai/tasks/${TASK_SLUG}/status.md
+# Status: ${ISSUE_TITLE}
 
-${CURRENT_STATE_CONTENT}
-
-## Extracted from GitHub on: $(date)
+- **Updated**: $(date "+%Y-%m-%d %H:%M")
+- **Progress**: ${CURRENT_PROGRESS}
+- **Next Steps**: ${NEXT_STEPS}
+- **Blockers**: ${BLOCKERS}
 EOF
 
 # Create task files if identified in the technical plan
@@ -164,7 +165,7 @@ if [[ -n "$CURRENT_STATE_COMMENT_ID" ]]; then
   SIMPLE_STATE="## Current State
 
 **Status**: ${STATUS}
-**KB State**: _ai/states/${ISSUE_NUMBER}-current-state.md
+**Task Status**: _ai/tasks/${TASK_SLUG}/status.md
 **Updated**: $(date +%Y-%m-%d\ %H:%M)
 **Blockers**: ${BLOCKERS}"
 
@@ -183,7 +184,7 @@ Check that all content has been properly synchronized:
 ```bash
 # Verify KB documents exist
 check_file_exists "_ai/issues/${ISSUE_NUMBER}-${ISSUE_SLUG}.md"
-check_file_exists "_ai/states/${ISSUE_NUMBER}-current-state.md"
+check_file_exists "_ai/tasks/${TASK_SLUG}/status.md"
 
 # Verify GitHub issue has been updated
 gh issue view $ISSUE_NUMBER --repo $REPO_NAME | grep -q "_ai/issues/${ISSUE_NUMBER}"
@@ -235,7 +236,7 @@ STATUS=$(echo "$CURRENT_STATE" | grep -oP '(?<=\*\*Status:\*\* )(.+)$' || echo "
 BLOCKERS=$(echo "$CURRENT_STATE" | grep -oP '(?<=\*\*Blockers:\*\* )(.+)$' || echo "None")
 
 # Create KB directories
-mkdir -p _ai/issues _ai/states _ai/tasks _ai/tdd/${ISSUE_NUMBER}-tdd-evidence
+mkdir -p _ai/issues _ai/tasks _ai/tdd/${ISSUE_NUMBER}-tdd-evidence
 
 # Create KB documents
 # [Implementation as shown in step 3 above]

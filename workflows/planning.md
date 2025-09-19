@@ -11,7 +11,6 @@
 **Required Protocols**: 
 - Boot Protocol (File: `_ai.bws/protocols/boot.md`)
 - Tasks Protocol (File: `_ai.bws/protocols/tasks.md`)
-- Issue Protocol (File: `_ai.bws/protocols/issue.md`)
 **Activation**: `workflow planning`
 
 This document outlines the recommended workflow for planning tickets, with a focus on thorough planning and structured preparation. The planning phase is where requirements are analyzed, technical approaches are defined, and implementation is prepared.
@@ -22,9 +21,10 @@ This document outlines the recommended workflow for planning tickets, with a foc
 
 The Planning workflow is designed to operate at multiple levels of the work hierarchy:
 
-1. **PRD Level Planning**: Breaking down a product area into issues
-2. **Issue Level Planning**: Creating technical plans for specific issues
-3. **Task Level Planning**: Breaking issues into discrete implementation tasks
+1. **PRD Level Planning**: Breaking down a product area into discrete tasks
+2. **Task Level Planning**: Creating technical plans for specific tasks (hours-scale work)
+
+> External trackers (e.g., GitHub issues) can be referenced within task plans when needed, but they are not required for this workflow.
 
 When operating at a specific level, explicitly state which level you are planning for and follow the appropriate sections of this workflow.
 
@@ -57,9 +57,9 @@ When operating at a specific level, explicitly state which level you are plannin
 ### 1. Task Folder and Technical Plan Creation
 
 **Create Task Folder Structure**:
-- Create folder: `_ai/tasks/[issue-id]-[task-name]/`
-- Task naming pattern: `[issue-id]-[descriptive-task-name]`
-- Examples: `478-xero-oauth-integration`, `123-profile-setup-forms`
+- Create folder: `_ai/tasks/[task-slug]/`
+- Task naming pattern: `[context]-[descriptive-task-name]` (e.g., `onboarding-step-navigation`)
+- Keep slugs concise, lowercase, and hyphenated
 
 **Create Technical Plan**:
 - Create file: `technical-plan.md` in the task folder
@@ -71,7 +71,7 @@ When operating at a specific level, explicitly state which level you are plannin
 
 - Read and understand the associated PRD (if applicable)
 - Identify which technical components will be affected
-- Review related tickets or dependencies
+- Review related tasks, components, or external tracker entries
 - Assess complexity (simple/moderate/complex) without time estimates
 
 ### 3. Code Review and Improvement Opportunities
@@ -82,11 +82,13 @@ During the planning phase, actively look for opportunities to improve the codeba
 - Identify opportunities for refactoring
 - Note potential architectural improvements
 - Document any findings that could lead to future improvement tickets
-- Create separate improvement tickets for issues that are out of scope for the current ticket
+- Create separate improvement tasks or external tickets for findings that are out of scope for the current work
 
 Document any findings in a section of the Technical Plan:
 
 ```
+
+> Maintain live execution updates in the task's `status.md`. The technical plan should remain focused on objectives, architectural decisions, and testing strategy.
 ### Code Improvement Opportunities
 - Identified technical debt in X component (potential future ticket)
 - Authentication logic could be refactored to improve Y
@@ -281,9 +283,10 @@ The `technical-plan.md` file should follow this structure:
 ```markdown
 # Technical Plan: [Task Name]
 
-**Issue**: #{issue-id}
-**Task**: {task-name} 
-**PRD Reference**: {prd-name}.md
+**Task**: {task-name}
+**References (Optional)**:
+- PRD: {prd-name}.md
+- GitHub Issue: #{issue-number}
 **Status**: Planning
 
 ## Objectives
@@ -314,15 +317,6 @@ The `technical-plan.md` file should follow this structure:
 ## Risks and Mitigation
 [Potential risks and how to address them]
 
-## Current State
-**Status**: Planning
-**Progress**: 
-- [x] Technical approach defined
-- [ ] Implementation started
-
-**Next Steps**:
-1. Create task folder and begin implementation
-2. Start with TDD cycle for first component
 ```
 
 ### 8. User Confirmation and Sign-Off
@@ -376,8 +370,8 @@ After user confirmation:
 - Create `artifacts/` subfolder if other task files will be needed
 
 **Update Project State**:
-- Update `_ai/current.md` to reference the new task folder
-- Link GitHub issue to task folder path in issue description
+- Create or refresh the task's `status.md` with key context and open questions
+- Add links to relevant GitHub issues or external trackers (optional)
 
 ## Example Technical Plans
 
@@ -647,16 +641,16 @@ After completing the planning phase, the next step is typically to move into exe
 
 1. Ensuring task folder is created with `technical-plan.md`
 2. Confirming the technical plan with stakeholders  
-3. Updating `_ai/current.md` to reference the task folder
+3. Updating the task's `status.md` with planning outcomes
 4. Updating `_ai/manual-test-plan.md` with any new test cases identified
 5. Activating the Execution Workflow with: `workflow execution`
 
-The execution workflow will work from the `technical-plan.md` file in the task folder and update the Current State section as implementation progresses.
+The execution workflow will work from the `technical-plan.md` file in the task folder and keep `status.md` current as implementation progresses.
 
 For details on implementation, refer to Execution Workflow (File: `_ai.bws/workflows/execution.md`).
 
 ## Related Protocols
 
 - Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) - For work breakdown
-- Issue Protocol (File: `_ai.bws/protocols/issue.md`) - For GitHub issue structure
 - TDD Protocol (File: `_ai.bws/protocols/tdd.md`) - For test planning
+- Issue Protocol (File: `_ai.bws/protocols/issue.md`, optional) - For GitHub issue structure when external coordination is needed

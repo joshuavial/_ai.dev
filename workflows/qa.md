@@ -20,7 +20,7 @@ QA is triggered when:
 
 ### QA Operates at Task Level
 
-- **Scope**: Single task folder in `_ai/tasks/[issue-id]-[task-letter]-[task-name]/`
+- **Scope**: Single task folder in `_ai/tasks/[task-slug]/`
 - **Input**: `technical-plan.md` with completed implementation
 - **Output**: `qa-report.md` with verification results and action items
 
@@ -37,7 +37,7 @@ QA evaluation centers on three core questions:
 ### 1. QA Preparation
 
 **Locate Task Folder**:
-- Navigate to: `_ai/tasks/[issue-id]-[task-letter]-[task-name]/`
+- Navigate to: `_ai/tasks/[task-slug]/`
 - Review: `technical-plan.md` for objectives and commitments
 - Check: TDD evidence in `tdd-evidence/` folder (if present)
 - Review: Any artifacts in `artifacts/` folder
@@ -589,7 +589,7 @@ Once QA is complete:
 
 1. **Save QA Report**: Ensure `qa-report.md` is saved in task folder
 2. **Update Manual Test Plan**: Add any new test cases discovered during QA to `_ai/manual-test-plan.md`
-3. **Update Current State**: If returning to execution, update technical plan
+3. **Update Status**: If returning to execution, refresh the task's `status.md`
 4. **Archive on Completion**: Move entire task folder to `_ai/archive/` when done
 5. **Transition**: 
    - If PASS: Ready for production or deployment

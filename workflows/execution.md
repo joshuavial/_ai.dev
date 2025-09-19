@@ -11,7 +11,6 @@
 **Required Protocols**: 
 - Boot Protocol (File: `_ai.bws/protocols/boot.md`)
 - Tasks Protocol (File: `_ai.bws/protocols/tasks.md`)
-- Issue Protocol (File: `_ai.bws/protocols/issue.md`)
 - TDD Protocol (File: `_ai.bws/protocols/tdd.md`)
 **Activation**: `workflow execution`
 
@@ -23,7 +22,7 @@ This document outlines the recommended workflow for executing tickets, with a fo
 
 Execution operates from task folders with this structure:
 ```
-_ai/tasks/[issue-id]-[task-name]/
+_ai/tasks/[task-slug]/
 ├── technical-plan.md    # Input: planning objectives and approach
 ├── qa-report.md         # Output: QA feedback (created by QA workflow)
 ├── implementation.md    # Optional: detailed execution notes
@@ -32,7 +31,7 @@ _ai/tasks/[issue-id]-[task-name]/
 └── artifacts/           # Optional: other task-related files
 ```
 
-**Primary Document**: `technical-plan.md` contains objectives, approach, and Current State tracking
+**Primary Documents**: `technical-plan.md` (objectives & approach) + `status.md` (live progress snapshot)
 
 **Note**: Execution workflow can operate on multiple tasks simultaneously. The developer manages task priorities and context switching as needed.
 
@@ -40,9 +39,9 @@ _ai/tasks/[issue-id]-[task-name]/
 
 ### 1. Branch Creation
 
-- Always use ticket ID in branch name (e.g., `2-stripe-xero-integration` for issue #2)
-- For bug fixes, use format: `bugfix/[issue-id]-[bug-description]` (e.g., `bugfix/45-user-login-timeout`)
-- Reference the issue in commit messages
+- Use the task slug in the branch name (e.g., `feat/onboarding-step-navigation`)
+- For bug fixes, use format: `bugfix/[task-slug]` (e.g., `bugfix/login-timeout`) and note reproduction steps in the task
+- Reference the task folder in commit messages; add GitHub issue IDs only when coordination with an external tracker is required
 
 ### 2. Bug Investigation Process (When Applicable)
 
@@ -193,7 +192,7 @@ You MUST follow the TDD cycle for implementation. This is a strict requirement, 
    - Make it specific and focused on a single functionality
    - Run the test to confirm it fails (red phase)
    - REQUIRED: Take a screenshot or save logs showing the failing test
-   - Document the failing test in the Current State comment
+   - Document the failing test in `status.md`
    - Consider both the happy path and edge cases
 
 2. **GREEN Phase (Implement Minimal Solution):**
@@ -201,7 +200,7 @@ You MUST follow the TDD cycle for implementation. This is a strict requirement, 
    - Focus on functionality, not optimization
    - Run the test to confirm it passes (green phase)
    - REQUIRED: Take a screenshot or save logs showing the passing test
-   - Document the passing test in the Current State comment
+   - Document the passing test in `status.md`
    - Do not proceed to refactoring until tests pass
 
 3. **REFACTOR Phase:**
@@ -209,13 +208,13 @@ You MUST follow the TDD cycle for implementation. This is a strict requirement, 
    - Remove duplication and improve code clarity
    - Run tests after each significant refactoring step
    - REQUIRED: Take a screenshot or save logs showing tests still pass after refactoring
-   - Document the refactoring in the Current State comment
+   - Document the refactoring in `status.md`
    - Consider performance optimizations if needed
    - CRITICAL: You MUST run the complete test suite after completing all refactoring to ensure no regressions were introduced
 
 4. **Verification Requirements:**
    - You MUST have evidence of all three phases for each component
-   - Each phase must be documented in the Current State comment
+   - Each phase must be documented in `status.md`
    - You CANNOT skip any phase of the cycle
    - You CANNOT implement code without first writing failing tests
    - You MUST run tests after each phase and document the results
@@ -310,11 +309,11 @@ Follow this sequence for most efficient implementation:
 
 ### 5. TDD Verification and State Tracking
 
-#### Retrieving GitHub Issues
+#### Retrieving GitHub Issues (Optional)
 
-For detailed instructions on accessing GitHub issues and their comments, refer to the Issue Protocol (File: `_ai.bws/protocols/issue.md`), section "Accessing GitHub Issues".
+When external coordination requires GitHub context, refer to the Issue Protocol (File: `_ai.bws/protocols/issue.md`), section "Accessing GitHub Issues".
 
-**IMPORTANT:** Always use GitHub CLI commands (like `gh issue view`) to access GitHub issues. Never attempt to locate GitHub issues by searching local directories.
+**IMPORTANT:** If you access GitHub issues, always use GitHub CLI commands (like `gh issue view`). Never attempt to locate GitHub issues by searching local directories.
 
 #### TDD Tracking Requirements
 
@@ -335,20 +334,20 @@ You MUST track the following for each component:
    - Measure and document test coverage percentage
    - Identify any gaps in test coverage
 
-#### Updating the Current State
+#### Updating Task Status
 
-Throughout implementation, continuously update the Current State section in `technical-plan.md`:
+Throughout implementation, continuously refresh the task's `status.md`:
 
-**Update Current State Section**:
-- Maintain "Test Status" tracking RED/GREEN/REFACTOR for each component
-- Document which tests were written and what they verify  
-- Record test coverage percentages after refactoring
-- Update status after completing each phase of the TDD cycle
-- Check off completed tasks as they are finished
-- Add newly discovered tasks if they emerge during implementation
+**Status.md Checklist**:
+- Maintain RED/GREEN/REFACTOR progress for each component
+- Document which tests were written and what they verify
+- Record coverage percentages after refactoring
+- Update the snapshot after every meaningful milestone (tests added, implementation complete, refactor done)
+- Check off completed todos as they are finished (and ensure `todos.md` reflects the same)
+- Add newly discovered todos if they emerge during implementation
 - Document blockers and challenges as they appear
-- Update next steps section regularly
-- Add relevant notes about discoveries or changes to the approach
+- Update next steps with the top pending actions
+- Note discoveries or changes to the approach succinctly
 
 **Optional Implementation Notes**:
 - Create `implementation.md` for detailed execution notes and discoveries
@@ -373,17 +372,17 @@ Throughout implementation, you MUST follow these file management requirements:
    - When refactoring code, always modify the original file directly
    - Do not create new "refactored" or "enhanced" versions
    - Use proper testing to ensure changes maintain expected behavior
-   - Document refactoring in the Current State comment, not in separate files
+   - Document refactoring in `status.md`, not in separate files
 
 4. **Required File Management Checks**
    - After completing each TDD cycle, verify no duplicate files exist
    - Before creating PRs, run a check for any files with suffixes indicating they are alternate versions
    - If duplicate files are discovered, consolidate changes into the original file and remove the duplicates
 
-Example state tracking updates with explicit TDD documentation:
+Example `status.md` snapshot with explicit TDD documentation:
 
 ```
-## Current State
+## Status: User Profile Export
 
 **Status:** In Progress
 
@@ -511,7 +510,7 @@ Before creating any PR, you MUST complete the following verification steps:
 #### 8.4 Review Process
 - Address review comments promptly
 - **MANDATORY**: Run complete test suite after addressing review comments
-- Update the Current State comment to reflect PR review status
+- Update `status.md` to reflect PR review status
 - **ZERO TOLERANCE**: If any tests fail during review, follow the TDD cycle to fix them - NO EXCEPTIONS
 
 ### 9. Completion
@@ -537,7 +536,7 @@ Before marking any task complete, you MUST verify:
 - **CONFIRM**: Repository contains only necessary files
 
 #### 9.4 Task Completion
-- Update Current State section in `technical-plan.md` to "Ready for QA"
+- Update `status.md` to "Ready for QA"
 - Close ticket with reference to the PR
 - Proceed to the QA workflow for final quality verification
 
@@ -550,7 +549,7 @@ When QA returns work with issues (creates `qa-report.md` in task folder):
 #### QA Document Review
 - Read the `qa-report.md` in the task folder
 - Review all Critical and Recommended action items
-- Update Current State in `technical-plan.md` to "Addressing QA Feedback"
+- Update `status.md` to "Addressing QA Feedback"
 
 #### Issue Resolution Approach
 1. **Critical Issues (Must Fix)**
@@ -568,9 +567,9 @@ When QA returns work with issues (creates `qa-report.md` in task folder):
    - Document decisions about implementation in `implementation.md`
 
 #### QA Feedback Loop
-- Update Current State in `technical-plan.md` with progress on QA action items
+- Update `status.md` with progress on QA action items
 - Check off completed items directly in the `qa-report.md`
-- When all Critical items resolved, update Current State to "Ready for Re-QA"
+- When all Critical items resolved, update `status.md` to "Ready for Re-QA"
 - Continue until QA report shows ✅ PASS status
 
 #### QA Action Item Template
@@ -714,7 +713,7 @@ When implementing a feature that has been broken down into sub-tickets:
 1. **Coordinated Implementation:**
    - Start with the parent ticket's technical plan as your overall guide
    - Focus implementation on the specific scope defined in the sub-ticket
-   - Update progress in both the sub-ticket and parent ticket's Current State
+   - Update progress in both the sub-task and parent task `status.md`
 
 2. **Integration Points:**
    - Pay special attention to integration points between sub-ticket implementations
@@ -722,16 +721,16 @@ When implementing a feature that has been broken down into sub-tickets:
    - Use consistent naming and patterns across all sub-ticket implementations
 
 3. **Completion Process:**
-   - Mark sub-tickets as complete individually
-   - Update the parent ticket's Current State to reflect progress
-   - Only close the parent ticket when all sub-tickets are complete and integrated
+   - Mark sub-tasks as complete individually
+   - Update the parent task's `status.md` (and `handoff.md`, if needed) to reflect progress
+   - Only close parent work items when all sub-tasks are complete and integrated
 
 ## AI Implementation Guidelines
 
 When working with AI tools to implement features:
 
-1. **Clear Context:** Provide full PRD links and ticket details
-2. **GitHub Issue Access:** When referencing GitHub issues, always use the GitHub CLI commands described in the Issue Protocol (File: `_ai.bws/protocols/issue.md`), section "Accessing GitHub Issues"
+1. **Clear Context:** Provide task folder path, PRD links, and any external references
+2. **GitHub Issue Access (Optional):** When referencing GitHub issues, use the GitHub CLI commands described in the Issue Protocol (File: `_ai.bws/protocols/issue.md`), section "Accessing GitHub Issues"
 3. **Chunked Tasks:** Break down implementation into small, manageable steps
 4. **Sequential Progression:** Complete one logical component before moving to the next
 5. **Test-First Approach:** Define expected behavior before implementation
@@ -759,5 +758,5 @@ For details on quality verification, refer to QA Workflow (File: `_ai.bws/workfl
 
 - TDD Protocol (File: `_ai.bws/protocols/tdd.md`) - For test-driven development process
 - Tasks Protocol (File: `_ai.bws/protocols/tasks.md`) - For work tracking
-- Issue Protocol (File: `_ai.bws/protocols/issue.md`) - For GitHub issue structure
+- Issue Protocol (File: `_ai.bws/protocols/issue.md`, optional) - For GitHub issue structure when coordination is needed
 - Playwright Protocol (File: `_ai.bws/protocols/playwright.md`) - For browser automation
