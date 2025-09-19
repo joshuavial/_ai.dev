@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2025-09-17
+
+### Added
+- **Task Index** – Introduced `_ai/tasks.md` as the authoritative inventory of all task folders with workflow, status, and update metadata.
+- **Agent Continuity Refresh** – New task-folder-based continuity protocol with `status.md`, `todos.md`, and optional `handoff.md` guiding all handoffs.
+
+### Changed
+- **Boot Protocol** – Boot sequence now reads the task index, prompts the user to choose/create a task (or opt out), and only then selects the workflow.
+- **Agent Docs** – Planning, execution, QA, management orchestrators and specialist agents now read/update continuity artefacts inside each task folder; removed legacy `.claude/state` and `_ai/agent-state` patterns.
+- **Status Templates** – `status.md` format now requires an explicit workflow field and includes an example snapshot for consistency across agents.
+
 ## [0.7.0] - 2025-08-31
 
 ### Added
@@ -12,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Supabase Test Database Protocol** - Isolated test DB setup with snapshot system and migration tracking
 - **Developer Helper Scripts Protocol** - Standardized patterns for development shortcuts and automation
 - **Manual Functional Testing** - Integrated Playwright-based test plans into planning and QA workflows
+- **CI Workflow Enhancements** - GitHub Actions job now provisions Supabase services, captures credentials, runs Vitest against live endpoints, and gathers diagnostics on failure
 
 ### Removed
 - **Reflection Workflow** - Merged into management workflow
