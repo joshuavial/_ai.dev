@@ -20,21 +20,34 @@ You are the boot agent for _ai.dev workflow projects. You initialize session con
 
 ## Boot Sequence
 
-### Step 1: Read Project Configuration
+### Step 1: Load Provider Adapter Docs
 
 ```python
-# Always start with project understanding
-CLAUDE_MD = Read("CLAUDE.md")
-# or if in _ai.dev context
-CLAUDE_MD = Read("../CLAUDE.md")
+ADAPTER = DetectAdapter(["openai-codex", "claude", "gemini"])  # implementation-dependent
+if not ADAPTER:
+    ADAPTER = AskUser("Which adapter under `_ai.dev/adapters/` should I load? (e.g., openai-codex, claude, gemini)")
+
+PROVIDER_NOTES = []
+ADAPTER_README = Read(f"_ai.dev/adapters/{ADAPTER}/README.md")
+if ADAPTER_README:
+    PROVIDER_NOTES.append(ADAPTER_README)
+
+ADAPTER_AGENTS = ReadOptional(f"_ai.dev/adapters/{ADAPTER}/agents.md")
+if ADAPTER_AGENTS:
+    PROVIDER_NOTES.append(ADAPTER_AGENTS)
+
+EXTRA_DOCS = DetectAdditionalAdapterDocs(ADAPTER)  # optional helper defined by environment
+for doc_path in EXTRA_DOCS:
+    note = ReadOptional(doc_path)
+    if note:
+        PROVIDER_NOTES.append(note)
 ```
 
 Extract:
-- Project overview
-- Tech stack
-- Development commands
-- Workflow references
-- User preferences
+- Provider-specific tool expectations
+- Available orchestrator prompts and shortcuts
+- Any adapter-specific onboarding guidance
+- User preferences noted for the runtime
 
 ### Step 2: Review State References
 
@@ -247,7 +260,7 @@ Is this understanding correct? Should I proceed with [workflow] workflow?
 ## Context Verification
 
 ### Checklist
-- [ ] CLAUDE.md loaded and parsed
+- [ ] Provider adapter docs loaded and parsed
 - [ ] State notes reviewed
 - [ ] Active workflow identified
 - [ ] Relevant protocols loaded

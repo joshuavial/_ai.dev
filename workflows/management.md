@@ -15,9 +15,9 @@ This document outlines the structured approach for managing, improving, and evol
 > - Make changes to application code, tests, or documentation outside of `_ai.dev`
 > - Alter database configurations, port settings, or other infrastructure in the main project
 > 
-> The scope is exclusively focused on workflow documentation, protocols, and process improvement within the `_ai.dev` directory structure. All improvement planning and documentation should be placed in the `_ai.dev/_improvements` directory to keep meta-documentation separate from the actual workflow files.
+> The scope is exclusively focused on workflow documentation, protocols, and process improvement within the `_ai.dev` directory structure. All management planning and documentation should be placed in the `_ai.dev/tasks/` hierarchy to keep meta-documentation separate from the actual workflow files.
 
-> **BOOT ALIGNMENT**: When following the Boot protocol for this workflow, skip the `_ai/` state artefacts entirely. Instead, review `_ai.dev/_improvements/`, `_ai.dev/CHANGELOG.md`, agent docs, and related workflow files to understand current process work before proceeding.
+> **BOOT ALIGNMENT**: When following the Boot protocol for this workflow, skip the `_ai/` state artefacts entirely. Instead, review `_ai.dev/tasks.md`, the folders under `_ai.dev/tasks/`, `_ai.dev/CHANGELOG.md`, agent docs, and related workflow files to understand current process work before proceeding.
 
 ## Purpose and Scope
 
@@ -555,69 +555,45 @@ Considerations:
 
 **CRITICAL:** Never create separate "update" versions of workflow documents with suffixes like `.updated` or `.new`. Always modify the original workflow files directly to maintain a single source of truth. All changes must be made within the existing workflow structure.
 
-**ORGANIZATION:** Use the `_ai.dev/_improvements` directory for all documentation about planning and implementing process improvements. This keeps meta-documentation separate from the actual workflow files and makes it easier to track improvement initiatives. Do not include timeline estimates with specific weeks or dates in these documents - they are for ongoing collaboration between user and AI, not for formal project planning.
+**ORGANIZATION:** Use the `_ai.dev/tasks/` hierarchy for all documentation about planning and implementing process improvements. This mirrors the structure used under `_ai/tasks/` and keeps meta-documentation separate from the workflow files themselves. Do not include week-by-week timelines—management artefacts capture collaborative planning, analysis, and execution notes.
 
-### _improvements Directory Guidelines
+### Management Tasks Directory Guidelines
 
-The `_ai.dev/_improvements` directory is a specialized location for process improvement documentation that follows these guidelines:
+The `_ai.dev/tasks/` directory is the canonical location for management workflow initiatives. Follow these conventions:
 
-#### 1. Purpose and Content
+#### 1. Purpose and Alignment
 
-- **Purpose**: A dedicated space for documenting process improvement initiatives, separate from the workflow documents themselves
+- **Purpose**: Provide task folders that mirror delivery-workflow artefacts while remaining scoped to `_ai.dev`
 - **Content Types**:
-  - Process improvement proposals
-  - Implementation planning documents
-  - Analysis of current processes
-  - Documentation streamlining initiatives
-  - Workflow enhancement research
-  - Before/after comparisons of process changes
+  - Process improvement proposals and implementation plans
+  - Workflow/agent documentation updates
+  - Incident analyses and follow-up actions
+  - Backlog curation and prioritisation notes for future refinements
 
-#### 2. File Organization
+#### 2. Standard Artefacts per Task Folder
 
-- **File Naming**:
-  - Use descriptive kebab-case filenames: `process-name-improvement.md`
-  - Avoid using version numbers or dates in filenames
-  - Use consistent naming patterns for related documents
-  
-- **Document Types**:
-  - **Overview Documents**: End with `-overview.md` (e.g., `documentation-streamlining-overview.md`)
-  - **Implementation Plans**: End with `-implementation.md` or `-checklist.md`
-  - **Scratchpads**: End with `-scratchpad.md` or `-notes.md`
-  - **Analysis Documents**: End with `-analysis.md`
-  
-- **Subdirectories**:
-  - Create subdirectories for complex improvement initiatives with multiple documents
-  - Name subdirectories after the improvement area (e.g., `_improvements/github-integration/`)
+Every management task folder MUST include (at minimum):
+- `technical-plan.md` — problem statement, analysis, solution outline, success metrics
+- `status.md` — workflow, updated timestamp, progress, next steps, blockers
+- `todos.md` — actionable checklist maintained via Todo tools
+- `handoff.md` — optional but recommended for detailed context and follow-up notes
+- Additional evidence files (`incident-report.md`, `artifacts/`, etc.) as needed
 
-#### 3. Document Structure
+Maintain `_ai.dev/tasks.md` as the index of all active and historical management tasks, mirroring `_ai/tasks.md` in formatting.
 
-- **Standard Sections**:
-  - Every document should begin with a clear title and purpose statement
-  - Include a "NOTE" section indicating the document's role in the improvement process
-  - Use consistent heading levels (H1 for title, H2 for major sections, etc.)
-  - Include cross-references to related documents when applicable
-  
-- **Implementation Checklists**:
-  - Use GitHub-style task lists with checkboxes `- [ ]` and `- [x]`
-  - Group tasks into logical sections with headings
-  - Include "Completed Tasks" and "Upcoming Tasks" sections
-  - Each task should be specific, measurable, and actionable
-  
-- **Notes/Scratchpad Documents**:
-  - Date entries when adding new notes
-  - Use clear section titles for different idea categories
-  - Maintain a "Decisions Made" section to track resolved questions
+#### 3. Folder Structure and Naming
 
-#### 4. Maintenance Guidelines
+- Use descriptive kebab-case folder names, e.g. `_ai.dev/tasks/zero-tolerance-test-enforcement/`
+- Store supporting documents inside the folder (e.g. `incident-report.md`, `research/notes.md`)
+- Avoid suffix-based versioning; always update the canonical artefacts in place
+- Archive completed initiatives by updating `status.md` and the row in `_ai.dev/tasks.md`; move auxiliary files into `archive/` only if clutter becomes an issue
 
-- **Regular Cleanup**:
-  - Archive completed initiatives to `_improvements/archive/` directory
-  - Update checklists as tasks are completed
-  - Consolidate redundant or fragmented notes periodically
-  
-- **Cross-Referencing**:
-  - Maintain references between related documents
-  - Add links to implemented changes in workflow documents
+#### 4. Maintenance Practices
+
+- **Regular Updates**: Refresh `status.md` and `todos.md` during every working session
+- **Cross-Referencing**: Link to relevant workflow/protocol files when changes land
+- **Cleanup**: Consolidate scratch notes into the main artefacts; retire obsolete folders when deliverables are shipped
+- **Handoffs**: Ensure `handoff.md` clearly states how to resume or what evidence is outstanding before pausing work
   - Document which workflow files were modified based on improvement plans
   
 - **Versioning**:

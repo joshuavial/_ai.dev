@@ -1,0 +1,3 @@
+- [ ] Automate status timestamp freshness checks
+- [ ] Draft handoff update templates
+- [ ] Evaluate dashboard options for task summaries

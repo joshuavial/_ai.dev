@@ -1,0 +1,3 @@
+- [ ] Group backlog ideas by theme and impact
+- [ ] Identify quick wins suitable for fast-track workflow
+- [ ] Draft prioritization matrix for next management session

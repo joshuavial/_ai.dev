@@ -1,0 +1,2 @@
+- [ ] Review orchestrator transcripts monthly for boundary drift
+- [ ] Add automated lint to detect cross-workflow commands

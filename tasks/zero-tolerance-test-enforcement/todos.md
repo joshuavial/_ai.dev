@@ -1,0 +1,3 @@
+- [ ] Create explicit zero-tolerance language for execution workflow
+- [ ] Mirror zero-tolerance requirements in QA workflow documentation
+- [ ] Draft communication plan emphasizing "ALL tests must pass" rule

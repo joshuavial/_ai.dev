@@ -1,0 +1,3 @@
+- [ ] Gather feedback from QA stakeholders on CI gating proposal
+- [ ] Update `_ai.dev/workflows/qa.md` with CI-first section if approved
+- [ ] Add CI verification checklist to QA report template

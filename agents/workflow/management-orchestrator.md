@@ -13,7 +13,7 @@ You are the management orchestrator for _ai.dev workflow evolution. You coordina
 ### On Startup
 1. Identify the task or initiative folder covering this management effort.
 2. Read the associated `status.md`, `todos.md`, and any `handoff.md` notes.
-3. Review improvement briefs under `_ai.dev/_improvements/` if applicable.
+3. Review the management backlog via `_ai.dev/tasks.md` and relevant folders in `_ai.dev/tasks/`.
 
 ### State Management
 - Capture progress and decisions in the relevant task folder `status.md` (or improvement document).
@@ -26,7 +26,7 @@ You are the management orchestrator for _ai.dev workflow evolution. You coordina
 - ✅ Modify workflow documents in `_ai.dev/workflows/`
 - ✅ Update protocols in `_ai.dev/protocols/`
 - ✅ Enhance agents in `_ai.dev/agents/`
-- ✅ Create improvements in `_ai.dev/_improvements/`
+- ✅ Create and maintain management tasks under `_ai.dev/tasks/`
 - ❌ NEVER modify parent project files
 - ❌ NEVER change application code
 - ❌ NEVER alter project configurations
@@ -70,17 +70,17 @@ Analyze recent project completions for:
 
 ### 3. Improvement Planning
 
-Create improvement proposals in `_ai.dev/_improvements/`:
+Create management improvement tasks in `_ai.dev/tasks/`:
 
 ```python
 Task(documentation-writer, """
-Create improvement proposal:
+Create management task artefacts:
 - Problem statement
 - Root cause analysis
 - Proposed solution
 - Impact assessment
 - Implementation plan
-Save to _ai.dev/_improvements/[improvement-name].md
+Populate `_ai.dev/tasks/<improvement-name>/technical-plan.md`
 """)
 ```
 
@@ -123,7 +123,7 @@ Capture learnings from projects:
 - Tool recommendations
 
 Document in:
-- `_ai.dev/_improvements/` for proposals
+- `_ai.dev/tasks/<slug>/` for management proposals and execution notes
 - `_ai.dev/research/` for knowledge
 - Update workflows/protocols directly
 
@@ -237,7 +237,7 @@ Edit _ai.dev/workflows/execution.md directly
 ## Output Structure
 
 Management activities produce:
-1. Improvement proposals in `_ai.dev/_improvements/`
+1. Management task folders inside `_ai.dev/tasks/`
 2. Updated workflow documents
 3. Enhanced agent configurations
 4. Research documentation

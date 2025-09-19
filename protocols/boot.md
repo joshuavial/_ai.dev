@@ -6,7 +6,7 @@ This document defines the initialization process for LLMs working on this projec
 
 When starting a new session or after context clearing:
 
-1. **Read CLAUDE.md** - Establish base project understanding
+1. **Load provider adapter docs** - Establish runtime-specific conventions
 2. **Review state references** - Gather current project context from `_ai/`
 3. **Select active task** - Confirm which task (if any) is in focus
 4. **Determine active workflow** - Confirm with available context or the user
@@ -14,23 +14,24 @@ When starting a new session or after context clearing:
 6. **Establish awareness** - Review the chosen task's artefacts
 7. **Confirm understanding** - Summarize context with the user before acting
 
-## 1. Read CLAUDE.md
+## 1. Load Provider Adapter Docs
 
-The first step in any session is to read the project's base configuration:
+Begin every session by loading the adapter documentation that matches the current runtime. Adapters live under `_ai.dev/adapters/<provider>/` (for example `openai-codex`, `claude`, `gemini`).
 
 ```
-Read CLAUDE.md
+adapter="openai-codex"  # detect automatically when possible; otherwise ask the user
+Read _ai.dev/adapters/${adapter}/README.md
+ReadOptional _ai.dev/adapters/${adapter}/agents.md
 ```
 
-CLAUDE.md contains:
-- Project-specific guidelines
-- Development environment details
-- Command reference
-- Workflow system reference
+Use the adapter README to confirm:
+- Provider-specific tool expectations and command mapping
+- Available orchestrator shortcuts and prompts
+- Any additional quick-start references (the README may point to extra onboarding docs for that provider)
 
-This establishes foundational knowledge about the project and its structure.
+Only load provider docs relevant to the active runtime. Do **not** read adapter material for other providers during boot.
 
-Additionally, check for port configuration:
+Additionally, check for port configuration if required by the task:
 ```
 Read _ai/port.md  # If exists - contains project port assignments
 ```
@@ -45,7 +46,7 @@ After establishing baseline understanding, gather current context from the locat
   - Within each task folder inspect `technical-plan.md`, `status.md`, `todos.md`, and any QA/TDD evidence
 - **Management workflow**
   - Stay inside `_ai.dev/` and focus on process artefacts
-  - Review `_ai.dev/_improvements/` for outstanding proposals, retrospectives, and session notes
+  - Review `_ai.dev/tasks.md` and the task folders under `_ai.dev/tasks/` for outstanding initiatives
   - Check `_ai.dev/CHANGELOG.md`, `_ai.dev/AGENTS.md`, and workflow documents for recent updates or open questions
   - Only reference `_ai/` materials when a process change explicitly requires current product-state examples
 
@@ -58,7 +59,7 @@ For delivery workflows, review `_ai/tasks.md` to see the current task index. The
 After reviewing the relevant backlog:
 
 - **Delivery workflows**: use `_ai/tasks.md` (or the individual task folders) as described below.
-- **Management workflow**: identify the improvement initiative to focus on (e.g., a document in `_ai.dev/_improvements/` or a management-specific ticket). If no improvement is currently active, confirm with the user whether to create a new proposal or review the backlog before continuing.
+- **Management workflow**: identify the improvement initiative to focus on (e.g., a task folder in `_ai.dev/tasks/` or a management-specific ticket). If no improvement is currently active, confirm with the user whether to create a new task or review the backlog before continuing.
 
 For delivery workflows, follow these rules after reviewing the task index:
 
@@ -114,10 +115,11 @@ fi
 # Management workflow: review process improvement context
 if [[ "$workflow_phase" == "management" ]]; then
   # Focus on `_ai.dev/` artefacts only
-  ls _ai.dev/_improvements/
+  ls _ai.dev/tasks/
+  Read _ai.dev/tasks.md
   Read _ai.dev/CHANGELOG.md
   Read _ai.dev/workflows/management.md
-  # Optional: open specific improvement proposals or session notes as directed by the user
+  # Optional: open specific management task folders as directed by the user
 fi
 
 # Check other running lists (e.g., shared backlog, meeting notes) if maintained separately
@@ -129,7 +131,7 @@ After completing the boot sequence, provide a concise summary to the user:
 
 ```
 Based on my initialization:
-- Project: [from CLAUDE.md]
+- Project: [key points from adapter/core docs]
 - Ports: [from port.md if available]
 - Current workflow: [workflow_phase]
 - Active task: [task identifier or "None"]
@@ -186,7 +188,7 @@ Maintain a lightweight source of truth within `_ai/` that captures:
 
 The format can be Markdown checklists, structured JSON, or short status notes—as long as it is easy to locate and kept up to date.
 
-> For management workflow efforts, keep analogous notes under `_ai.dev/_improvements/` rather than `_ai/`.
+> For management workflow efforts, keep analogous notes inside `_ai.dev/tasks/` rather than `_ai/`.
 
 ### Workflow Identification
 
@@ -199,8 +201,10 @@ Workflows are identified by simple string identifiers:
 ### Example Boot Sequence (Delivery Workflow)
 
 ```
-# 1. Read base project configuration
-Read CLAUDE.md
+# 1. Load provider adapter docs
+adapter="openai-codex"  # detect/confirm with the user
+Read _ai.dev/adapters/${adapter}/README.md
+ReadOptional _ai.dev/adapters/${adapter}/agents.md
 
 # 2. Review state references
 Read _ai/tasks.md  # Task index table
@@ -230,15 +234,18 @@ Review _ai/tasks/wizard-navigation/todos.md
 ### Example Boot Sequence (Management Workflow)
 
 ```
-# 1. Read base project configuration
-Read CLAUDE.md
+# 1. Load provider adapter docs
+adapter="openai-codex"  # detect/confirm with the user
+Read _ai.dev/adapters/${adapter}/README.md
+ReadOptional _ai.dev/adapters/${adapter}/agents.md
 
 # 2. Review state references inside `_ai.dev/`
-ls _ai.dev/_improvements/
+ls _ai.dev/tasks/
+Read _ai.dev/tasks.md
 Read _ai.dev/CHANGELOG.md
 
 # 3. Identify active improvement effort
-Ask user which document under `_ai.dev/_improvements/` to focus on
+Ask user which management task folder under `_ai.dev/tasks/` to focus on
 
 # 4. Confirm workflow focus
 Confirm "management" with user
@@ -266,7 +273,7 @@ This boot sequence approach offers several advantages:
 
 ## Implementation Notes
 
-1. Keep shared `_ai/` notes updated (or `_ai.dev/_improvements/` when in management workflow):
+1. Keep shared `_ai/` notes updated (or `_ai.dev/tasks/` when in management workflow):
    - When starting a new feature
    - When completing a workflow phase
    - When transitioning between workflows

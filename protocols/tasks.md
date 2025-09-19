@@ -36,6 +36,7 @@ The project uses a consistent hierarchy to organize work:
 
 ### Task Tracking
 - Create a dedicated folder in `_ai/tasks/` for each active task
+- For management workflow improvements, mirror the same folder structure under `_ai.dev/tasks/`
 - Use consistent, descriptive slugs (e.g., `onboarding-step-navigation`)
 - Maintain the standard file set:
   - `technical-plan.md` — objectives, scope, acceptance criteria
@@ -58,6 +59,7 @@ The project uses a consistent hierarchy to organize work:
   | onboarding-data-storage      | planning  | ready for impl | 2025-01-02 09:45  | pending security review   |
   ```
 - When a task is closed, either move it to a "Completed" section or mark the Status column accordingly so future agents have historical context
+- Management workflow maintains an equivalent index at `_ai.dev/tasks.md` using the same column structure
 
 ### Todo Tracking
 - Use internal TodoWrite/TodoRead tools to maintain the task's `todos.md`
