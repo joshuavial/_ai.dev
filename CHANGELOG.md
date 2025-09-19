@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2025-09-19
+
+### Changed
+- Updated all workflow and agent documentation references from `_ai.bws` to `_ai.dev` to align the instruction hub with the new directory structure.
+
 ## [0.8.0] - 2025-09-17
 
 ### Added
