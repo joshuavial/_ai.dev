@@ -1,0 +1,7 @@
+- [x] Audit AGENTS.md references and instructions
+- [x] Audit CLAUDE.md references and workflows section
+- [x] Update docs to reflect _ai.dev structure and management workflow scope
+- [x] Refresh status metadata after edits
+- [x] Document git diff requirement in boot/state-awareness guidance
+- [x] Add branch/divergence guidance for resumed work
+- [ ] Incorporate any additional feedback from maintainers if requested

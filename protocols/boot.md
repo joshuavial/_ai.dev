@@ -1,284 +1,57 @@
 # LLM Boot Sequence Protocol
 
-This document defines the initialization process for LLMs working on this project. It provides a clear, ordered sequence of operations that should be performed at the start of each session to establish proper context and state awareness.
+Use this sequence whenever a session starts or context is reset. Follow the steps in order and keep the workflow scope tight.
 
-## Boot Sequence Overview
+## Required Sequence
 
-When starting a new session or after context clearing:
+1. **Identify runtime adapter**
+   - Detect the active provider
+   - Read `_ai.dev/adapters/<adapter>/README.md` and, if useful, `agents.md` for shortcuts.
 
-1. **Load provider adapter docs** - Establish runtime-specific conventions
-2. **Review state references** - Gather current project context from `_ai/`
-3. **Select active task** - Confirm which task (if any) is in focus
-4. **Determine active workflow** - Confirm with available context or the user
-5. **Load workflow-specific instructions** - From core instructions
-6. **Establish awareness** - Review the chosen task's artefacts
-7. **Confirm understanding** - Summarize context with the user before acting
+2. **Load core instructions**
+   - Read `_ai.dev/core-instructions.md`.
+   - Note critical directives (no duplicate files, obey workflow phases, update task artefacts).
 
-## 1. Load Provider Adapter Docs
+3. **Gather state references**
+   - *Delivery workflows (planning / execution / qa):* Read `_ai/tasks.md` only. Do **not** inspect individual task folders yet.
+   - *Management workflow:* Read `_ai.dev/tasks.md` and `_ai.dev/CHANGELOG.md`. Skip `_ai.dev/tasks/<slug>/` folders until a task is confirmed.
+   - If the workflow is unclear after this context, ask the user before continuing.
 
-Begin every session by loading the adapter documentation that matches the current runtime. Adapters live under `_ai.dev/adapters/<provider>/` (for example `openai-codex`, `claude`, `gemini`).
+4. **Select active task**
+   - Zero candidates → ask whether to create a task, continue without one, or supply a path.
+   - One candidate → confirm with the user.
+   - Multiple candidates → present a numbered list and let the user choose.
+   - Ensure `status.md` and `todos.md` exist; create minimal placeholders if missing.
 
-```
-adapter="openai-codex"  # detect automatically when possible; otherwise ask the user
-Read _ai.dev/adapters/${adapter}/README.md
-ReadOptional _ai.dev/adapters/${adapter}/agents.md
-```
+5. **Confirm workflow phase**
+   - Use user guidance or the task `status.md` to lock in the active phase.
+   - Record the phase in `status.md` if it is absent or outdated.
 
-Use the adapter README to confirm:
-- Provider-specific tool expectations and command mapping
-- Available orchestrator shortcuts and prompts
-- Any additional quick-start references (the README may point to extra onboarding docs for that provider)
+6. **Load workflow instructions**
+   - Read `_ai.dev/workflows/<phase>.md`.
+   - Note any protocol dependencies (e.g., `_ai.dev/protocols/tdd.md`).
 
-Only load provider docs relevant to the active runtime. Do **not** read adapter material for other providers during boot.
+7. **Establish state awareness**
+   - After a task is confirmed, read its artefacts (`technical-plan.md`, `status.md`, `todos.md`, optional `handoff.md`, `qa-report.md`).
+   - Run `git status -sb` and `git diff --stat` (followed by targeted `git diff` as needed) to understand any pre-existing modifications before making changes.
+   - When resuming or inheriting in-flight work, capture the current branch (`git rev-parse --abbrev-ref HEAD`) and compare against `main` (e.g., `git diff main...HEAD --stat`) to gauge outstanding scope.
+   - Capture progress, blockers, and next steps; update `status.md` / `todos.md` when stale.
 
-Additionally, check for port configuration if required by the task:
-```
-Read _ai/port.md  # If exists - contains project port assignments
-```
+8. **Confirm understanding with the user**
+   - Summarize current context and intended actions.
+   - Ask clarifying questions where needed.
+   - Wait for explicit user approval before executing work.
 
-## 2. Review State References
+## Continuity Requirements
 
-After establishing baseline understanding, gather current context from the location that matches the active workflow:
+- Keep progress snapshots in `status.md`, actionable items in `todos.md`, and detailed notes in `handoff.md`.
+- Update these artefacts after meaningful milestones or before handoff.
+- Management efforts must never touch files outside `_ai.dev`; delivery efforts must leave `_ai.dev` unchanged unless instructed.
 
-- **Delivery workflows (planning / execution / QA)**
-  - Use `_ai/` artefacts to understand product work in flight
-  - Review `_ai/ports.md`, `_ai/prds/`, and the relevant folders under `_ai/tasks/`
-  - Within each task folder inspect `technical-plan.md`, `status.md`, `todos.md`, and any QA/TDD evidence
-- **Management workflow**
-  - Stay inside `_ai.dev/` and focus on process artefacts
-  - Review `_ai.dev/tasks.md` and the task folders under `_ai.dev/tasks/` for outstanding initiatives
-  - Check `_ai.dev/CHANGELOG.md`, `_ai.dev/AGENTS.md`, and workflow documents for recent updates or open questions
-  - Only reference `_ai/` materials when a process change explicitly requires current product-state examples
+## Quick Commands
 
-If the appropriate documents do not make the active effort clear, ask the user to clarify the current focus before proceeding.
+- Workflows: `workflow planning`, `workflow execution`, `workflow qa`, `workflow management`
+- Protocols: `protocol boot`, `protocol tdd`, `protocol tasks`, `protocol playwright`, `protocol sub-agents`
+- Orchestrators: `/plan`, `/execute`, `/qa`, `/manage`
 
-For delivery workflows, review `_ai/tasks.md` to see the current task index. The table should list each task slug, workflow, status, timestamp, and any notes. If the index is missing or out of date, fall back to the Tasks Protocol to reconstruct it before proceeding (or, as a temporary measure, enumerate `_ai/tasks/*/` manually).
-
-## 3. Select Active Task
-
-After reviewing the relevant backlog:
-
-- **Delivery workflows**: use `_ai/tasks.md` (or the individual task folders) as described below.
-- **Management workflow**: identify the improvement initiative to focus on (e.g., a task folder in `_ai.dev/tasks/` or a management-specific ticket). If no improvement is currently active, confirm with the user whether to create a new task or review the backlog before continuing.
-
-For delivery workflows, follow these rules after reviewing the task index:
-
-1. **Zero Tasks Detected**
-   - Ask: “No existing tasks found. Do you want to create a new task folder, work without a task, or point me to an existing path?”
-   - If the user opts for a new task, follow the Tasks Protocol to create one before continuing.
-2. **One Candidate Task**
-   - Confirm with the user: “Should I continue with `<task-slug>` (workflow: X)?”
-   - If the user declines, ask how they want to proceed (switch task, create new, or work without one).
-3. **Multiple Candidate Tasks**
-   - Present a numbered list derived from `_ai/tasks.md` (include workflow, status, last updated time).
-   - Ask the user to choose a task, create a new one, or work without a task.
-4. **Work Without Task**
-   - If the user explicitly chooses to operate without a task, document that choice and continue. Remind them that capturing notes may be harder without a dedicated folder.
-
-Always wait for explicit user confirmation before locking in the active task. If the user selects a task that is missing required artefacts (`status.md`, `todos.md`), create placeholders before proceeding.
-
-## 4. Determine Active Workflow
-
-Use the available state documents and recent user guidance to decide which workflow phase applies. If the materials under `_ai/` do not clearly identify the active workflow, confirm it directly with the user before continuing.
-
-## 5. Load Workflow Instructions
-
-Once the active workflow is identified, load the core instructions for that workflow:
-
-```
-# Read core instructions
-Read _ai.dev/core-instructions.md
-
-# Filter for relevant workflow instructions
-Apply [WORKFLOW:${workflow_phase}] instructions
-```
-
-The core-instructions.md contains tagged instructions for each workflow phase.
-
-## 6. Establish Awareness
-
-Before taking any action, establish awareness of the current state and confirm understanding:
-
-```
-# Delivery workflows: load the active task artefacts
-if [[ -n "$active_task" && "$workflow_phase" != "management" ]]; then
-  Read _ai/tasks/${active_task}/technical-plan.md
-  Read _ai/tasks/${active_task}/status.md
-  Read _ai/tasks/${active_task}/qa-report.md
-  Read _ai/tasks/${active_task}/todos.md
-
-  if [[ -n "$linked_issue" ]]; then
-    gh issue view $linked_issue
-  fi
-fi
-
-# Management workflow: review process improvement context
-if [[ "$workflow_phase" == "management" ]]; then
-  # Focus on `_ai.dev/` artefacts only
-  ls _ai.dev/tasks/
-  Read _ai.dev/tasks.md
-  Read _ai.dev/CHANGELOG.md
-  Read _ai.dev/workflows/management.md
-  # Optional: open specific management task folders as directed by the user
-fi
-
-# Check other running lists (e.g., shared backlog, meeting notes) if maintained separately
-```
-
-## 7. Confirm Understanding with User
-
-After completing the boot sequence, provide a concise summary to the user:
-
-```
-Based on my initialization:
-- Project: [key points from adapter/core docs]
-- Ports: [from port.md if available]
-- Current workflow: [workflow_phase]
-- Active task: [task identifier or "None"]
-- Linked references: [optional list of GitHub issues, PRDs, or docs]
-- Current status: [key points from status.md]
-- Next steps: [top items from todos.md]
-
-Is this understanding correct before I proceed?
-```
-
-Wait for user confirmation before taking any actions.
-
-## Workflow Transitions
-
-When state documents or the user signal that a workflow transition is needed:
-
-1. **Complete current workflow** - Finish any remaining tasks in the current workflow
-2. **Acknowledge transition** - Inform the user of the pending transition and confirm alignment
-3. **Load next workflow** - Read instructions for the upcoming workflow
-4. **Update shared notes** - Record the new workflow phase in the relevant `_ai/` tracking documents
-
-## Workflow Phase-Specific Boot Extensions
-
-### Planning Phase Boot
-
-When in planning phase, additionally:
-- Read related PRD document if specified
-- Review existing tasks or features with overlapping scope
-- Outline how new tasks will be organized within `_ai/tasks/`
-
-### Execution Phase Boot
-
-When in execution phase, additionally:
-- Check branch status and name
-- Review technical plan
-- Verify test environment
-- Check TDD evidence requirements
-
-### QA Phase Boot
-
-When in QA phase, additionally:
-- Load QA checklist templates
-- Check testing requirements
-- Verify implementation completeness
-
-## Implementation Details
-
-### State Documentation
-
-Maintain a lightweight source of truth within `_ai/` that captures:
-- Active PRD and task (if any)
-- Current workflow phase and any expected transition
-- Recent notes, blockers, or decisions
-
-The format can be Markdown checklists, structured JSON, or short status notes—as long as it is easy to locate and kept up to date.
-
-> For management workflow efforts, keep analogous notes inside `_ai.dev/tasks/` rather than `_ai/`.
-
-### Workflow Identification
-
-Workflows are identified by simple string identifiers:
-- `planning` - Planning phase
-- `execution` - Execution phase 
-- `qa` - Quality Assurance phase
-- `management` - Process improvement and workflow evolution
-
-### Example Boot Sequence (Delivery Workflow)
-
-```
-# 1. Load provider adapter docs
-adapter="openai-codex"  # detect/confirm with the user
-Read _ai.dev/adapters/${adapter}/README.md
-ReadOptional _ai.dev/adapters/${adapter}/agents.md
-
-# 2. Review state references
-Read _ai/tasks.md  # Task index table
-Review `_ai/tasks/wizard-navigation/status.md`
-Review `_ai/tasks/wizard-navigation/todos.md`
-
-# 3. Select active task
-Ask user: "Should I continue with task 'wizard-navigation' or choose/create another?"
-
-# 4. Confirm workflow focus
-Ask user: "Which workflow should I activate?"
-
-# 5. Load workflow instructions
-Read _ai.dev/core-instructions.md
-# Filter for [WORKFLOW:execution] instructions (if execution confirmed)
-
-# 6. Establish state awareness
-Read _ai/tasks/wizard-navigation/technical-plan.md
-Read _ai/tasks/wizard-navigation/status.md
-Review _ai/tasks/wizard-navigation/qa-report.md (when present)
-Review _ai/tasks/wizard-navigation/todos.md
-
-# 7. Confirm understanding with user
-# Provide state summary and await confirmation
-```
-
-### Example Boot Sequence (Management Workflow)
-
-```
-# 1. Load provider adapter docs
-adapter="openai-codex"  # detect/confirm with the user
-Read _ai.dev/adapters/${adapter}/README.md
-ReadOptional _ai.dev/adapters/${adapter}/agents.md
-
-# 2. Review state references inside `_ai.dev/`
-ls _ai.dev/tasks/
-Read _ai.dev/tasks.md
-Read _ai.dev/CHANGELOG.md
-
-# 3. Identify active improvement effort
-Ask user which management task folder under `_ai.dev/tasks/` to focus on
-
-# 4. Confirm workflow focus
-Confirm "management" with user
-
-# 5. Load workflow instructions
-Read _ai.dev/workflows/management.md
-
-# 6. Establish state awareness
-Open the selected improvement proposal or session notes for review
-
-# 7. Confirm understanding with user
-Summarize process-improvement status and next steps before acting
-```
-
-## Benefits of This Approach
-
-This boot sequence approach offers several advantages:
-
-1. **Clean Start Capability** - Works after context clearing
-2. **Consistent State Management** - Encourages centralized notes within `_ai/`
-3. **Minimal Redundancy** - Focuses on shared task documentation without duplicating external issue trackers
-4. **Workflow Flexibility** - Easy to modify workflow phases
-5. **Clarity for LLMs** - Explicit, ordered instructions reduce confusion
-6. **User Confirmation** - Verifies correct understanding before proceeding
-
-## Implementation Notes
-
-1. Keep shared `_ai/` notes updated (or `_ai.dev/tasks/` when in management workflow):
-   - When starting a new feature
-   - When completing a workflow phase
-   - When transitioning between workflows
-   - When changing active tasks
-
-2. LLMs should follow this exact boot sequence after context clearing
-
-3. Workflow-specific instructions should be tagged in core-instructions.md to allow filtering
+Follow this checklist every time you boot.

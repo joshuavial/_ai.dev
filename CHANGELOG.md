@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Introduced `_ai.dev/tasks/` as the canonical management-workflow task hierarchy, migrated existing improvements into task folders, and updated boot/management docs to consume the new structure.
+- Condensed `_ai.dev/protocols/boot.md`, limiting boot-time reads to task indexes until a task is selected and clarifying task-specific state awareness steps.
+- Documented mandatory branch and diff awareness steps (including `git status`, targeted diffs, and divergence from `main`) across boot protocol and quick-start guides.
 
 ## [1.0.1] - 2025-09-20
 
