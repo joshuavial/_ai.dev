@@ -136,11 +136,7 @@ if [ -e "$AI_BWS_CLAUDE_DIR/agents" ]; then
     if [ -L "$AI_BWS_CLAUDE_DIR/agents" ] && [ "$(readlink "$AI_BWS_CLAUDE_DIR/agents")" = "$AGENTS_SOURCE" ]; then
         echo "  ✓ _ai.dev/.claude/agents already symlinked"
     else
-        echo "  ⚠️  _ai.dev/.claude/agents exists - replacing with symlink"
-        rm -rf "$AI_BWS_CLAUDE_DIR/agents"
-        ln -s "$AGENTS_SOURCE" "$AI_BWS_CLAUDE_DIR/agents"
-        echo "  ✓ Replaced with symlink in _ai.dev/.claude"
-        CHANGES_MADE=true
+        echo "  ⚠️  _ai.dev/.claude/agents already exists (non-standard); leaving in place"
     fi
 else
     # Create .claude directory if needed
@@ -149,9 +145,12 @@ else
         echo "  ✓ Created _ai.dev/.claude directory"
     fi
     
-    ln -s "$AGENTS_SOURCE" "$AI_BWS_CLAUDE_DIR/agents"
-    echo "  ✓ Created symlink in _ai.dev/.claude/agents"
-    CHANGES_MADE=true
+    if ln -s "$AGENTS_SOURCE" "$AI_BWS_CLAUDE_DIR/agents" 2>/dev/null; then
+        echo "  ✓ Created symlink in _ai.dev/.claude/agents"
+        CHANGES_MADE=true
+    else
+        echo "  ⚠️  Could not create symlink for _ai.dev/.claude/agents (already exists)"
+    fi
 fi
 
 # Setup commands in _ai.dev/.claude
@@ -159,11 +158,7 @@ if [ -e "$AI_BWS_CLAUDE_DIR/commands" ]; then
     if [ -L "$AI_BWS_CLAUDE_DIR/commands" ] && [ "$(readlink "$AI_BWS_CLAUDE_DIR/commands")" = "$COMMANDS_SOURCE" ]; then
         echo "  ✓ _ai.dev/.claude/commands already symlinked"
     else
-        echo "  ⚠️  _ai.dev/.claude/commands exists - replacing with symlink"
-        rm -rf "$AI_BWS_CLAUDE_DIR/commands"
-        ln -s "$COMMANDS_SOURCE" "$AI_BWS_CLAUDE_DIR/commands"
-        echo "  ✓ Replaced with symlink in _ai.dev/.claude"
-        CHANGES_MADE=true
+        echo "  ⚠️  _ai.dev/.claude/commands already exists (non-standard); leaving in place"
     fi
 else
     # Create .claude directory if needed
@@ -172,15 +167,106 @@ else
         echo "  ✓ Created _ai.dev/.claude directory"
     fi
     
-    ln -s "$COMMANDS_SOURCE" "$AI_BWS_CLAUDE_DIR/commands"
-    echo "  ✓ Created symlink in _ai.dev/.claude/commands"
-    CHANGES_MADE=true
+    if ln -s "$COMMANDS_SOURCE" "$AI_BWS_CLAUDE_DIR/commands" 2>/dev/null; then
+        echo "  ✓ Created symlink in _ai.dev/.claude/commands"
+        CHANGES_MADE=true
+    else
+        echo "  ⚠️  Could not create symlink for _ai.dev/.claude/commands (already exists)"
+    fi
 fi
 
 # Add _ai.dev/.claude to .gitignore
 add_to_gitignore "_ai.dev/.claude"
 
 # Since we always use symlinks now, no need to add .claude to parent .gitignore
+
+# Detect available AI CLIs (Codex, Gemini, Claude) and prepare adapter docs
+echo -e "\nDetecting available AI CLI adapters..."
+
+CLI_ORDER="codex gemini claude"
+
+cli_name() {
+    case "$1" in
+        codex) echo "Codex" ;;
+        gemini) echo "Gemini" ;;
+        claude) echo "Claude" ;;
+        *) echo "$1" ;;
+    esac
+}
+
+cli_doc() {
+    case "$1" in
+        codex) echo "AGENTS.md" ;;
+        gemini) echo "GEMINI.md" ;;
+        claude) echo "CLAUDE.md" ;;
+        *) echo "README.md" ;;
+    esac
+}
+
+create_adapter_doc() {
+    local cli_key="$1"
+    local title="$(cli_name "$cli_key")"
+    local doc_name="$(cli_doc "$cli_key")"
+    local doc_path="$PARENT_DIR/$doc_name"
+
+    if [ -f "$doc_path" ]; then
+        echo "  ✓ $doc_name already present"
+        return
+    fi
+
+    {
+        printf '# %s CLI Setup\n\n' "$title"
+        printf 'This repository uses the provider-agnostic `_ai.dev` workflow system. When working through the %s CLI:\n\n' "$title"
+        printf '1. Run `protocol boot` to load the core instructions.\n'
+        printf '2. Run `protocol setup` to bootstrap the repository-specific configuration.\n'
+        printf '3. Use workflow commands (for example, `workflow planning`, `workflow management`, `workflow research`) as your work requires.\n\n'
+        printf 'If the setup script just ran, it may also have dispatched a setup prompt to the %s CLI automatically.\n\n' "$title"
+        printf 'Refer to `_ai.dev/core-instructions.md` and `_ai.dev/workflows/` for complete guidance.\n'
+    } > "$doc_path"
+
+    echo "  ✓ Created $doc_name with $title onboarding notes"
+    CHANGES_MADE=true
+}
+
+PRIMARY_CLI=""
+AVAILABLE_CLIS=()
+
+for cli in $CLI_ORDER; do
+    if command -v "$cli" >/dev/null 2>&1; then
+        echo "  ✓ Detected $(cli_name "$cli") CLI ($cli)"
+        create_adapter_doc "$cli"
+        if [ -z "$PRIMARY_CLI" ]; then
+            PRIMARY_CLI="$cli"
+        fi
+        AVAILABLE_CLIS+=("$cli")
+    else
+        echo "  - $(cli_name "$cli") CLI not detected"
+    fi
+done
+
+SETUP_PROMPT="setup the _ai folder"
+
+if [ ${#AVAILABLE_CLIS[@]} -gt 0 ]; then
+    echo -e "\nManual follow-up required: run one of the following commands in your preferred CLI to finish setup:\n"
+    for cli in "${AVAILABLE_CLIS[@]}"; do
+        case "$cli" in
+            codex)
+                echo "  codex \"$SETUP_PROMPT\""
+                ;;
+            gemini)
+                echo "  gemini -p \"$SETUP_PROMPT\""
+                ;;
+            claude)
+                echo "  claude \"$SETUP_PROMPT\""
+                ;;
+            *)
+                echo "  $cli \"$SETUP_PROMPT\""
+                ;;
+        esac
+    done
+else
+    echo "  ⚠️  No supported AI CLI detected (Codex, Gemini, Claude)."
+fi
 
 # Final status
 echo -e "\n========================================="
