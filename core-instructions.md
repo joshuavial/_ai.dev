@@ -38,6 +38,7 @@ workflow planning
 workflow execution
 workflow qa
 workflow management
+workflow research
 
 # Protocol usage
 protocol boot
@@ -52,6 +53,7 @@ protocol sub-agents
 /execute    # Execution orchestrator
 /qa         # QA orchestrator
 /manage     # Management orchestrator
+/research   # Research workflow agent
 /test       # Manual testing agent
 ```
 
@@ -170,6 +172,13 @@ protocol sub-agents
    - When implementing process improvements
    - When evolving the workflow system
 
+5. **Research**: File: `_ai.dev/workflows/research.md`
+   - When performing knowledge discovery or competitive analysis
+   - When gathering external sources for future planning or execution
+   - When producing reusable artefacts under `_ai/research/<slug>/`
+   - When updating `_ai/research/index.md` for discoverability
+   - When preparing research handoffs for other workflows
+
 [PROCESS:PROTO-02] How to activate documents:
 
 1. To load a protocol or workflow, use these directives:
@@ -178,6 +187,8 @@ protocol sub-agents
    workflow planning
    workflow execution
    workflow qa
+   workflow management
+   workflow research
    
    # For protocols:
    protocol tdd

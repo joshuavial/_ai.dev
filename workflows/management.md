@@ -264,6 +264,35 @@ This phase focuses on validating the effectiveness of changes and iterating as n
 - Lessons learned document
 - Closed process improvement ticket with results
 
+## Agent Design Principles
+
+### Context Management for Sub-Agents
+
+When designing or launching specialist sub-agents, follow these principles:
+
+1. **Keep Sub-Agents Context-Light**: Specialist agents should be stateless and focused on their specific task. Do not burden them with:
+   - Full project context or Boot Protocol requirements
+   - Entire codebase understanding
+   - Workflow history or state management
+   - Unnecessary environmental setup
+
+2. **Provide Only Essential Context**: Include only the information directly relevant to the agent's task:
+   - Specific file paths they need to work with
+   - Clear, focused prompts with well-defined objectives
+   - Required tools and their constraints
+   - Expected output format and success criteria
+
+3. **Benefits of Context-Light Design**:
+   - Faster agent initialization and execution
+   - Reduced token usage and improved efficiency
+   - Clearer task focus without distraction
+   - Better separation of concerns between workflow orchestration and task execution
+
+4. **Examples of Good Practice**:
+   - Research agents get search queries and output requirements, not project architecture
+   - Code analysis agents receive specific files to review, not entire repository context
+   - Test writers get interface definitions and requirements, not implementation history
+
 ## Tools and Templates
 
 ### 1. Process Improvement Proposal Template
