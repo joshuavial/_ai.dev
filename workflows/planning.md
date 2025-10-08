@@ -22,35 +22,88 @@ This document outlines the recommended workflow for planning tickets, with a foc
 The Planning workflow is designed to operate at multiple levels of the work hierarchy:
 
 1. **PRD Level Planning**: Breaking down a product area into discrete tasks
-2. **Task Level Planning**: Creating technical plans for specific tasks (hours-scale work)
+2. **Task Level Planning**: Creating technical plans for specific tasks
 
 > External trackers (e.g., GitHub issues) can be referenced within task plans when needed, but they are not required for this workflow.
 
 When operating at a specific level, explicitly state which level you are planning for and follow the appropriate sections of this workflow.
 
-## Critical Guidelines for Planning
+## ⛔ CRITICAL: ABSOLUTE PROHIBITION OF TIME AND EFFORT ESTIMATES ⛔
 
-### Prohibition of Time Estimates
+**MANDATORY REQUIREMENT - ZERO TOLERANCE**: You MUST NEVER include ANY form of time, effort, schedule, or duration estimates in planning documents.
 
-**IMPORTANT**: Do NOT include any time estimates, deadlines, or specific dates in planning documents. This includes:
+### PROHIBITED - DO NOT INCLUDE:
 
-- Sprint estimates or story points
-- Week/day estimates for implementation
-- Specific calendar dates or deadlines
-- Timeline predictions of any kind
-- Effort estimates in hours, days, or weeks
+**Time-Based Estimates (NEVER ALLOWED):**
+- ❌ Hours, days, weeks, months estimates
+- ❌ Sprint estimates or story points
+- ❌ Calendar dates or deadlines
+- ❌ Timeline predictions or forecasts
+- ❌ Duration estimates of any kind
+- ❌ Schedule commitments or projections
+- ❌ Time-to-completion predictions
+- ❌ Velocity-based estimates
 
-**Why no time estimates?**
-- Time estimates are inherently uncertain during planning
-- They create false expectations and pressure
-- Actual implementation time varies based on many factors
-- Focus should be on quality technical planning, not timeline predictions
+**Effort-Based Estimates (NEVER ALLOWED):**
+- ❌ Effort estimates (low/medium/high effort)
+- ❌ Complexity ratings that imply duration
+- ❌ Story points or t-shirt sizing
+- ❌ Resource allocation estimates
+- ❌ Developer-hours or person-days
+- ❌ Workload assessments with temporal implications
 
-**What to use instead:**
-- Relative complexity indicators (simple, moderate, complex)
-- Dependency identification without timeline implications
-- Prioritization without time commitments
-- Focus on technical approach and thoroughness
+**Schedule-Related Items (NEVER ALLOWED):**
+- ❌ Specific delivery dates
+- ❌ Milestone timelines
+- ❌ Phase duration estimates
+- ❌ Implementation schedules
+- ❌ Rollout timelines
+- ❌ "This will take X time" statements
+
+### WHY THIS PROHIBITION EXISTS:
+
+1. **Estimates Create False Expectations**: Time predictions during planning are inherently uncertain and create unrealistic expectations
+2. **Pressure and Quality Trade-offs**: Estimates create artificial pressure that can compromise code quality
+3. **High Variability**: Actual implementation time varies dramatically based on countless factors discovered during execution
+4. **Planning vs Execution**: Planning phase should focus on WHAT and HOW, not WHEN
+5. **User Directive**: The user has explicitly prohibited all time and effort estimations
+
+### WHAT TO USE INSTEAD:
+
+**Allowed Complexity Indicators (Descriptive Only):**
+- ✅ Relative complexity descriptors: "simple", "moderate", "complex"
+- ✅ Technical difficulty assessment (without time implications)
+- ✅ Dependency identification (without schedule implications)
+- ✅ Risk assessment (without duration estimates)
+- ✅ Scope clarity indicators
+
+**Allowed Prioritization (Without Time):**
+- ✅ Critical, High, Medium, Low priority
+- ✅ Dependency ordering (what must come before what)
+- ✅ Business value assessment
+- ✅ Risk-based prioritization
+- ✅ Impact analysis (without schedule implications)
+
+**Focus Areas:**
+- ✅ Technical approach and architecture
+- ✅ Component design and interfaces
+- ✅ Test strategy and coverage
+- ✅ Quality requirements
+- ✅ Technical thoroughness and completeness
+
+### ENFORCEMENT:
+
+**If you find yourself:**
+- Thinking "this will take X hours/days"
+- Wanting to estimate effort or duration
+- Considering schedule predictions
+- Planning timelines or milestones
+
+**STOP IMMEDIATELY** and refocus on:
+- Technical approach and design
+- Quality and testing strategy
+- Dependency identification
+- Risk assessment (without time estimates)
 
 ## Planning Phase Process
 
@@ -72,7 +125,7 @@ When operating at a specific level, explicitly state which level you are plannin
 - Read and understand the associated PRD (if applicable)
 - Identify which technical components will be affected
 - Review related tasks, components, or external tracker entries
-- Assess complexity (simple/moderate/complex) without time estimates
+- Assess complexity (simple/moderate/complex) - DESCRIPTIVE ONLY, NO TIME ESTIMATES
 
 ### 3. Code Review and Improvement Opportunities
 
@@ -103,7 +156,7 @@ A critical component of technical planning is carefully analyzing any new packag
   - Review existing packages in the project
   - Identify if any existing packages can fulfill the requirements
   - Document patterns for how similar functionality is implemented
-  
+
 - **Package Evaluation Criteria:**
   - Functionality: Does it fully meet the requirements?
   - Maintenance: Is it actively maintained? When was the last release?
@@ -113,12 +166,12 @@ A critical component of technical planning is carefully analyzing any new packag
   - Security: Any known vulnerabilities or security concerns?
   - License: Is the license compatible with the project?
   - Testing: Does the package have good test coverage?
-  
+
 - **Alternatives Comparison:**
   - List at least 2-3 alternatives for any proposed package
   - Create a comparison table with the evaluation criteria
   - Provide a reasoned recommendation with clear justification
-  
+
 - **Final Recommendation:**
   - Clear recommendation with reasoning
   - Implementation considerations or caveats
@@ -194,15 +247,15 @@ Every technical plan must include a comprehensive testing strategy that explicit
 
   ```
   #### Component: [ComponentName]
-  
+
   **Red Phase (Failing Tests):**
   - Test 1: [Description of specific test case]
   - Test 2: [Description of specific test case]
-  
+
   **Green Phase (Implementation):**
   - Implement minimal solution to make tests pass
   - Run and document test results
-  
+
   **Refactor Phase:**
   - [Specific refactoring goals]
   - Run tests after refactoring to ensure they pass
@@ -260,7 +313,7 @@ Example testing strategy section:
 
 #### Test Verification Requirements
 - Screenshot or log of RED phase (failing tests) before implementation
-- Screenshot or log of GREEN phase (passing tests) after implementation 
+- Screenshot or log of GREEN phase (passing tests) after implementation
 - Screenshot or log of tests passing after REFACTOR phase
 - Test coverage report showing minimum 85% coverage
 - Manual test execution results from Playwright testing

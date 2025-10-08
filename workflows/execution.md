@@ -18,6 +18,8 @@ This document outlines the recommended workflow for executing tickets, with a fo
 
 > Note: Always begin by activating the Boot Protocol to establish context before starting implementation work.
 
+> **⛔ NO TIME/EFFORT ESTIMATES**: Never include time estimates, effort predictions, or duration forecasts in any documentation. Focus on technical implementation only.
+
 ## Task Folder Structure
 
 Execution operates from task folders with this structure:
