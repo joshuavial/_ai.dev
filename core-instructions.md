@@ -30,25 +30,25 @@ This document serves as the single source of truth for workflow instructions acr
 
 ## Quick Reference
 
-To activate a specific document, use these standard patterns:
+To activate a specific document, reference these file paths directly:
 
 ```
-# Workflow activation
-workflow planning
-workflow execution
-workflow qa
-workflow management
-workflow research
+# Workflow files - Read these files to understand each workflow phase:
+File: _ai.dev/workflows/planning.md
+File: _ai.dev/workflows/execution.md
+File: _ai.dev/workflows/qa.md
+File: _ai.dev/workflows/management.md
+File: _ai.dev/workflows/research.md
 
-# Protocol usage
-protocol boot
-protocol tdd
-protocol issue
-protocol tasks
-protocol playwright
-protocol sub-agents
+# Protocol files - Read these files to follow specific protocols:
+File: _ai.dev/protocols/boot.md
+File: _ai.dev/protocols/tdd.md
+File: _ai.dev/protocols/issue.md
+File: _ai.dev/protocols/tasks.md
+File: _ai.dev/protocols/playwright.md
+File: _ai.dev/protocols/sub-agents.md
 
-# Agent activation (via slash commands)
+# Agent activation (via slash commands) - These are actual commands:
 /plan       # Planning orchestrator
 /execute    # Execution orchestrator
 /qa         # QA orchestrator
@@ -181,29 +181,29 @@ protocol sub-agents
 
 [PROCESS:PROTO-02] How to activate documents:
 
-1. To load a protocol or workflow, use these directives:
+1. To load a protocol or workflow, read the file directly using these paths:
    ```
    # For workflows:
-   workflow planning
-   workflow execution
-   workflow qa
-   workflow management
-   workflow research
-   
+   File: _ai.dev/workflows/planning.md
+   File: _ai.dev/workflows/execution.md
+   File: _ai.dev/workflows/qa.md
+   File: _ai.dev/workflows/management.md
+   File: _ai.dev/workflows/research.md
+
    # For protocols:
-   protocol tdd
-   protocol boot
-   protocol issue
-   protocol port-management
-   protocol supabase-test-db
-   protocol dev-helper-scripts
+   File: _ai.dev/protocols/tdd.md
+   File: _ai.dev/protocols/boot.md
+   File: _ai.dev/protocols/issue.md
+   File: _ai.dev/protocols/port-management.md
+   File: _ai.dev/protocols/supabase-test-db.md
+   File: _ai.dev/protocols/dev-helper-scripts.md
    ```
 
-2. This will trigger loading of the appropriate document
+2. Read the file to understand the document's procedures
 
 3. Follow the document's procedures for the specific task
 
-4. Reference loaded protocols when following their processes
+4. Reference the protocol files when following their processes
 
 [GUIDELINE:PROTO-03] Document lazy-loading advantages:
 1. Reduced token usage in initial context

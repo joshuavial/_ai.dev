@@ -13,7 +13,7 @@ This placeholder documents the adapter contract for future Gemini integration. C
 
 ## To Do (when implementing)
 
-- Define invocation phrases consistent with `workflow` and `protocol` triggers.
+- Define how to reference workflow and protocol files (should use file paths like `_ai.dev/workflows/planning.md` and `_ai.dev/protocols/boot.md`).
 - Document tool equivalents and constraints (token limits, context size, etc.).
 - Provide examples mirroring the Codex and Claude adapters for consistency.
 

@@ -8,10 +8,10 @@
 > 3. Only then proceed with this workflow
 
 **Primary Protocol**: File: `_ai.dev/workflows/planning.md`
-**Required Protocols**: 
+**Required Protocols**:
 - Boot Protocol (File: `_ai.dev/protocols/boot.md`)
 - Tasks Protocol (File: `_ai.dev/protocols/tasks.md`)
-**Activation**: `workflow planning`
+**How to Use**: Read this file directly to follow the planning workflow
 
 This document outlines the recommended workflow for planning tickets, with a focus on thorough planning and structured preparation. The planning phase is where requirements are analyzed, technical approaches are defined, and implementation is prepared.
 
@@ -640,10 +640,10 @@ The manual test plan should be organized by functional areas and include:
 After completing the planning phase, the next step is typically to move into execution. This is done by:
 
 1. Ensuring task folder is created with `technical-plan.md`
-2. Confirming the technical plan with stakeholders  
+2. Confirming the technical plan with stakeholders
 3. Updating the task's `status.md` with planning outcomes
 4. Updating `_ai/manual-test-plan.md` with any new test cases identified
-5. Activating the Execution Workflow with: `workflow execution`
+5. Reading and following the Execution Workflow (File: `_ai.dev/workflows/execution.md`)
 
 The execution workflow will work from the `technical-plan.md` file in the task folder and keep `status.md` current as implementation progresses.
 

@@ -8,11 +8,11 @@
 > 3. Only then proceed with this workflow
 
 **Primary Protocol**: File: `_ai.dev/workflows/execution.md`
-**Required Protocols**: 
+**Required Protocols**:
 - Boot Protocol (File: `_ai.dev/protocols/boot.md`)
 - Tasks Protocol (File: `_ai.dev/protocols/tasks.md`)
 - TDD Protocol (File: `_ai.dev/protocols/tdd.md`)
-**Activation**: `workflow execution`
+**How to Use**: Read this file directly to follow the execution workflow
 
 This document outlines the recommended workflow for executing tickets, with a focus on structured implementation using Test-Driven Development (TDD) and continuous improvement. Execution works from task folders created by the planning workflow.
 
@@ -750,7 +750,7 @@ After completing the execution phase, the next step is typically to move into qu
 1. Making sure all implementation is complete
 2. Running the full test suite to ensure everything passes
 3. Ensuring all items in the technical plan have been addressed
-4. Activating the QA Workflow with: `workflow qa`
+4. Reading and following the QA Workflow (File: `_ai.dev/workflows/qa.md`)
 
 For details on quality verification, refer to QA Workflow (File: `_ai.dev/workflows/qa.md`).
 

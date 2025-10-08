@@ -217,9 +217,9 @@ create_adapter_doc() {
     {
         printf '# %s CLI Setup\n\n' "$title"
         printf 'This repository uses the provider-agnostic `_ai.dev` workflow system. When working through the %s CLI:\n\n' "$title"
-        printf '1. Run `protocol boot` to load the core instructions.\n'
-        printf '2. Run `protocol setup` to bootstrap the repository-specific configuration.\n'
-        printf '3. Use workflow commands (for example, `workflow planning`, `workflow management`, `workflow research`) as your work requires.\n\n'
+        printf '1. Read File: `_ai.dev/protocols/boot.md` to load the core instructions.\n'
+        printf '2. Read File: `_ai.dev/protocols/setup.md` to bootstrap the repository-specific configuration.\n'
+        printf '3. Read workflow files as needed (for example, `_ai.dev/workflows/planning.md`, `_ai.dev/workflows/management.md`, `_ai.dev/workflows/research.md`).\n\n'
         printf 'If the setup script just ran, it may also have dispatched a setup prompt to the %s CLI automatically.\n\n' "$title"
         printf 'Refer to `_ai.dev/core-instructions.md` and `_ai.dev/workflows/` for complete guidance.\n'
     } > "$doc_path"

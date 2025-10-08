@@ -87,7 +87,7 @@ The workflow system integrates with Claude Code sub-agents for dramatic efficien
 
 4. **Documentation**: Maintain appropriate documentation as specified in each workflow.
 
-5. **Protocol Activation**: Use `protocol [name]` for protocols and `workflow [name]` for workflows.
+5. **Document References**: Read protocol and workflow files directly using their file paths (e.g., File: `_ai.dev/protocols/boot.md` or File: `_ai.dev/workflows/planning.md`).
 
 6. **Workflow Adherence**: Continuously reference the current workflow document during work. If ever in doubt about process or next steps, re-read the relevant workflow document.
 

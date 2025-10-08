@@ -49,7 +49,7 @@ project/
 
 ### Following Port Management Protocol
 
-Reference: `protocol port-management`
+Reference: File: `_ai.dev/protocols/port-management.md`
 
 Test databases should use different port ranges than development to avoid conflicts:
 

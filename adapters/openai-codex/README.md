@@ -5,9 +5,9 @@ This adapter explains how to use the `_ai.dev` workflows and agents with OpenAI 
 ## Quick Start
 
 1. Open the repository in Codex CLI.
-2. Say: “protocol boot” and follow the boot steps (summarize, confirm, clarify).
-3. Say: “workflow planning” or “workflow execution” as needed.
-4. To use orchestrators, say: “Activate [orchestrator] for [context]” (see Agents below).
+2. Read File: `_ai.dev/protocols/boot.md` and follow the boot steps (summarize, confirm, clarify).
+3. Read the appropriate workflow file as needed (e.g., `_ai.dev/workflows/planning.md` or `_ai.dev/workflows/execution.md`).
+4. To use orchestrators, say: "Activate [orchestrator] for [context]" (see Agents below).
 
 Core references live in `_ai.dev/` and remain provider‑agnostic:
 - Core Instructions: `_ai.dev/core-instructions.md`
@@ -17,10 +17,10 @@ Core references live in `_ai.dev/` and remain provider‑agnostic:
 
 ## Invocation Patterns
 
-- Workflows: `workflow planning`, `workflow execution`, `workflow qa`, `workflow management`
-- Protocols: `protocol boot`, `protocol tdd`, `protocol issue`, etc.
-- Orchestrators: “Activate planning/execution/qa/management orchestrator for <context>.”
-- Specialized agents: “Run test-writer for <component>,” “Run bug-investigator on <bug-id>.”
+- Workflows: Read `_ai.dev/workflows/planning.md`, `_ai.dev/workflows/execution.md`, `_ai.dev/workflows/qa.md`, `_ai.dev/workflows/management.md`
+- Protocols: Read `_ai.dev/protocols/boot.md`, `_ai.dev/protocols/tdd.md`, `_ai.dev/protocols/issue.md`, etc.
+- Orchestrators: "Activate planning/execution/qa/management orchestrator for <context>."
+- Specialized agents: "Run test-writer for <component>," "Run bug-investigator on <bug-id>."
 
 ## Tools Mapping (Codex CLI)
 

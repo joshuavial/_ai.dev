@@ -4,8 +4,10 @@ This registry lists the workflow orchestrators and specialized agents available 
 
 ## How To Invoke
 
-- Load core docs as needed: `workflow planning`, `workflow execution`, `workflow qa`, `workflow management`, and `protocol tdd`, `protocol boot`, etc.
-- Ask your AI to “activate the [orchestrator] for [context]” and follow the referenced agent doc below.
+- Read workflow and protocol files directly using their file paths:
+  - Workflows: `_ai.dev/workflows/planning.md`, `_ai.dev/workflows/execution.md`, `_ai.dev/workflows/qa.md`, `_ai.dev/workflows/management.md`
+  - Protocols: `_ai.dev/protocols/tdd.md`, `_ai.dev/protocols/boot.md`, etc.
+- Ask your AI to "activate the [orchestrator] for [context]" and follow the referenced agent doc below.
 - State is stored under `_ai/agent-state/...` when agents support continuity.
 
 ## Orchestrators

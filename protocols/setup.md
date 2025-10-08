@@ -8,7 +8,7 @@ Use this protocol when bootstrapping `_ai.dev` (and the companion `_ai/` knowled
 > - Identify whether the repository already contains `_ai.dev/` or `_ai/`; abort if conflicting structures exist.
 
 ## Step 1 – Orientation
-1. Run the Boot protocol (`protocol boot`) to load core instructions.
+1. Read the Boot protocol (File: `_ai.dev/protocols/boot.md`) to load core instructions.
 2. Review `_ai.dev/README.md` (if present) for repository-specific notes.
 3. Capture current state in a management task folder if setup spans multiple sessions.
 
@@ -47,7 +47,7 @@ _ai/
 ## Step 4 – Post-Setup Verification
 1. Confirm `_ai.dev/` contains core directories:
    - `agents/`, `commands/`, `protocols/`, `workflows/`, `tasks.md`
-2. Confirm the `workflow` commands are registered (e.g., `workflow management` should load without errors).
+2. Confirm workflow files are accessible (e.g., verify `_ai.dev/workflows/management.md` exists and is readable).
 3. Update `AGENTS.md` or project docs if repository-specific adaptations were made during setup.
 4. Run `git status -sb` to verify there are no unintended modifications.
 
@@ -60,9 +60,9 @@ After running the setup script, ensure the root-level onboarding files exist for
 
 This repository uses the provider-agnostic `_ai.dev` workflow system.
 
-1. Run `protocol boot` to load the core instructions.
-2. Run `protocol setup` to bootstrap this repository.
-3. Use workflow commands (e.g., `workflow planning`, `workflow execution`, `workflow management`, `workflow research`) as needed.
+1. Read File: `_ai.dev/protocols/boot.md` to load the core instructions.
+2. Read File: `_ai.dev/protocols/setup.md` to bootstrap this repository.
+3. Read workflow files as needed (e.g., `_ai.dev/workflows/planning.md`, `_ai.dev/workflows/execution.md`, `_ai.dev/workflows/management.md`, `_ai.dev/workflows/research.md`).
 
 Refer to `_ai.dev/core-instructions.md` and `_ai.dev/workflows/` for the full process catalogue.
 ```
@@ -73,9 +73,9 @@ Refer to `_ai.dev/core-instructions.md` and `_ai.dev/workflows/` for the full pr
 
 This repository uses the provider-agnostic `_ai.dev` workflow system.
 
-1. Run `protocol boot` to load the core instructions.
-2. Run `protocol setup` to bootstrap this repository.
-3. Use workflow commands (e.g., `workflow planning`, `workflow execution`, `workflow management`, `workflow research`) as needed.
+1. Read File: `_ai.dev/protocols/boot.md` to load the core instructions.
+2. Read File: `_ai.dev/protocols/setup.md` to bootstrap this repository.
+3. Read workflow files as needed (e.g., `_ai.dev/workflows/planning.md`, `_ai.dev/workflows/execution.md`, `_ai.dev/workflows/management.md`, `_ai.dev/workflows/research.md`).
 
 Refer to `_ai.dev/core-instructions.md` and `_ai.dev/workflows/` for the full process catalogue.
 ```
@@ -86,9 +86,9 @@ Refer to `_ai.dev/core-instructions.md` and `_ai.dev/workflows/` for the full pr
 
 This repository uses the provider-agnostic `_ai.dev` workflow system.
 
-1. Run `protocol boot` to load the core instructions.
-2. Run `protocol setup` to bootstrap this repository.
-3. Use workflow commands (e.g., `workflow planning`, `workflow execution`, `workflow management`, `workflow research`) as needed.
+1. Read File: `_ai.dev/protocols/boot.md` to load the core instructions.
+2. Read File: `_ai.dev/protocols/setup.md` to bootstrap this repository.
+3. Read workflow files as needed (e.g., `_ai.dev/workflows/planning.md`, `_ai.dev/workflows/execution.md`, `_ai.dev/workflows/management.md`, `_ai.dev/workflows/research.md`).
 
 Refer to `_ai.dev/core-instructions.md` and `_ai.dev/workflows/` for the full process catalogue.
 ```

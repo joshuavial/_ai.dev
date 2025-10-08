@@ -57,10 +57,10 @@ Use this sequence whenever a session starts or context is reset. Follow the step
 - Update these artefacts after meaningful milestones or before handoff.
 - Management efforts must never touch files outside `_ai.dev`; delivery efforts must leave `_ai.dev` unchanged unless instructed.
 
-## Quick Commands
+## Quick Reference
 
-- Workflows: `workflow planning`, `workflow execution`, `workflow qa`, `workflow management`
-- Protocols: `protocol boot`, `protocol tdd`, `protocol tasks`, `protocol playwright`, `protocol sub-agents`
-- Orchestrators: `/plan`, `/execute`, `/qa`, `/manage`
+- Workflow files to read: `_ai.dev/workflows/planning.md`, `_ai.dev/workflows/execution.md`, `_ai.dev/workflows/qa.md`, `_ai.dev/workflows/management.md`
+- Protocol files to read: `_ai.dev/protocols/boot.md`, `_ai.dev/protocols/tdd.md`, `_ai.dev/protocols/tasks.md`, `_ai.dev/protocols/playwright.md`, `_ai.dev/protocols/sub-agents.md`
+- Orchestrator slash commands to execute: `/plan`, `/execute`, `/qa`, `/manage`
 
 Follow this checklist every time you boot.
