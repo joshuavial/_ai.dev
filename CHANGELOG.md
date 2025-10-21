@@ -5,7 +5,47 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Current]
+## [Unreleased]
+
+## [1.1.0] - 2025-01-21
+
+### Added
+- **Three-tier override system** - Resources can now be overridden at repository (`_ai/`) and user-global (`~/_ai/`) levels
+- **build.sh** - New build script that replaces setup.sh with enhanced functionality
+- **Configuration system** - `_ai.dev.conf` files with three-tier precedence for controlling build behavior
+- **Auto-generated provider files** - CLAUDE.md, AGENTS.md, and GEMINI.md are now generated with explicit resource listings
+- **Override markers** - Generated files show `[OVERRIDE: repo]` and `[OVERRIDE: user]` to indicate customizations
+- **Merged .claude/ folders** - Auto-built from all three tiers with proper precedence
+- **Automatic directory creation** - Build script creates `~/_ai/` and `_ai/` directory structures automatically
+- **Resource precedence chain** - `_ai/` (repo) > `~/_ai/` (user) > `_ai.dev/` (system defaults)
+
+### Changed
+- **setup.sh replaced by build.sh** - All setup.sh functionality integrated into build.sh with new features
+- **Provider files now auto-generated** - CLAUDE.md, AGENTS.md, GEMINI.md should not be edited manually
+- **.gitignore management** - Generated files automatically added to .gitignore
+- **README.md** - Comprehensive documentation of three-tier override system and build process
+
+### Configuration Options
+New `_ai.dev.conf` options:
+- `BUILD_CLAUDE` - Control CLAUDE.md generation
+- `BUILD_AGENTS` - Control AGENTS.md generation (Codex CLI)
+- `BUILD_GEMINI` - Control GEMINI.md generation
+- `INCLUDE_WORKFLOWS` - Control workflow inclusion
+- `INCLUDE_PROTOCOLS` - Control protocol inclusion
+- `INCLUDE_AGENTS` - Control agent inclusion
+- `INCLUDE_COMMANDS` - Control command inclusion
+- `INCLUDE_SKILLS` - Control skills inclusion
+- `SHOW_OVERRIDE_MARKERS` - Toggle override markers in generated files
+- `VERBOSE` - Enable verbose output
+- `COMMIT_GENERATED` - Control whether generated files are committed
+
+### Migration from 1.0.x
+- Run `_ai.dev/build.sh` instead of `_ai.dev/setup.sh`
+- setup.sh functionality is preserved for backward compatibility
+- Generated files will be added to .gitignore automatically
+- Custom content from old CLAUDE.md can be moved to `_ai/` overrides
+
+## [Current from 1.0.x]
 
 ### Changed
 - Introduced `_ai.dev/tasks/` as the canonical management-workflow task hierarchy, migrated existing improvements into task folders, and updated boot/management docs to consume the new structure.
