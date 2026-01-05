@@ -1,5 +1,7 @@
 # _ai.dev
 
+> **⚠️ DEPRECATED**: This workflow system is no longer actively maintained. Development has shifted to workflows using [beads](https://github.com/steveyegge/beads) and [gastown](https://github.com/steveyegge/gastown) for more streamlined issue tracking and orchestration.
+
 Provider-agnostic AI workflow system for project management and agentic coding.
 
 This system has been predominantly tested with **Claude Code** and **Codex**.
